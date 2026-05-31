@@ -19,6 +19,8 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
 .nav-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
 .nav-toggle span{display:block;width:22px;height:1.5px;background:#fff}
 @media(max-width:768px){.nav-links{display:none}.nav-toggle{display:flex}.site-nav.open .nav-links{display:flex;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(15,30,60,0.98);padding:24px 40px;gap:20px}}
+
+/* ── PAGE HERO ── */
 .page-hero{background:var(--navy);padding:140px 60px 100px;position:relative;overflow:hidden}
 .page-hero::after{content:'';position:absolute;left:0;top:0;width:4px;height:100%;background:linear-gradient(to bottom,transparent,var(--gold),transparent)}
 .page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(135deg,transparent 40%,rgba(201,168,76,0.04) 40%,rgba(201,168,76,0.04) 60%,transparent 60%);background-size:80px 80px}
@@ -27,28 +29,74 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
 .page-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold);display:block}
 .page-title{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,6vw,80px);font-weight:300;color:var(--white);line-height:1.05}
 .page-title em{font-style:italic;color:var(--gold)}
-.btn-dl{display:inline-block;padding:14px 36px;background:var(--gold);color:var(--navy);font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:all 0.3s;align-self:flex-end}
+.btn-dl{display:inline-block;padding:14px 36px;background:var(--gold);color:var(--navy);font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:all 0.3s}
 .btn-dl:hover{background:var(--gold-lite)}
+
+/* ── RESUME BODY ── */
 .resume-body{background:var(--white);padding:100px 60px}
-.resume-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px}
-.col-label{font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:28px;padding-bottom:12px;border-bottom:1px solid rgba(201,168,76,0.3)}
-.resume-entry{margin-bottom:40px;padding-bottom:40px;border-bottom:1px solid rgba(0,0,0,0.06)}
-.resume-entry:last-child{border-bottom:none;margin-bottom:0}
-.entry-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--navy);margin-bottom:4px}
-.entry-org{font-size:14px;font-weight:500;color:var(--gold-dim);margin-bottom:4px}
-.entry-date{font-size:12px;font-weight:300;color:var(--text-lite);margin-bottom:12px}
-.entry-desc{font-size:14px;font-weight:300;color:var(--text-mid);line-height:1.75}
-.skills-section{background:var(--cream);padding:80px 60px}
+.resume-inner{max-width:1200px;margin:0 auto}
+
+/* Profile strip */
+.profile-strip{display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center;margin-bottom:64px;padding-bottom:64px;border-bottom:1px solid rgba(201,168,76,0.2)}
+.profile-photo{width:140px;height:140px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);flex-shrink:0}
+.profile-name{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:var(--navy);margin-bottom:4px}
+.profile-name em{font-style:italic;color:var(--gold-dim)}
+.profile-role{font-size:12px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-lite);margin-bottom:16px}
+.profile-summary{font-size:15px;font-weight:300;color:var(--text-mid);line-height:1.8;max-width:680px}
+
+/* Two column layout */
+.resume-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:64px}
+
+/* Left column */
+.col-label{font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid rgba(201,168,76,0.25);margin-top:40px}
+.col-label:first-child{margin-top:0}
+
+.contact-list{display:flex;flex-direction:column;gap:10px;margin-bottom:8px}
+.contact-item{display:flex;gap:12px;align-items:center;font-size:14px;color:var(--text-mid);font-weight:300}
+.contact-item a{color:var(--gold-dim);text-decoration:none}
+.contact-item a:hover{color:var(--gold)}
+.contact-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;flex-shrink:0}
+
+.edu-item{margin-bottom:20px}
+.edu-degree{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--navy);margin-bottom:3px}
+.edu-school{font-size:13px;font-weight:500;color:var(--gold-dim);margin-bottom:2px}
+.edu-status{font-size:12px;font-weight:300;color:var(--text-lite);font-style:italic}
+
+.cert-list{display:flex;flex-direction:column;gap:8px}
+.cert-item{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--text-mid);font-weight:300}
+.cert-item::before{content:'■';color:var(--gold);font-size:8px;margin-top:4px;flex-shrink:0}
+
+.skills-section{margin-bottom:8px}
+.skill-tag{display:inline-block;padding:5px 12px;background:var(--cream);border:1px solid rgba(201,168,76,0.3);font-size:12px;color:var(--text-mid);margin:3px 3px 3px 0}
+
+/* Right column — experience */
+.exp-entry{margin-bottom:40px;padding-bottom:40px;border-bottom:1px solid rgba(0,0,0,0.06)}
+.exp-entry:last-child{border-bottom:none;margin-bottom:0}
+.exp-header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:4px}
+.exp-org{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--navy)}
+.exp-date{font-size:12px;font-weight:400;color:var(--text-lite);white-space:nowrap}
+.exp-role{font-size:14px;font-weight:600;color:var(--gold-dim);margin-bottom:12px;letter-spacing:0.05em;text-transform:uppercase;font-size:11px}
+.exp-bullets{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.exp-bullets li{font-size:14px;font-weight:300;color:var(--text-mid);line-height:1.7;padding-left:16px;position:relative}
+.exp-bullets li::before{content:'→';position:absolute;left:0;color:var(--gold);font-size:12px}
+
+/* Open to relocation badge */
+.relocation-badge{display:inline-block;background:linear-gradient(135deg,var(--gold),var(--gold-lite));color:var(--navy);font-size:12px;font-weight:600;letter-spacing:0.08em;padding:10px 20px;margin-top:20px}
+
+/* Skills section */
+.skills-body{background:var(--cream);padding:80px 60px}
 .skills-inner{max-width:1200px;margin:0 auto}
 .section-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px;display:flex;align-items:center;gap:12px}
 .section-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold);display:block}
-.section-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,48px);font-weight:300;color:var(--navy);margin-bottom:56px;line-height:1.1}
+.section-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,48px);font-weight:300;color:var(--navy);margin-bottom:48px;line-height:1.1}
 .section-heading em{font-style:italic;color:var(--gold-dim)}
 .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--gold)}
 .skill-group{background:var(--white);padding:36px}
 .skill-group-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--navy);margin-bottom:20px}
 .skill-tags{display:flex;flex-wrap:wrap;gap:8px}
-.skill-tag{display:inline-block;padding:6px 14px;background:var(--cream);border:1px solid rgba(201,168,76,0.3);font-size:12px;color:var(--text-mid)}
+.skill-tag-lg{display:inline-block;padding:6px 14px;background:var(--cream);border:1px solid rgba(201,168,76,0.3);font-size:12px;color:var(--text-mid)}
+
+/* Footer */
 .site-footer{background:#080f1e;border-top:1px solid rgba(201,168,76,0.15);padding:60px}
 .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr 1fr;gap:40px;align-items:start;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.06)}
 .footer-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:#fff}
@@ -60,95 +108,206 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
 .footer-right a{font-size:14px;color:#c9a84c;text-decoration:none;display:block;margin-bottom:6px}
 .footer-right p{font-size:13px;color:rgba(255,255,255,0.35)}
 .footer-bottom{max-width:1200px;margin:24px auto 0;text-align:center;font-size:12px;color:rgba(255,255,255,0.2);letter-spacing:0.08em}
-@media(max-width:900px){.resume-inner{grid-template-columns:1fr}.skills-grid{grid-template-columns:1fr}.page-hero,.resume-body,.skills-section{padding-left:32px;padding-right:32px}.footer-inner{grid-template-columns:1fr;text-align:center}.footer-right{text-align:center}.footer-nav{justify-content:center}.site-footer{padding:48px 24px}}
+
+@media(max-width:900px){
+  .profile-strip{grid-template-columns:1fr;text-align:center}
+  .profile-photo{margin:0 auto}
+  .resume-grid{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:1fr}
+  .page-hero,.resume-body,.skills-body{padding-left:32px;padding-right:32px}
+  .footer-inner{grid-template-columns:1fr;text-align:center}
+  .footer-right{text-align:center}
+  .footer-nav{justify-content:center}
+  .site-footer{padding:48px 24px}
+}
 </style>
 </head>
 <body>
+
 <nav class="site-nav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">Thomas <span>Starr</span></a>
     <div class="nav-links">
-      <a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="philosophy.html">Philosophy</a><a href="resume.html" class="active">Résumé</a><a href="contact.html">Contact</a>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="philosophy.html">Philosophy</a>
+      <a href="resume.html" class="active">Résumé</a>
+      <a href="contact.html">Contact</a>
     </div>
-    <button class="nav-toggle" onclick="this.parentElement.parentElement.classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+    <button class="nav-toggle" onclick="this.parentElement.parentElement.classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
 <section class="page-hero">
   <div class="page-hero-inner">
     <div>
       <p class="page-eyebrow">Résumé</p>
       <h1 class="page-title">Experience &amp;<br><em>qualifications.</em></h1>
     </div>
-    <a href="mailto:thomasjjstarr@gmail.com" class="btn-dl">Request Full Résumé →</a>
+    <a href="Resume2026.png" target="_blank" class="btn-dl">View Full Résumé →</a>
   </div>
 </section>
+
 <section class="resume-body">
   <div class="resume-inner">
-    <div>
-      <p class="col-label">Experience</p>
-      <div class="resume-entry">
-        <h3 class="entry-title">STEM Club Leader &amp; Curriculum Designer</h3>
-        <p class="entry-org">City Church Academy — Deltona, Florida</p>
-        <p class="entry-date">2026–2027 Academic Year</p>
-        <p class="entry-desc">Designed and delivered a full two-semester after-school STEM program for Grades 3–5. Built sixteen complete instructional units using Understanding by Design, including lesson plans, slide decks, student materials, assessment rubrics, and showcase events. Managed all program logistics, family communication, and enrollment through FACTS.</p>
-      </div>
-      <div class="resume-entry">
-        <h3 class="entry-title">Instructional Design Coursework</h3>
-        <p class="entry-org">National University</p>
-        <p class="entry-date">Current</p>
-        <p class="entry-desc">Applied coursework in instructional design, project management for education, applied design and development, and the ethical dimensions of learning design. Deliverables include complete project management plans, multimedia design papers, DEI rubrics, and this professional portfolio.</p>
-      </div>
-      <p class="col-label" style="margin-top:48px">Education</p>
-      <div class="resume-entry">
-        <h3 class="entry-title">M.S. Applied Learning Sciences</h3>
-        <p class="entry-org">University of Miami</p>
-        <p class="entry-desc">Graduate study in cognitive theory, learning design, educational research, and the science of how people acquire knowledge and expertise.</p>
-      </div>
-      <div class="resume-entry">
-        <h3 class="entry-title">Instructional Design</h3>
-        <p class="entry-org">National University — In Progress</p>
-        <p class="entry-desc">Applied coursework focusing on design frameworks, project management, multimedia principles, and ethical practice in learning design.</p>
+
+    <!-- Profile strip with photo -->
+    <div class="profile-strip">
+      <img src="Resume2026.png" alt="Thomas Starr" class="profile-photo" style="object-position:top center">
+      <div>
+        <h2 class="profile-name">Thomas <em>Starr</em></h2>
+        <p class="profile-role">Educator &amp; Instructional Designer</p>
+        <p class="profile-summary">Dedicated educator with 10+ years of classroom experience and a deep commitment to data-driven, differentiated instruction. Specializes in literacy intervention, STEM integration, and the thoughtful use of AI-adaptive learning tools to support diverse learners. Currently pursuing an Ed.D. in Instructional Design, with a foundation in Applied Learning Sciences and a track record of measurable student growth.</p>
+        <span class="relocation-badge">Open to Relocation Within the U.S.</span>
       </div>
     </div>
-    <div>
-      <p class="col-label">Core Competencies</p>
-      <div class="resume-entry">
-        <h3 class="entry-title">Curriculum &amp; Instructional Design</h3>
-        <p class="entry-desc">Full-semester program design using UbD, ADDIE, and SAM frameworks. K–5 STEM specialization with NGSS alignment. Performance task development and authentic assessment design.</p>
+
+    <!-- Two column resume -->
+    <div class="resume-grid">
+
+      <!-- LEFT: Contact, Education, Certs, Dev -->
+      <div>
+        <p class="col-label">Contact</p>
+        <div class="contact-list">
+          <div class="contact-item"><span class="contact-dot"></span>386-848-3014</div>
+          <div class="contact-item"><span class="contact-dot"></span><a href="mailto:thomasjjstarr@gmail.com">thomasjjstarr@gmail.com</a></div>
+          <div class="contact-item"><span class="contact-dot"></span>2577 Derby Dr., Deltona FL</div>
+        </div>
+
+        <p class="col-label">Education</p>
+        <div class="edu-item">
+          <p class="edu-degree">Ed.D. Instructional Design</p>
+          <p class="edu-school">National University</p>
+          <p class="edu-status">In Progress</p>
+        </div>
+        <div class="edu-item">
+          <p class="edu-degree">M.S. Applied Learning Sciences</p>
+          <p class="edu-school">University of Miami</p>
+        </div>
+
+        <p class="col-label">Certifications</p>
+        <div class="cert-list">
+          <div class="cert-item">Florida State Education Cert.</div>
+          <div class="cert-item">Reading Endorsed</div>
+          <div class="cert-item">ESOL Endorsed</div>
+        </div>
+
+        <p class="col-label">Professional Development</p>
+        <div class="cert-list">
+          <div class="cert-item">Canva Education</div>
+          <div class="cert-item">AWS Skill Builder (In Progress)</div>
+        </div>
+
+        <p class="col-label">Core Skills</p>
+        <div class="skills-section">
+          <span class="skill-tag">Differentiated Instruction</span>
+          <span class="skill-tag">Reading Intervention (SIPPS)</span>
+          <span class="skill-tag">Curriculum Design</span>
+          <span class="skill-tag">STEM Coordination</span>
+          <span class="skill-tag">Formative Assessment</span>
+          <span class="skill-tag">Data-Driven Instruction</span>
+          <span class="skill-tag">AI-Adaptive EdTech</span>
+          <span class="skill-tag">Google Classroom</span>
+          <span class="skill-tag">Tier 2 Intervention</span>
+          <span class="skill-tag">Phonics &amp; Fluency</span>
+          <span class="skill-tag">ESOL Instruction</span>
+          <span class="skill-tag">Instructional Design</span>
+        </div>
       </div>
-      <div class="resume-entry">
-        <h3 class="entry-title">Multimedia &amp; Visual Design</h3>
-        <p class="entry-desc">Slide deck design applying Mayer's CTML principles. HTML/CSS development for educational websites and digital materials. Print-ready document design for student-facing materials.</p>
-      </div>
-      <div class="resume-entry">
-        <h3 class="entry-title">Project Management</h3>
-        <p class="entry-desc">WBS development, schedule management, risk assessment, and stakeholder communication planning for multi-deliverable instructional design projects from initiation through close.</p>
-      </div>
-      <div class="resume-entry">
-        <h3 class="entry-title">Equity &amp; Accessibility</h3>
-        <p class="entry-desc">Universal Design for Learning implementation. WCAG 2.1 accessibility standards. DEI rubric development and application. Culturally responsive practice and design justice framework.</p>
+
+      <!-- RIGHT: Experience -->
+      <div>
+        <p class="col-label">Work Experience</p>
+
+        <div class="exp-entry">
+          <div class="exp-header">
+            <p class="exp-org">City Church Academy</p>
+            <p class="exp-date">2024 – Present</p>
+          </div>
+          <p class="exp-role">Fifth Grade Teacher / STEM Coordinator</p>
+          <ul class="exp-bullets">
+            <li>Delivered differentiated instruction across core subjects, integrating visual routines, hands-on STEM activities, and AI-adaptive learning tools to support diverse learners.</li>
+            <li>Designed and coordinated schoolwide STEM programming, overseeing curriculum development, project-based units, and cross-grade collaboration for 100+ students.</li>
+            <li>Led targeted small-group reading intervention using data-driven strategies to strengthen phonics, fluency, and comprehension; monitored progress through ongoing formative assessments.</li>
+          </ul>
+        </div>
+
+        <div class="exp-entry">
+          <div class="exp-header">
+            <p class="exp-org">Volusia County Public Schools</p>
+            <p class="exp-date">2015 – 2024</p>
+          </div>
+          <p class="exp-role">Second Grade Teacher</p>
+          <ul class="exp-bullets">
+            <li>Delivered differentiated small-group instruction and facilitated schoolwide walk-to-intervention reading blocks, providing targeted Tier 2 support for students working toward grade-level proficiency.</li>
+            <li>Implemented SIPPS phonics intervention with fidelity, producing measurable gains in decoding, fluency, and foundational literacy skills among below-level readers.</li>
+            <li>Maintained detailed progress monitoring records, using assessment data to adjust instruction and communicate student growth with families and instructional leadership.</li>
+          </ul>
+        </div>
+
       </div>
     </div>
   </div>
 </section>
-<section class="skills-section">
+
+<!-- Skills section -->
+<section class="skills-body">
   <div class="skills-inner">
-    <p class="section-eyebrow">Skills</p>
-    <h2 class="section-heading">Frameworks &amp;<br><em>tools.</em></h2>
+    <p class="section-eyebrow">Skills &amp; Tools</p>
+    <h2 class="section-heading">Frameworks &amp;<br><em>expertise.</em></h2>
     <div class="skills-grid">
-      <div class="skill-group"><h3 class="skill-group-title">ID Frameworks</h3><div class="skill-tags"><span class="skill-tag">UbD / Backward Design</span><span class="skill-tag">ADDIE</span><span class="skill-tag">SAM</span><span class="skill-tag">Mayer's CTML</span><span class="skill-tag">UDL</span><span class="skill-tag">ARCS Model</span><span class="skill-tag">NGSS</span></div></div>
-      <div class="skill-group"><h3 class="skill-group-title">Design &amp; Technology</h3><div class="skill-tags"><span class="skill-tag">PowerPoint</span><span class="skill-tag">HTML / CSS</span><span class="skill-tag">Word / Docs</span><span class="skill-tag">Canva</span><span class="skill-tag">Wix</span><span class="skill-tag">GitHub Pages</span><span class="skill-tag">WCAG 2.1</span></div></div>
-      <div class="skill-group"><h3 class="skill-group-title">Specializations</h3><div class="skill-tags"><span class="skill-tag">STEM Education K–5</span><span class="skill-tag">Rubric Design</span><span class="skill-tag">DEI in Design</span><span class="skill-tag">Project Management</span><span class="skill-tag">Stakeholder Communication</span><span class="skill-tag">Culturally Responsive Practice</span></div></div>
+      <div class="skill-group">
+        <h3 class="skill-group-title">ID Frameworks</h3>
+        <div class="skill-tags">
+          <span class="skill-tag-lg">UbD / Backward Design</span>
+          <span class="skill-tag-lg">ADDIE</span>
+          <span class="skill-tag-lg">SAM</span>
+          <span class="skill-tag-lg">Mayer's CTML</span>
+          <span class="skill-tag-lg">UDL</span>
+          <span class="skill-tag-lg">ARCS Model</span>
+          <span class="skill-tag-lg">NGSS</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3 class="skill-group-title">Design &amp; Technology</h3>
+        <div class="skill-tags">
+          <span class="skill-tag-lg">PowerPoint</span>
+          <span class="skill-tag-lg">HTML / CSS</span>
+          <span class="skill-tag-lg">Canva</span>
+          <span class="skill-tag-lg">Google Classroom</span>
+          <span class="skill-tag-lg">GitHub Pages</span>
+          <span class="skill-tag-lg">WCAG 2.1</span>
+          <span class="skill-tag-lg">AI-Adaptive Tools</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3 class="skill-group-title">Specializations</h3>
+        <div class="skill-tags">
+          <span class="skill-tag-lg">STEM Education K–5</span>
+          <span class="skill-tag-lg">Literacy Intervention</span>
+          <span class="skill-tag-lg">DEI in Design</span>
+          <span class="skill-tag-lg">Project Management</span>
+          <span class="skill-tag-lg">Differentiated Instruction</span>
+          <span class="skill-tag-lg">Culturally Responsive Practice</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
 <footer class="site-footer">
   <div class="footer-inner">
     <div><p class="footer-name">Thomas Starr</p><p class="footer-title">Instructional Designer</p></div>
-    <nav class="footer-nav"><a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="philosophy.html">Philosophy</a><a href="resume.html">Résumé</a><a href="contact.html">Contact</a></nav>
+    <nav class="footer-nav">
+      <a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="philosophy.html">Philosophy</a><a href="resume.html">Résumé</a><a href="contact.html">Contact</a>
+    </nav>
     <div class="footer-right"><a href="mailto:thomasjjstarr@gmail.com">thomasjjstarr@gmail.com</a><p>Deltona, Florida</p></div>
   </div>
   <p class="footer-bottom">© 2026 Thomas Starr · Instructional Designer · Built with purpose.</p>
 </footer>
+
 </body>
 </html>
