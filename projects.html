@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Thomas Starr</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0f1e3c;--navy-mid:#1a2f5a;--gold:#c9a84c;--gold-lite:#e8c96e;--gold-dim:#8a6f2e;--cream:#f8f4ec;--cream-mid:#f0e9d8;--white:#ffffff;--text:#1a1a2e;--text-mid:#3a3a5c;--text-lite:#6b6b8a;--lgray:#e8e8f0}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(15,30,60,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,76,0.15)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 40px;height:68px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:#fff;text-decoration:none}
+.nav-logo span{color:#c9a84c;font-style:italic}
+.nav-links{display:flex;gap:36px}
+.nav-links a{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover,.nav-links a.active{color:#c9a84c}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
+.nav-toggle span{display:block;width:22px;height:1.5px;background:#fff}
+@media(max-width:768px){.nav-links{display:none}.nav-toggle{display:flex}.site-nav.open .nav-links{display:flex;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(15,30,60,0.98);padding:24px 40px;gap:20px}}
+.page-hero{background:var(--navy);padding:140px 60px 100px;position:relative;overflow:hidden}
+.page-hero::after{content:'';position:absolute;left:0;top:0;width:4px;height:100%;background:linear-gradient(to bottom,transparent,var(--gold),transparent)}
+.page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(135deg,transparent 40%,rgba(201,168,76,0.04) 40%,rgba(201,168,76,0.04) 60%,transparent 60%);background-size:80px 80px}
+.page-hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
+.page-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.page-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold);display:block}
+.page-title{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,6vw,80px);font-weight:300;color:var(--white);line-height:1.05}
+.page-title em{font-style:italic;color:var(--gold)}
+.page-subtitle{font-size:16px;font-weight:300;color:rgba(255,255,255,0.5);margin-top:20px;max-width:560px;line-height:1.7}
+.case-study{background:var(--white);padding:100px 60px}
+.case-inner{max-width:1200px;margin:0 auto}
+.case-banner{background:var(--navy);padding:64px;margin-bottom:64px;position:relative;overflow:hidden;display:grid;grid-template-columns:1.2fr 1fr;gap:64px;align-items:center}
+.case-banner::after{content:'';position:absolute;bottom:0;right:0;width:80px;height:80px;border-right:3px solid var(--gold);border-bottom:3px solid var(--gold)}
+.case-banner-tag{font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.case-banner-title{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--white);line-height:1.15;margin-bottom:16px}
+.case-banner-desc{font-size:14px;font-weight:300;color:rgba(255,255,255,0.6);line-height:1.8}
+.case-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.case-meta-item{background:rgba(255,255,255,0.06);padding:20px 24px;border-left:2px solid var(--gold)}
+.case-meta-label{font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.case-meta-val{font-size:14px;font-weight:300;color:rgba(255,255,255,0.8);line-height:1.4}
+.case-body{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-bottom:56px}
+.case-section-label{font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.case-section-label::before{content:'';width:20px;height:1px;background:var(--gold);display:block}
+.case-section-heading{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--navy);margin-bottom:16px}
+.case-text{font-size:14px;font-weight:300;color:var(--text-mid);line-height:1.8;margin-bottom:16px}
+.deliverables{margin:0;padding:0;list-style:none}
+.deliverables li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--lgray);font-size:14px;color:var(--text-mid);font-weight:300}
+.deliverables li::before{content:'→';color:var(--gold);font-weight:600;flex-shrink:0}
+.deliverables li:last-child{border-bottom:none}
+.reflection-box{background:var(--cream);border-left:4px solid var(--gold);padding:28px 36px;margin:36px 0}
+.reflection-box p{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;color:var(--navy);line-height:1.6}
+.more-projects{background:var(--cream);padding:100px 60px}
+.more-inner{max-width:1200px;margin:0 auto}
+.section-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.section-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold);display:block}
+.section-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,48px);font-weight:300;color:var(--navy);margin-bottom:56px;line-height:1.1}
+.section-heading em{font-style:italic;color:var(--gold-dim)}
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--gold)}
+.project-card{background:var(--white);padding:40px 36px;position:relative;overflow:hidden;transition:background 0.3s}
+.project-card:hover{background:var(--cream)}
+.project-card::before{content:'';position:absolute;top:0;left:0;width:0;height:3px;background:var(--gold);transition:width 0.4s}
+.project-card:hover::before{width:100%}
+.project-tag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold-dim);background:var(--cream);padding:4px 12px;margin-bottom:20px}
+.project-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--navy);margin-bottom:12px;line-height:1.2}
+.project-desc{font-size:13px;font-weight:300;color:var(--text-lite);line-height:1.7;margin-bottom:24px}
+.project-link{font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:gap 0.2s}
+.project-link:hover{gap:12px;color:var(--gold-dim)}
+.site-footer{background:#080f1e;border-top:1px solid rgba(201,168,76,0.15);padding:60px}
+.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr 1fr;gap:40px;align-items:start;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.footer-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:#fff}
+.footer-title{font-size:12px;color:rgba(255,255,255,0.35);margin-top:4px;letter-spacing:0.1em;text-transform:uppercase}
+.footer-nav{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:center}
+.footer-nav a{font-size:12px;color:rgba(255,255,255,0.45);text-decoration:none;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s}
+.footer-nav a:hover{color:#c9a84c}
+.footer-right{text-align:right}
+.footer-right a{font-size:14px;color:#c9a84c;text-decoration:none;display:block;margin-bottom:6px}
+.footer-right p{font-size:13px;color:rgba(255,255,255,0.35)}
+.footer-bottom{max-width:1200px;margin:24px auto 0;text-align:center;font-size:12px;color:rgba(255,255,255,0.2);letter-spacing:0.08em}
+@media(max-width:900px){.case-banner{grid-template-columns:1fr;padding:40px}.case-body{grid-template-columns:1fr}.case-meta-grid{grid-template-columns:1fr}.projects-grid{grid-template-columns:1fr}.page-hero,.case-study,.more-projects{padding-left:32px;padding-right:32px}.footer-inner{grid-template-columns:1fr;text-align:center}.footer-right{text-align:center}.footer-nav{justify-content:center}.site-footer{padding:48px 24px}}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Thomas <span>Starr</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html" class="active">Projects</a><a href="philosophy.html">Philosophy</a><a href="resume.html">Résumé</a><a href="contact.html">Contact</a>
+    </div>
+    <button class="nav-toggle" onclick="this.parentElement.parentElement.classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <p class="page-eyebrow">Projects</p>
+    <h1 class="page-title">Work that<br><em>earns its place.</em></h1>
+    <p class="page-subtitle">Case studies in curriculum design, assessment, and multimedia development — each with honest reflection on what worked and what didn't.</p>
+  </div>
+</section>
+<section class="case-study">
+  <div class="case-inner">
+    <div class="case-banner">
+      <div>
+        <p class="case-banner-tag">Featured Project · Curriculum Design · STEM · K–5</p>
+        <h2 class="case-banner-title">Elementary STEM Club — A Full-Year Instructional Design Project</h2>
+        <p class="case-banner-desc">Two semesters. Sixteen sessions. Forces &amp; Structures in the Fall, Earth &amp; Energy in the Spring. A complete from-scratch curriculum for after-school STEM education at Grades 3–5, built using Understanding by Design from the first day to the community showcase.</p>
+      </div>
+      <div class="case-meta-grid">
+        <div class="case-meta-item"><p class="case-meta-label">Framework</p><p class="case-meta-val">Understanding by Design (UbD)</p></div>
+        <div class="case-meta-item"><p class="case-meta-label">Audience</p><p class="case-meta-val">Grades 3–5 · After School</p></div>
+        <div class="case-meta-item"><p class="case-meta-label">Standards</p><p class="case-meta-val">NGSS Aligned</p></div>
+        <div class="case-meta-item"><p class="case-meta-label">Duration</p><p class="case-meta-val">2 semesters · 16 sessions</p></div>
+      </div>
+    </div>
+    <div class="case-body">
+      <div>
+        <p class="case-section-label">The Challenge</p>
+        <h3 class="case-section-heading">Design a complete after-school STEM program from scratch.</h3>
+        <p class="case-text">City Church Academy needed an after-school STEM Club that was more than activities — a coherent, sequenced curriculum that built genuine scientific thinking in elementary students across an entire academic year. There was no existing curriculum, no material library, and no template to follow.</p>
+        <p class="case-text">The design challenge was to create something that would work in a 60-minute after-school window, with mixed grade levels (3–5), with materials that could be sourced affordably, and that would culminate in a genuine public showcase where students presented their work to families and community guests.</p>
+        <div class="reflection-box"><p>"The backward design logic meant starting with the showcase — what would students need to know and be able to do to present confidently? — and working backward from there. That question shaped every session that came before it."</p></div>
+      </div>
+      <div>
+        <p class="case-section-label">The Approach</p>
+        <h3 class="case-section-heading">Understanding by Design, applied to a full year.</h3>
+        <p class="case-text">Each session was built using the UbD three-stage model: desired results first, then acceptable evidence, then the learning plan. Big ideas and essential questions anchored each week. Performance tasks served as the Stage 2 evidence.</p>
+        <p class="case-text">Mayer's CTML principles informed the multimedia design throughout: slide decks were built to minimize extraneous load, recording sheets were structured to scaffold thinking rather than just collect answers, and every session included an explicit exit reflection connecting the day's activity to a real-world problem.</p>
+      </div>
+    </div>
+    <p class="case-section-label">Deliverables</p>
+    <ul class="deliverables">
+      <li>16 UbD lesson plans (Fall + Spring) — each with Stage 1–3 documentation, NGSS alignment, differentiation, and rubric</li>
+      <li>16 slide decks — designed using Mayer's CTML principles, color-coded by unit theme</li>
+      <li>Fall and Spring student recording sheets — one per session with exit reflections</li>
+      <li>Fall and Spring challenge cards — print-and-cut with mission, materials, criteria, and engineering hint</li>
+      <li>Fall and Spring activity planners — complete program overview with NGSS alignment and materials lists</li>
+      <li>Parent welcome letters, budget worksheet, and enrollment materials</li>
+      <li>Program website — 5-page HTML site built for Network Solutions</li>
+      <li>Enrollment flyers, certificates of completion, and showcase materials</li>
+    </ul>
+    <div class="reflection-box" style="margin-top:48px"><p>"What I would do differently: the community representation framing for each artifact needed more intentional design. Naming the community served and connecting design decisions to culturally responsive practice is the revision I am currently working through."</p></div>
+  </div>
+</section>
+<section class="more-projects">
+  <div class="more-inner">
+    <p class="section-eyebrow">More Work</p>
+    <h2 class="section-heading">Additional projects &amp;<br><em>academic work.</em></h2>
+    <div class="projects-grid">
+      <div class="project-card"><span class="project-tag">Project Management</span><h3 class="project-title">Grade 5 States of Matter — Full Project Management Plan</h3><p class="project-desc">A complete project management suite: WBS, schedule, communication plan, stakeholder email, risk assessment, closure report, and future trends reflection.</p><a href="#" class="project-link">View Case Study →</a></div>
+      <div class="project-card"><span class="project-tag">Portfolio Design · Academic</span><h3 class="project-title">Designing With Purpose — APA Paper</h3><p class="project-desc">Applying backward design and Mayer's five multimedia principles to professional portfolio development, with specific design applications and violations to avoid.</p><a href="#" class="project-link">View Paper →</a></div>
+      <div class="project-card"><span class="project-tag">DEI · Universal Design</span><h3 class="project-title">Designing With Integrity — DEI Rubric &amp; Application</h3><p class="project-desc">A seven-criterion rubric for evaluating portfolio design against ethical design, universal design, and DEI principles — with an honest self-assessment applying it to this portfolio.</p><a href="#" class="project-link">View Paper →</a></div>
+    </div>
+  </div>
+</section>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div><p class="footer-name">Thomas Starr</p><p class="footer-title">Instructional Designer</p></div>
+    <nav class="footer-nav"><a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="philosophy.html">Philosophy</a><a href="resume.html">Résumé</a><a href="contact.html">Contact</a></nav>
+    <div class="footer-right"><a href="mailto:thomasjjstarr@gmail.com">thomasjjstarr@gmail.com</a><p>Deltona, Florida</p></div>
+  </div>
+  <p class="footer-bottom">© 2026 Thomas Starr · Instructional Designer · Built with purpose.</p>
+</footer>
+</body>
+</html>

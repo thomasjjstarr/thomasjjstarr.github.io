@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Philosophy — Thomas Starr</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0f1e3c;--navy-mid:#1a2f5a;--gold:#c9a84c;--gold-lite:#e8c96e;--gold-dim:#8a6f2e;--cream:#f8f4ec;--cream-mid:#f0e9d8;--white:#ffffff;--text:#1a1a2e;--text-mid:#3a3a5c;--text-lite:#6b6b8a}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(15,30,60,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,76,0.15)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 40px;height:68px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:#fff;text-decoration:none}
+.nav-logo span{color:#c9a84c;font-style:italic}
+.nav-links{display:flex;gap:36px}
+.nav-links a{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover,.nav-links a.active{color:#c9a84c}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
+.nav-toggle span{display:block;width:22px;height:1.5px;background:#fff}
+@media(max-width:768px){.nav-links{display:none}.nav-toggle{display:flex}.site-nav.open .nav-links{display:flex;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(15,30,60,0.98);padding:24px 40px;gap:20px}}
+.page-hero{background:var(--navy);padding:140px 60px 100px;position:relative;overflow:hidden}
+.page-hero::after{content:'';position:absolute;left:0;top:0;width:4px;height:100%;background:linear-gradient(to bottom,transparent,var(--gold),transparent)}
+.page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(135deg,transparent 40%,rgba(201,168,76,0.04) 40%,rgba(201,168,76,0.04) 60%,transparent 60%);background-size:80px 80px}
+.page-hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
+.page-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.page-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold);display:block}
+.page-title{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,6vw,80px);font-weight:300;color:var(--white);line-height:1.05}
+.page-title em{font-style:italic;color:var(--gold)}
+.page-subtitle{font-size:16px;font-weight:300;color:rgba(255,255,255,0.5);margin-top:20px;max-width:560px;line-height:1.7}
+.phil-body{background:var(--white);padding:120px 60px}
+.phil-inner{max-width:780px;margin:0 auto}
+.phil-lead{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;font-style:italic;color:var(--navy);line-height:1.5;border-left:4px solid var(--gold);padding:24px 32px;background:var(--cream);margin-bottom:56px}
+.phil-section-label{font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:12px;margin-top:56px;display:flex;align-items:center;gap:10px}
+.phil-section-label::before{content:'';width:20px;height:1px;background:var(--gold);display:block}
+.phil-section-label:first-of-type{margin-top:0}
+.phil-h2{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--navy);line-height:1.15;margin-bottom:20px}
+.phil-h2 em{font-style:italic;color:var(--gold-dim)}
+.phil-text{font-size:16px;font-weight:300;color:var(--text-mid);line-height:1.9;margin-bottom:20px}
+.phil-principles{margin:48px 0;display:flex;flex-direction:column;gap:2px;background:var(--cream-mid)}
+.phil-principle{background:var(--white);padding:32px 36px;display:grid;grid-template-columns:48px 1fr;gap:24px;align-items:start;transition:background 0.3s}
+.phil-principle:hover{background:#fdfbf7}
+.phil-principle-num{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;color:rgba(201,168,76,0.25);line-height:1}
+.phil-principle-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--navy);margin-bottom:8px}
+.phil-principle-text{font-size:14px;font-weight:300;color:var(--text-lite);line-height:1.7}
+.site-footer{background:#080f1e;border-top:1px solid rgba(201,168,76,0.15);padding:60px}
+.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr 1fr;gap:40px;align-items:start;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.footer-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:#fff}
+.footer-title{font-size:12px;color:rgba(255,255,255,0.35);margin-top:4px;letter-spacing:0.1em;text-transform:uppercase}
+.footer-nav{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:center}
+.footer-nav a{font-size:12px;color:rgba(255,255,255,0.45);text-decoration:none;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s}
+.footer-nav a:hover{color:#c9a84c}
+.footer-right{text-align:right}
+.footer-right a{font-size:14px;color:#c9a84c;text-decoration:none;display:block;margin-bottom:6px}
+.footer-right p{font-size:13px;color:rgba(255,255,255,0.35)}
+.footer-bottom{max-width:1200px;margin:24px auto 0;text-align:center;font-size:12px;color:rgba(255,255,255,0.2);letter-spacing:0.08em}
+@media(max-width:900px){.page-hero,.phil-body{padding-left:32px;padding-right:32px}.phil-body{padding-top:80px;padding-bottom:80px}.footer-inner{grid-template-columns:1fr;text-align:center}.footer-right{text-align:center}.footer-nav{justify-content:center}.site-footer{padding:48px 24px}}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Thomas <span>Starr</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="philosophy.html" class="active">Philosophy</a><a href="resume.html">Résumé</a><a href="contact.html">Contact</a>
+    </div>
+    <button class="nav-toggle" onclick="this.parentElement.parentElement.classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <p class="page-eyebrow">Philosophy</p>
+    <h1 class="page-title">What I believe about<br><em>learning design.</em></h1>
+    <p class="page-subtitle">These are not abstract principles. They are commitments that show up in every lesson plan, every slide, and every assessment I write.</p>
+  </div>
+</section>
+<section class="phil-body">
+  <div class="phil-inner">
+    <div class="phil-lead">"Design is not decoration. It is the argument made visible — a claim about what matters, who it matters to, and what they deserve from the experience you are building for them."</div>
+    <p class="phil-section-label">Core Belief</p>
+    <h2 class="phil-h2">Learning design is an<br><em>ethical practice.</em></h2>
+    <p class="phil-text">Every decision I make as an instructional designer — what to include, what to cut, how to sequence, what to assess, whose voice to center — is an ethical decision before it is a design decision. The question is not only "does this work?" but "does this work for the people it is supposed to serve, in the context where they actually are?"</p>
+    <p class="phil-text">That conviction shapes my entire practice. It is why I use backward design: not because it is a popular framework, but because starting with the learner's desired understanding rather than the content to be covered is a fundamentally more honest way to approach design. It is why I apply universal design principles to everything I build — not to check a box, but because a learning experience that excludes some learners is not, in any meaningful sense, a good learning experience.</p>
+    <p class="phil-section-label">Five Principles</p>
+    <h2 class="phil-h2">The commitments I bring<br><em>to every project.</em></h2>
+    <div class="phil-principles">
+      <div class="phil-principle"><span class="phil-principle-num">01</span><div><h3 class="phil-principle-title">Begin with understanding, not content.</h3><p class="phil-principle-text">Coverage is not learning. The question that opens every project is: what must the learner genuinely understand when this is over — not what material will be presented, but what insight will be transferable? That question, answered honestly, determines everything else.</p></div></div>
+      <div class="phil-principle"><span class="phil-principle-num">02</span><div><h3 class="phil-principle-title">Design removes barriers, not challenge.</h3><p class="phil-principle-text">Universal design is not about making things easier. It is about removing the barriers that prevent people from engaging with the challenge you are offering. Cognitive load from poor design is not the same as productive struggle with meaningful content.</p></div></div>
+      <div class="phil-principle"><span class="phil-principle-num">03</span><div><h3 class="phil-principle-title">Failure is evidence, not failure.</h3><p class="phil-principle-text">Every design produces data. When something doesn't work — a lesson that falls flat, an assessment that doesn't distinguish levels of understanding — that is not a problem to minimize. It is information to use.</p></div></div>
+      <div class="phil-principle"><span class="phil-principle-num">04</span><div><h3 class="phil-principle-title">Whose knowledge is centered matters.</h3><p class="phil-principle-text">Following Costanza-Chock's design justice framework, the most important question in any design process is whose experience and knowledge shapes the decisions being made. Instructional design that treats learners as generic recipients of content produces generic results at best, and harmful ones at worst.</p></div></div>
+      <div class="phil-principle"><span class="phil-principle-num">05</span><div><h3 class="phil-principle-title">The portfolio enacts what the work claims.</h3><p class="phil-principle-text">If I claim to practice equitable, accessible, learner-centered design, this portfolio must demonstrate those qualities — not just describe them. Every design decision here is an argument about my values. I have tried to make those arguments honestly, including acknowledging where I fall short.</p></div></div>
+    </div>
+  </div>
+</section>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div><p class="footer-name">Thomas Starr</p><p class="footer-title">Instructional Designer</p></div>
+    <nav class="footer-nav"><a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="philosophy.html">Philosophy</a><a href="resume.html">Résumé</a><a href="contact.html">Contact</a></nav>
+    <div class="footer-right"><a href="mailto:thomasjjstarr@gmail.com">thomasjjstarr@gmail.com</a><p>Deltona, Florida</p></div>
+  </div>
+  <p class="footer-bottom">© 2026 Thomas Starr · Instructional Designer · Built with purpose.</p>
+</footer>
+</body>
+</html>
