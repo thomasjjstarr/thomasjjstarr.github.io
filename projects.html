@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Thomas Starr</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0f1e3c;--navy-mid:#1a2f5a;--gold:#c9a84c;--gold-lite:#e8c96e;--gold-dim:#8a6f2e;--cream:#f8f4ec;--cream-mid:#f0e9d8;--white:#ffffff;--text:#1a1a2e;--text-mid:#3a3a5c;--text-lite:#6b6b8a;--lgray:#e8e8f0}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(15,30,60,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,76,0.15)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 40px;height:68px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:#fff;text-decoration:none}
+.nav-logo span{color:#c9a84c;font-style:italic}
+.nav-links{display:flex;gap:36px}
+.nav-links a{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover,.nav-links a.active{color:#c9a84c}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
+.nav-toggle span{display:block;width:22px;height:1.5px;background:#fff}
+@media(max-width:768px){.nav-links{display:none}.nav-toggle{display:flex}.site-nav.open .nav-links{display:flex;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(15,30,60,0.98);padding:24px 40px;gap:20px}}
+.page-hero{background:var(--navy);padding:140px 60px 100px;position:relative;overflow:hidden}
+.page-hero::after{content:'';position:absolute;left:0;top:0;width:4px;height:100%;background:linear-gradient(to bottom,transparent,var(--gold),transparent)}
+.page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(135deg,transparent 40%,rgba(201,168,76,0.04) 40%,rgba(201,168,76,0.04) 60%,transparent 60%);background-size:80px 80px}
+.page-hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
+.page-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.page-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold);display:block}
+.page-title{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,6vw,80px);font-weight:300;color:var(--white);line-height:1.05}
+.page-title em{font-style:italic;color:var(--gold)}
+.page-subtitle{font-size:16px;font-weight:300;color:rgba(255,255,255,0.5);margin-top:20px;max-width:560px;line-height:1.7}
+.artifact-nav{background:var(--navy-mid);border-bottom:1px solid rgba(201,168,76,0.15);position:sticky;top:68px;z-index:100}
+.artifact-nav-inner{max-width:1200px;margin:0 auto;padding:0 60px;display:flex;gap:0;overflow-x:auto}
+.artifact-tab{padding:18px 28px;font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.45);text-decoration:none;border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap;cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;font-family:'Outfit',sans-serif}
+.artifact-tab:hover{color:rgba(255,255,255,0.8)}
+.artifact-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+.artifact-section{display:none}
+.artifact-section.active{display:block}
+
+/* ── SHARED COMPONENTS ── */
+.section-inner{max-width:1200px;margin:0 auto}
+.artifact-badge{display:inline-block;background:var(--gold);color:var(--navy);font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;padding:6px 16px;margin-bottom:16px}
+.artifact-num{font-size:13px;font-weight:300;color:var(--text-lite);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:8px}
+.artifact-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vw,50px);font-weight:300;color:var(--navy);line-height:1.1;margin-bottom:16px}
+.artifact-title em{font-style:italic;color:var(--gold-dim)}
+.artifact-subtitle{font-size:15px;font-weight:300;color:var(--text-mid);line-height:1.8;margin-bottom:28px}
+.artifact-header{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:start;margin-bottom:56px}
+.meta-stack{display:flex;flex-direction:column;gap:12px}
+.meta-row{background:var(--cream);padding:16px 20px;border-left:3px solid var(--gold)}
+.meta-label{font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:4px}
+.meta-val{font-size:14px;color:var(--text);line-height:1.4}
+.embed-wrap{background:var(--navy);padding:48px;margin-bottom:56px;position:relative}
+.embed-wrap::before{content:'';position:absolute;top:0;left:0;width:40px;height:40px;border-top:3px solid var(--gold);border-left:3px solid var(--gold)}
+.embed-wrap::after{content:'';position:absolute;bottom:0;right:0;width:40px;height:40px;border-bottom:3px solid var(--gold);border-right:3px solid var(--gold)}
+.embed-label{font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.embed-label::before{content:'';width:20px;height:1px;background:var(--gold);display:block}
+.embed-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--white);margin-bottom:20px;font-style:italic}
+.embed-container{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:#000}
+.embed-container iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
+.three-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--gold);margin-bottom:56px}
+.grid-card{background:var(--white);padding:32px;position:relative;overflow:hidden;transition:background 0.3s}
+.grid-card:hover{background:#fdfbf7}
+.grid-card::before{content:'';position:absolute;bottom:0;left:0;width:0;height:3px;background:var(--gold);transition:width 0.4s}
+.grid-card:hover::before{width:100%}
+.grid-icon{font-size:26px;margin-bottom:14px;display:block}
+.grid-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--navy);margin-bottom:10px}
+.grid-text{font-size:13px;font-weight:300;color:var(--text-lite);line-height:1.7}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-bottom:48px}
+.col-label{font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.col-label::before{content:'';width:16px;height:1px;background:var(--gold);display:block}
+.col-heading{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--navy);margin-bottom:14px}
+.col-text{font-size:14px;font-weight:300;color:var(--text-mid);line-height:1.8;margin-bottom:14px}
+.pull-quote{background:var(--cream);border-left:4px solid var(--gold);padding:24px 32px;margin:32px 0}
+.pull-quote p{font-family:'Cormorant Garamond',serif;font-size:19px;font-style:italic;color:var(--navy);line-height:1.6}
+.deliverables{margin:0;padding:0;list-style:none}
+.deliverables li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--lgray);font-size:14px;color:var(--text-mid);font-weight:300}
+.deliverables li::before{content:'→';color:var(--gold);font-weight:600;flex-shrink:0}
+.deliverables li:last-child{border-bottom:none}
+.case-banner{background:var(--navy);padding:56px;margin-bottom:56px;position:relative;overflow:hidden;display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:center}
+.case-banner::after{content:'';position:absolute;bottom:0;right:0;width:64px;height:64px;border-right:3px solid var(--gold);border-bottom:3px solid var(--gold)}
+.case-banner-tag{font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.case-banner-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--white);line-height:1.15;margin-bottom:14px}
+.case-banner-desc{font-size:14px;font-weight:300;color:rgba(255,255,255,0.6);line-height:1.8}
+.case-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.case-meta-item{background:rgba(255,255,255,0.06);padding:18px 20px;border-left:2px solid var(--gold)}
+.case-meta-label{font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.case-meta-val{font-size:13px;font-weight:300;color:rgba(255,255,255,0.8);line-height:1.4}
+.section-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.section-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold);display:block}
+.section-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vw,46px);font-weight:300;color:var(--navy);margin-bottom:48px;line-height:1.1}
+.section-heading em{font-style:italic;color:var(--gold-dim)}
+.pdf-card{background:var(--white);border:1px solid var(--lgray);padding:28px 32px;display:flex;gap:20px;align-items:flex-start;margin-bottom:2px;transition:background 0.3s;text-decoration:none}
+.pdf-card:hover{background:var(--cream)}
+.pdf-icon{font-size:32px;flex-shrink:0;margin-top:2px}
+.pdf-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--navy);margin-bottom:6px}
+.pdf-desc{font-size:13px;font-weight:300;color:var(--text-lite);line-height:1.6;margin-bottom:10px}
+.pdf-link{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-dim)}
+.site-footer{background:#080f1e;border-top:1px solid rgba(201,168,76,0.15);padding:60px}
+.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr 1fr;gap:40px;align-items:start;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.footer-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:#fff}
+.footer-title{font-size:12px;color:rgba(255,255,255,0.35);margin-top:4px;letter-spacing:0.1em;text-transform:uppercase}
+.footer-nav{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:center}
+.footer-nav a{font-size:12px;color:rgba(255,255,255,0.45);text-decoration:none;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s}
+.footer-nav a:hover{color:#c9a84c}
+.footer-right{text-align:right}
+.footer-right a{font-size:14px;color:#c9a84c;text-decoration:none;display:block;margin-bottom:6px}
+.footer-right p{font-size:13px;color:rgba(255,255,255,0.35)}
+.footer-bottom{max-width:1200px;margin:24px auto 0;text-align:center;font-size:12px;color:rgba(255,255,255,0.2);letter-spacing:0.08em}
+
+/* ── APP TAB SPECIFIC STYLES ── */
+.app-launch-card{background:var(--navy);padding:56px;margin-bottom:40px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:40px}
+.app-launch-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--gold)}
+.app-launch-card::after{content:'';position:absolute;bottom:0;right:0;width:56px;height:56px;border-bottom:3px solid var(--gold);border-right:3px solid var(--gold)}
+.app-launch-text .alc-tag{font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.app-launch-text .alc-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--white);line-height:1.2;margin-bottom:10px}
+.app-launch-text .alc-desc{font-size:14px;font-weight:300;color:rgba(255,255,255,0.55);line-height:1.7;max-width:520px}
+.app-launch-btn{flex-shrink:0;background:var(--gold);color:var(--navy);font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;padding:16px 32px;text-decoration:none;display:inline-block;transition:background 0.2s;white-space:nowrap}
+.app-launch-btn:hover{background:var(--gold-lite)}
+.feature-row{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--gold);margin-bottom:48px}
+.feature-card{background:var(--cream);padding:28px 24px}
+.feature-num{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:var(--gold-dim);line-height:1;margin-bottom:8px}
+.feature-title{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:8px;letter-spacing:0.04em}
+.feature-text{font-size:12px;font-weight:300;color:var(--text-lite);line-height:1.6}
+.decision-stack{display:flex;flex-direction:column;gap:0;margin-bottom:48px;border:1px solid var(--lgray)}
+.decision-row{display:grid;grid-template-columns:80px 1fr;gap:0;border-bottom:1px solid var(--lgray)}
+.decision-row:last-child{border-bottom:none}
+.decision-num{background:var(--navy);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--gold)}
+.decision-body{padding:24px 28px;background:var(--white)}
+.decision-body h4{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:6px;letter-spacing:0.02em}
+.decision-body p{font-size:13px;font-weight:300;color:var(--text-mid);line-height:1.7}
+.case-study-card{background:var(--cream-mid);border:1px solid var(--lgray);padding:36px;display:flex;gap:28px;align-items:flex-start;text-decoration:none;transition:background 0.2s;margin-bottom:16px}
+.case-study-card:hover{background:var(--cream)}
+.cs-icon{font-size:40px;flex-shrink:0}
+.cs-body .cs-tag{font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:6px}
+.cs-body .cs-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--navy);margin-bottom:8px}
+.cs-body .cs-desc{font-size:13px;font-weight:300;color:var(--text-lite);line-height:1.6;margin-bottom:12px}
+.cs-body .cs-link{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-dim)}
+.framework-table{width:100%;border-collapse:collapse;margin-bottom:48px;font-size:13px}
+.framework-table th{background:var(--navy);color:var(--gold);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;padding:14px 20px;text-align:left;font-weight:600}
+.framework-table td{padding:16px 20px;border-bottom:1px solid var(--lgray);vertical-align:top;font-weight:300;color:var(--text-mid);line-height:1.6}
+.framework-table td:first-child{font-weight:600;color:var(--navy);white-space:nowrap;border-right:2px solid var(--gold);background:var(--cream)}
+.framework-table tr:last-child td{border-bottom:none}
+.framework-table tr:nth-child(even) td:not(:first-child){background:#fdfbf7}
+
+@media(max-width:900px){
+  .artifact-header,.two-col,.case-banner,.case-meta-grid{grid-template-columns:1fr}
+  .case-banner{padding:36px}
+  .three-grid,.feature-row{grid-template-columns:1fr}
+  .page-hero,.artifact-section>div{padding-left:32px!important;padding-right:32px!important}
+  .artifact-nav-inner{padding:0 24px}
+  .embed-wrap{padding:32px}
+  .footer-inner{grid-template-columns:1fr;text-align:center}
+  .footer-right{text-align:center}
+  .footer-nav{justify-content:center}
+  .site-footer{padding:48px 24px}
+  .app-launch-card{flex-direction:column;align-items:flex-start;padding:36px}
+  .decision-row{grid-template-columns:56px 1fr}
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Thomas <span>Starr</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html" class="active">Projects</a>
+      <a href="philosophy.html">Philosophy</a>
+      <a href="resume.html">Résumé</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <button class="nav-toggle" onclick="this.parentElement.parentElement.classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <p class="page-eyebrow">Projects</p>
+    <h1 class="page-title">Work that<br><em>earns its place.</em></h1>
+    <p class="page-subtitle">Case studies, artifacts, and work samples spanning VR design, curriculum development, and multimedia — each with honest reflection on the decisions made.</p>
+  </div>
+</section>
+
+<nav class="artifact-nav">
+  <div class="artifact-nav-inner">
+    <button class="artifact-tab active" onclick="showArtifact('mission-motion',this)">Artifact 4 — Mission: Motion</button>
+    <button class="artifact-tab" onclick="showArtifact('stem-club',this)">STEM Club — Full Year</button>
+    <button class="artifact-tab" onclick="showArtifact('weather-watch',this)">Spring Slides — Weather Watch</button>
+    <button class="artifact-tab" onclick="showArtifact('mult-facts',this)">Multiplication Facts App</button>
+    <button class="artifact-tab" onclick="showArtifact('academic',this)">Academic Work</button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     TAB 1 — MISSION: MOTION
+══════════════════════════════════════ -->
+<section class="artifact-section active" id="mission-motion" style="background:var(--white);padding:80px 60px">
+  <div class="section-inner">
+
+    <div class="artifact-header">
+      <div>
+        <p class="artifact-num">Artifact 4 &nbsp;·&nbsp; ID-8960: Applied Design and Development</p>
+        <span class="artifact-badge">Multimedia · VR Experience Concept</span>
+        <h2 class="artifact-title">Mission: Motion —<br><em>A VR Journey Through Newton's Laws</em></h2>
+        <p class="artifact-subtitle">A narrative-driven virtual reality instructional experience designed to teach Newton's Three Laws of Motion to 5th Grade students through immersive, mission-based gameplay guided by an AI mentor named NOVA.</p>
+      </div>
+      <div class="meta-stack">
+        <div class="meta-row"><p class="meta-label">Artifact Type</p><p class="meta-val">Multimedia slide presentation (PDF) — VR Experience Concept</p></div>
+        <div class="meta-row"><p class="meta-label">Course</p><p class="meta-val">ID-8960: Applied Design and Development</p></div>
+        <div class="meta-row"><p class="meta-label">Standards</p><p class="meta-val">Newton's Three Laws of Motion · 5th Grade Physics</p></div>
+        <div class="meta-row"><p class="meta-label">Research</p><p class="meta-val">Acevedo et al. (2024) · Tene et al. (2024) · Jiang et al. (2025)</p></div>
+      </div>
+    </div>
+
+    <div class="embed-wrap">
+      <p class="embed-label">Presentation Recording</p>
+      <p class="embed-title">Mission: Motion — Full Concept Presentation Video</p>
+      <div class="embed-container">
+        <iframe src="https://drive.google.com/file/d/1-4NAZwYrHFpkt7XK2taHiaamc9US-mAg/preview" allow="autoplay" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="embed-wrap" style="margin-bottom:56px">
+      <p class="embed-label">Slide Deck</p>
+      <p class="embed-title">Mission: Motion — Full PDF Presentation</p>
+      <div class="embed-container" style="padding-bottom:75%">
+        <iframe src="https://drive.google.com/file/d/1Hx4rZ2sZS0HJSQAJqXa2c6ESxQ52Ly_0/preview" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="three-grid">
+      <div class="grid-card">
+        <span class="grid-icon">🎯</span>
+        <h3 class="grid-title">Relevance</h3>
+        <p class="grid-text">This artifact sits at the intersection of immersive technology, instructional design, and K–12 STEM — my intended specialization. It demonstrates creative capacity and research literacy: design grounded in peer-reviewed immersive learning research from 2024–2025.</p>
+      </div>
+      <div class="grid-card">
+        <span class="grid-icon">⭐</span>
+        <h3 class="grid-title">Quality</h3>
+        <p class="grid-text">A coherent narrative structure — setting, characters, three-act mission progression, adaptive feedback, and conclusion — with clear learning objectives mapped to each of Newton's Three Laws and AI guide NOVA providing real-time adaptive mentoring.</p>
+      </div>
+      <div class="grid-card">
+        <span class="grid-icon">🔄</span>
+        <h3 class="grid-title">Variety &amp; Impact</h3>
+        <p class="grid-text">The only multimedia and immersive design artifact in this portfolio. Its three-mission structure, character-based mentoring, and adaptive feedback are design patterns transferable across subjects and grade levels — and identified as a potential STEM program development project.</p>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <p class="col-label">The Design Challenge</p>
+        <h3 class="col-heading">Teaching physics through immersive narrative.</h3>
+        <p class="col-text">Newton's Laws are abstract concepts students often memorize without understanding. The design challenge was to create a learning environment where the laws are encountered as phenomena — felt and observed in context — rather than defined and applied.</p>
+        <div class="pull-quote"><p>"A VR environment offers something no textbook can: the ability to place a learner inside the physics itself. Mission: Motion uses that affordance deliberately."</p></div>
+      </div>
+      <div>
+        <p class="col-label">The Instructional Framework</p>
+        <h3 class="col-heading">Research-grounded immersive design.</h3>
+        <p class="col-text">The design is grounded in current empirical research on immersive learning environments (Acevedo et al., 2024; Tene et al., 2024; Jiang et al., 2025), supporting narrative framing, embodied interaction, and adaptive feedback as mechanisms for deepening conceptual understanding in VR.</p>
+        <p class="col-text">NOVA embodies Mayer's Personalization Principle — a conversational, responsive presence that adjusts guidance based on learner performance, maintaining engagement without removing productive challenge.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     TAB 2 — STEM CLUB
+══════════════════════════════════════ -->
+<section class="artifact-section" id="stem-club" style="background:var(--cream);padding:80px 60px">
+  <div class="section-inner">
+
+    <div class="case-banner">
+      <div>
+        <p class="case-banner-tag">Curriculum Design · STEM · K–5 · Full Year</p>
+        <h2 class="case-banner-title">Elementary STEM Club — A Full-Year Instructional Design Project</h2>
+        <p class="case-banner-desc">Two semesters. Sixteen sessions. Forces &amp; Structures in the Fall, Earth &amp; Energy in the Spring. A complete from-scratch curriculum built using Understanding by Design from the first session to the community showcase.</p>
+      </div>
+      <div class="case-meta-grid">
+        <div class="case-meta-item"><p class="case-meta-label">Framework</p><p class="case-meta-val">Understanding by Design</p></div>
+        <div class="case-meta-item"><p class="case-meta-label">Audience</p><p class="case-meta-val">Grades 3–5 · After School</p></div>
+        <div class="case-meta-item"><p class="case-meta-label">Standards</p><p class="case-meta-val">NGSS Aligned</p></div>
+        <div class="case-meta-item"><p class="case-meta-label">Duration</p><p class="case-meta-val">2 semesters · 16 sessions</p></div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <p class="col-label">The Challenge</p>
+        <h3 class="col-heading">Design a complete after-school STEM program from scratch.</h3>
+        <p class="col-text">City Church Academy needed more than activities — a coherent, sequenced curriculum that built genuine scientific thinking across an entire academic year. No existing curriculum, no material library, no template.</p>
+        <div class="pull-quote"><p>"The backward design logic meant starting with the showcase — what would students need to know and be able to do to present confidently? — and working backward from there."</p></div>
+      </div>
+      <div>
+        <p class="col-label">The Approach</p>
+        <h3 class="col-heading">UbD applied to a full year.</h3>
+        <p class="col-text">Each session was built using the UbD three-stage model: desired results first, then acceptable evidence, then the learning plan. Mayer's CTML principles informed the multimedia design — slide decks minimizing extraneous load, recording sheets scaffolding thinking rather than just collecting answers.</p>
+        <p class="col-text">Every session included an explicit exit reflection connecting the day's activity to a real-world problem — building the habit of transferable thinking that carried through to the showcase presentations.</p>
+      </div>
+    </div>
+
+    <p class="col-label">Deliverables</p>
+    <ul class="deliverables" style="margin-bottom:48px">
+      <li>16 UbD lesson plans (Fall + Spring) with Stage 1–3 documentation, NGSS alignment, differentiation, and rubric</li>
+      <li>16 slide decks designed using Mayer's CTML principles, color-coded by unit theme</li>
+      <li>Fall and Spring student recording sheets — one per session with exit reflections</li>
+      <li>Fall and Spring challenge cards — print-and-cut with mission, materials, success criteria, and engineering hint</li>
+      <li>Fall and Spring activity planners — complete program overview with NGSS alignment and materials lists</li>
+      <li>Parent welcome letters, budget worksheet, and enrollment materials</li>
+      <li>Program website — 5-page HTML site</li>
+      <li>Enrollment flyers, certificates of completion, and showcase materials</li>
+    </ul>
+
+    <div class="pull-quote">
+      <p>"What I would do differently: the community representation framing needed more intentional design. The curriculum was built for a specific school community — but my initial documentation treated it as generic instructional work. Naming the community and connecting decisions to culturally responsive practice is the revision I am currently working through."</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     TAB 3 — WEATHER WATCH SLIDES
+══════════════════════════════════════ -->
+<section class="artifact-section" id="weather-watch" style="background:var(--white);padding:80px 60px">
+  <div class="section-inner">
+
+    <div class="artifact-header">
+      <div>
+        <span class="artifact-badge">Multimedia Design · STEM · K–5</span>
+        <h2 class="artifact-title">Spring Week 1 — <em>Weather Watch</em></h2>
+        <p class="artifact-subtitle">A complete instructional slide deck for the first session of the Spring Earth &amp; Energy semester. Students investigate weather, build working anemometers, and connect wind to atmospheric energy — all in 60 minutes.</p>
+      </div>
+      <div class="meta-stack">
+        <div class="meta-row"><p class="meta-label">Session Length</p><p class="meta-val">60 minutes · After School</p></div>
+        <div class="meta-row"><p class="meta-label">Big Idea</p><p class="meta-val">Earth's atmosphere is always moving and changing.</p></div>
+        <div class="meta-row"><p class="meta-label">Design Principles</p><p class="meta-val">Mayer's CTML · Coherence · Signaling · Segmenting</p></div>
+        <div class="meta-row"><p class="meta-label">Slides</p><p class="meta-val">9 slides · Welcome, Key Concepts, Build, Test, Reflect, Wrap-Up</p></div>
+      </div>
+    </div>
+
+    <div class="embed-wrap" style="margin-bottom:56px">
+      <p class="embed-label">Live Slide Deck</p>
+      <p class="embed-title">Spring Week 1: Weather Watch — Full Presentation</p>
+      <div class="embed-container" style="padding-bottom:61%">
+        <iframe src="https://docs.google.com/presentation/d/1djSGQAVPuj9FBP7pbWpAyxxF9PJkZXySmpANwVs9zI0/preview" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="three-grid">
+      <div class="grid-card">
+        <span class="grid-icon">🎨</span>
+        <h3 class="grid-title">Design Decisions</h3>
+        <p class="grid-text">Each slide has a single focal point, consistent color coding (sky blue for Weather Watch), and timed activity banners so students always know how long each phase lasts. No slide exceeds one concept — direct application of the Coherence Principle.</p>
+      </div>
+      <div class="grid-card">
+        <span class="grid-icon">🔬</span>
+        <h3 class="grid-title">The Build Activity</h3>
+        <p class="grid-text">Students build a working anemometer in 25 minutes using paper cups, straws, a pencil, and a pin. The slide sequence scaffolds planning before building, building before testing, and testing before reflecting — the engineering design process made explicit.</p>
+      </div>
+      <div class="grid-card">
+        <span class="grid-icon">🌍</span>
+        <h3 class="grid-title">Real-World Connection</h3>
+        <p class="grid-text">Every session closes with a question connecting the day's activity to the real world. Weather Watch closes with: "Wind is caused by differences in air temperature — where do you think that energy originally comes from?" Setting up the solar energy session in Week 2.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     TAB 4 — MULTIPLICATION FACTS APP
+══════════════════════════════════════ -->
+<section class="artifact-section" id="mult-facts" style="background:var(--cream);padding:80px 60px">
+  <div class="section-inner">
+
+    <p class="artifact-num">Live Web Application · City Church Academy</p>
+    <span class="artifact-badge">EdTech · Web App · Grades 4–5</span>
+    <h2 class="artifact-title" style="margin-top:16px">Multiplication Facts<br><em>Practice App</em></h2>
+    <p class="artifact-subtitle">A fully deployed, mobile-friendly web application for building multiplication fact fluency in 4th and 5th grade students — with per-device mastery tracking, four practice modes, and zero personal data collected.</p>
+
+    <!-- Launch card -->
+    <div class="app-launch-card">
+      <div class="app-launch-text">
+        <p class="alc-tag">Live Application</p>
+        <p class="alc-title">Open the app on any device — phone, tablet, or Chromebook</p>
+        <p class="alc-desc">No login. No download. Students tap the link and start practicing immediately. Progress saves to their device and persists across sessions.</p>
+      </div>
+      <a href="multiplication-facts.html" target="_blank" class="app-launch-btn">Launch App →</a>
+    </div>
+
+    <!-- Feature cards -->
+    <div class="feature-row">
+      <div class="feature-card">
+        <p class="feature-num">4</p>
+        <p class="feature-title">Practice Modes</p>
+        <p class="feature-text">60-second sprint, 2-minute run, 20-question practice, and a 10-question mastery check — one for every classroom context.</p>
+      </div>
+      <div class="feature-card">
+        <p class="feature-num">×12</p>
+        <p class="feature-title">Fact Families</p>
+        <p class="feature-text">All 11 fact families (×2 through ×12) available. Students select which ones to practice each session.</p>
+      </div>
+      <div class="feature-card">
+        <p class="feature-num">3</p>
+        <p class="feature-title">Mastery Levels</p>
+        <p class="feature-text">Not Started → Practicing → Mastered. Earned at 8/10 correct and tracked on-device across sessions.</p>
+      </div>
+      <div class="feature-card">
+        <p class="feature-num">0</p>
+        <p class="feature-title">Data Collected</p>
+        <p class="feature-text">Progress lives on the student's own device only. No accounts, no servers, no personal information — COPPA-compliant by design.</p>
+      </div>
+    </div>
+
+    <!-- Design decisions -->
+    <p class="col-label" style="margin-bottom:16px">Design Rationale</p>
+    <h3 class="col-heading" style="margin-bottom:24px">Every decision grounded in learning science.</h3>
+
+    <div class="decision-stack">
+      <div class="decision-row">
+        <div class="decision-num">01</div>
+        <div class="decision-body">
+          <h4>Timed Practice for Automaticity</h4>
+          <p>At the 4th and 5th grade level, the goal shifts from procedural knowledge (being able to calculate) to automaticity (instant recall). Timed modes were chosen to build this type of recall under mild time pressure — mirroring how facts are used in real academic tasks like long division and fractions.</p>
+        </div>
+      </div>
+      <div class="decision-row">
+        <div class="decision-num">02</div>
+        <div class="decision-body">
+          <h4>Local Storage — Privacy by Design</h4>
+          <p>Rather than requiring student accounts, progress uses the browser's built-in Local Storage API — meaning zero personal data is transmitted or stored on any server. This approach is COPPA-compliant by design, making the app appropriate for school use without additional privacy agreements.</p>
+        </div>
+      </div>
+      <div class="decision-row">
+        <div class="decision-num">03</div>
+        <div class="decision-body">
+          <h4>Student Choice as a Motivational Lever</h4>
+          <p>Students select which fact families to practice rather than being assigned a fixed sequence. This reflects self-determination theory — giving learners autonomy over their practice path increases engagement and persistence without sacrificing structure.</p>
+        </div>
+      </div>
+      <div class="decision-row">
+        <div class="decision-num">04</div>
+        <div class="decision-body">
+          <h4>Four Modes for Different Contexts</h4>
+          <p>A 60-second warm-up serves a different purpose than a structured homework session or a formal mastery assessment. Building all four modes into one tool means teachers don't need separate resources for each context — the app adapts to the moment.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frameworks -->
+    <p class="col-label" style="margin-bottom:16px">Frameworks in Action</p>
+    <table class="framework-table">
+      <thead>
+        <tr><th>Framework</th><th>How It Appears in This Project</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ADDIE</td>
+          <td>Analysis identified the fluency gap. Design chose timed recall and mastery thresholds. Development produced the single-file HTML/JS app. Implementation deployed via GitHub Pages. Evaluation is built into the mastery tracking system.</td>
+        </tr>
+        <tr>
+          <td>Bloom's Taxonomy</td>
+          <td>Targets the Remember level — the foundation for all higher-order math operations. Students must recall facts automatically before they can Apply them in multi-step problems like long division and algebraic expressions.</td>
+        </tr>
+        <tr>
+          <td>Kirkpatrick Model</td>
+          <td>Level 1 (Reaction): student choice of mode and fact family maintains engagement. Level 2 (Learning): mastery threshold provides measurable evidence of fact acquisition. Levels 3–4 to be tracked as classroom data emerges over the school year.</td>
+        </tr>
+        <tr>
+          <td>Cognitive Load Theory</td>
+          <td>Automaticity with multiplication facts reduces extraneous cognitive load when students encounter fractions, long division, and algebraic expressions — freeing working memory for the new concept being introduced.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Case study download -->
+    <p class="col-label" style="margin-bottom:16px">Portfolio Document</p>
+    <a href="StarrID_CaseStudy_MultiplicationFacts.pdf" target="_blank" class="case-study-card">
+      <span class="cs-icon">📋</span>
+      <div class="cs-body">
+        <p class="cs-tag">Case Study · PDF · Starr Instructional Design</p>
+        <p class="cs-title">Multiplication Facts App — Full Case Study</p>
+        <p class="cs-desc">A four-page portfolio document covering the project context, design rationale, ID frameworks applied, and outcomes. Built in Starr ID branding — burnt orange and forest green.</p>
+        <p class="cs-link">Download Case Study →</p>
+      </div>
+    </a>
+
+    <div class="pull-quote" style="margin-top:32px">
+      <p>"This project demonstrated that instructional design thinking and rapid development can work together. A real learning need, a grounded design rationale, and a deployed solution — built in a single evening."</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     TAB 5 — ACADEMIC WORK
+══════════════════════════════════════ -->
+<section class="artifact-section" id="academic" style="background:var(--white);padding:80px 60px">
+  <div class="section-inner">
+
+    <p class="section-eyebrow">Academic Work</p>
+    <h2 class="section-heading">Written artifacts &amp;<br><em>applied coursework.</em></h2>
+
+    <div style="margin-bottom:64px">
+      <span class="artifact-badge" style="margin-bottom:12px;display:inline-block">Interactive Media · Grade 5</span>
+      <h3 class="artifact-title" style="font-size:clamp(24px,3vw,36px);margin-bottom:8px">Interactive Media Proposal</h3>
+      <p class="artifact-subtitle" style="margin-bottom:24px">A Grade 5 project proposal for Weekly Wisdom Review Boards using Canva and Google Gemini AI. Students synthesize weekly science content into multimedia presentations featuring visuals, AI-sourced quotes, and faith-based reflection — submitted and peer-reviewed via Google Classroom.</p>
+      <div class="embed-wrap" style="margin-bottom:16px">
+        <p class="embed-label">PDF Document</p>
+        <p class="embed-title">Interactive Media Proposal — Full Document</p>
+        <div class="embed-container" style="padding-bottom:75%">
+          <iframe src="https://drive.google.com/file/d/1TVtLA0DACeFA1Xni4JF6R3YKHFKfPo3u/preview" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:64px">
+      <span class="artifact-badge" style="margin-bottom:12px;display:inline-block">Visual Design · Instructional Graphic</span>
+      <h3 class="artifact-title" style="font-size:clamp(24px,3vw,36px);margin-bottom:8px">Previously On... RECAP</h3>
+      <p class="artifact-subtitle" style="margin-bottom:24px">A visual instructional graphic summarizing five core instructional design principles — Relevance, Experience, Choice, Application, and Progress — in a retro TV format. Designed as a session recap tool for learner engagement and principle reinforcement.</p>
+      <div class="embed-wrap" style="margin-bottom:16px">
+        <p class="embed-label">Visual Artifact</p>
+        <p class="embed-title">RECAP TV — Instructional Design Principles Graphic</p>
+        <div class="embed-container" style="padding-bottom:75%">
+          <iframe src="https://drive.google.com/file/d/1u7XYAt1aWFeaT5fq3cHPAX9p7CFjRWnj/preview" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+
+    <p class="section-eyebrow" style="margin-top:16px">APA Papers</p>
+    <h3 class="section-heading" style="font-size:clamp(24px,3vw,38px)">Written work from<br><em>EDU8960.</em></h3>
+
+    <a href="#" class="pdf-card">
+      <span class="pdf-icon">📄</span>
+      <div>
+        <p class="pdf-title">Designing With Purpose</p>
+        <p class="pdf-desc">Applying backward design and Mayer's five multimedia principles to professional portfolio development — with specific design applications and violations to avoid.</p>
+        <p class="pdf-link">View Paper →</p>
+      </div>
+    </a>
+    <a href="#" class="pdf-card">
+      <span class="pdf-icon">📄</span>
+      <div>
+        <p class="pdf-title">Designing With Integrity</p>
+        <p class="pdf-desc">A seven-criterion rubric for evaluating portfolio design against ethical design, universal design, and DEI principles — with an honest self-assessment applying it to this portfolio.</p>
+        <p class="pdf-link">View Paper →</p>
+      </div>
+    </a>
+    <a href="#" class="pdf-card">
+      <span class="pdf-icon">📄</span>
+      <div>
+        <p class="pdf-title">Grade 5 States of Matter — Project Management Plan</p>
+        <p class="pdf-desc">A complete project management suite: WBS, schedule, communication plan, stakeholder email, risk assessment, closure report, and future trends reflection.</p>
+        <p class="pdf-link">View Paper →</p>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div><p class="footer-name">Thomas Starr</p><p class="footer-title">Instructional Designer</p></div>
+    <nav class="footer-nav">
+      <a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="philosophy.html">Philosophy</a><a href="resume.html">Résumé</a><a href="contact.html">Contact</a>
+    </nav>
+    <div class="footer-right"><a href="mailto:thomasjjstarr@gmail.com">thomasjjstarr@gmail.com</a><p>Deltona, Florida</p></div>
+  </div>
+  <p class="footer-bottom">© 2026 Thomas Starr · Instructional Designer · Built with purpose.</p>
+</footer>
+
+<script>
+function showArtifact(id, btn) {
+  document.querySelectorAll('.artifact-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.artifact-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: document.querySelector('.artifact-nav').offsetTop - 68, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
