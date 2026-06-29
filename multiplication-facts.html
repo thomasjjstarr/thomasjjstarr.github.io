@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="theme-color" content="#1a2a5e" />
+<title>Math Facts — City Church Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;900&family=DM+Mono:wght@500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #1a2a5e;
+    --navy-dark: #111d42;
+    --navy-light: #243472;
+    --gold: #c9a84c;
+    --gold-light: #e8c96a;
+    --gold-pale: #fdf4dd;
+    --white: #ffffff;
+    --gray-100: #f4f5f8;
+    --gray-300: #d0d4e0;
+    --gray-500: #8890aa;
+    --green: #2d7a4f;
+    --green-bg: #eaf6ef;
+    --red: #b03030;
+    --red-bg: #fceaea;
+    --radius: 16px;
+    --radius-sm: 8px;
+  }
+
+  html, body {
+    height: 100%;
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy-dark);
+    color: var(--white);
+    overscroll-behavior: none;
+  }
+
+  /* ── APP SHELL ── */
+  #app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--navy);
+    position: relative;
+  }
+
+  .screen { display: none; flex-direction: column; flex: 1; }
+  .screen.active { display: flex; }
+
+  /* ── HEADER ── */
+  .app-header {
+    background: var(--navy-dark);
+    padding: 14px 20px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--gold);
+    flex-shrink: 0;
+  }
+  .app-header .brand {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    line-height: 1.2;
+  }
+  .app-header .brand span { display: block; color: rgba(255,255,255,.5); font-weight: 500; font-size: 9px; letter-spacing: .08em; }
+
+  /* ── HOME SCREEN ── */
+  #screen-home {
+    padding: 24px 20px 32px;
+    gap: 24px;
+  }
+
+  .hero-title {
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--white);
+  }
+  .hero-title em {
+    font-style: normal;
+    color: var(--gold);
+  }
+  .hero-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,.55);
+    margin-top: 6px;
+    font-weight: 500;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  /* Mastery grid */
+  .mastery-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+  }
+  .fact-chip {
+    background: var(--navy-light);
+    border-radius: var(--radius-sm);
+    padding: 8px 4px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform .12s, box-shadow .12s;
+    border: 2px solid transparent;
+    position: relative;
+  }
+  .fact-chip:active { transform: scale(.95); }
+  .fact-chip .fc-label { font-size: 14px; font-weight: 700; color: var(--white); }
+  .fact-chip .fc-status { font-size: 9px; margin-top: 3px; font-weight: 600; letter-spacing: .04em; }
+  .fact-chip[data-mastery="none"] { border-color: rgba(255,255,255,.1); }
+  .fact-chip[data-mastery="none"] .fc-status { color: rgba(255,255,255,.3); }
+  .fact-chip[data-mastery="practicing"] { border-color: var(--gold); }
+  .fact-chip[data-mastery="practicing"] .fc-status { color: var(--gold); }
+  .fact-chip[data-mastery="mastered"] { border-color: #2d7a4f; background: rgba(45,122,79,.2); }
+  .fact-chip[data-mastery="mastered"] .fc-status { color: #5ecb8a; }
+  .fact-chip[data-mastery="selected"] { border-color: var(--gold); background: var(--gold); }
+  .fact-chip[data-mastery="selected"] .fc-label { color: var(--navy-dark); }
+  .fact-chip[data-mastery="selected"] .fc-status { color: var(--navy); }
+
+  .legend {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 2px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: rgba(255,255,255,.55);
+    font-weight: 500;
+  }
+  .legend-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .legend-dot.none { background: rgba(255,255,255,.2); }
+  .legend-dot.practicing { background: var(--gold); }
+  .legend-dot.mastered { background: #5ecb8a; }
+
+  .mode-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .mode-card {
+    background: var(--navy-light);
+    border-radius: var(--radius);
+    padding: 16px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color .15s, transform .12s;
+    text-align: center;
+  }
+  .mode-card:active { transform: scale(.97); }
+  .mode-card.selected { border-color: var(--gold); }
+  .mode-card .mode-icon { font-size: 26px; margin-bottom: 6px; }
+  .mode-card .mode-name { font-size: 13px; font-weight: 700; color: var(--white); }
+  .mode-card .mode-desc { font-size: 11px; color: rgba(255,255,255,.45); margin-top: 3px; font-weight: 500; }
+
+  .btn-primary {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    background: var(--gold);
+    color: var(--navy-dark);
+    border: none;
+    border-radius: var(--radius);
+    font-size: 16px;
+    font-weight: 800;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    letter-spacing: .02em;
+    transition: background .12s, transform .12s;
+  }
+  .btn-primary:active { transform: scale(.98); background: var(--gold-light); }
+  .btn-primary:disabled { background: var(--gray-300); color: var(--gray-500); cursor: not-allowed; transform: none; }
+
+  .btn-ghost {
+    display: block;
+    width: 100%;
+    padding: 13px;
+    background: transparent;
+    color: rgba(255,255,255,.5);
+    border: 2px solid rgba(255,255,255,.15);
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: border-color .12s, color .12s;
+  }
+  .btn-ghost:hover { border-color: rgba(255,255,255,.35); color: var(--white); }
+
+  /* ── QUIZ SCREEN ── */
+  #screen-quiz {
+    padding: 0;
+  }
+
+  .quiz-top {
+    padding: 16px 20px 12px;
+    background: var(--navy-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .quiz-stat { text-align: center; }
+  .quiz-stat .qs-val { font-size: 22px; font-weight: 900; color: var(--white); font-family: 'DM Mono', monospace; }
+  .quiz-stat .qs-label { font-size: 9px; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.4); font-weight: 600; margin-top: 1px; }
+
+  .timer-bar-wrap {
+    flex: 1;
+    height: 6px;
+    background: rgba(255,255,255,.1);
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 0 4px;
+  }
+  #timer-bar {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 3px;
+    transition: width .25s linear, background .25s;
+    width: 100%;
+  }
+  #timer-bar.warning { background: #e06060; }
+
+  .fact-tag {
+    background: var(--gold);
+    color: var(--navy-dark);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    flex-shrink: 0;
+  }
+
+  .problem-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 20px;
+    gap: 24px;
+  }
+
+  .problem-display {
+    font-size: 64px;
+    font-weight: 900;
+    font-family: 'DM Mono', monospace;
+    color: var(--white);
+    letter-spacing: -.02em;
+    line-height: 1;
+    text-align: center;
+  }
+  .problem-display .op { color: var(--gold); }
+
+  .feedback-zone {
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .feedback-badge {
+    padding: 6px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity .15s, transform .15s;
+  }
+  .feedback-badge.show { opacity: 1; transform: translateY(0); }
+  .feedback-badge.correct { background: var(--green-bg); color: var(--green); }
+  .feedback-badge.wrong { background: var(--red-bg); color: var(--red); }
+
+  /* Number pad */
+  .numpad-wrap {
+    padding: 0 16px 24px;
+    flex-shrink: 0;
+  }
+  .numpad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .np-btn {
+    background: var(--navy-light);
+    border: 2px solid rgba(255,255,255,.08);
+    border-radius: var(--radius);
+    padding: 18px 8px;
+    font-size: 22px;
+    font-weight: 700;
+    font-family: 'DM Mono', monospace;
+    color: var(--white);
+    cursor: pointer;
+    transition: background .1s, transform .08s, border-color .1s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .np-btn:active { transform: scale(.93); background: var(--gold); color: var(--navy-dark); border-color: var(--gold); }
+  .np-btn.zero { grid-column: 1; }
+  .np-btn.clear { background: rgba(176,48,48,.18); border-color: rgba(176,48,48,.25); color: #e07070; }
+  .np-btn.clear:active { background: #b03030; color: white; }
+  .np-btn.enter { background: var(--gold); color: var(--navy-dark); border-color: var(--gold); font-size: 14px; font-family: 'DM Sans', sans-serif; font-weight: 800; letter-spacing: .04em; }
+  .np-btn.enter:active { background: var(--gold-light); }
+
+  .answer-display {
+    font-size: 36px;
+    font-weight: 900;
+    font-family: 'DM Mono', monospace;
+    color: var(--gold);
+    min-height: 48px;
+    text-align: center;
+    letter-spacing: .04em;
+  }
+  .answer-display.placeholder { color: rgba(255,255,255,.15); font-size: 28px; }
+
+  /* ── RESULTS SCREEN ── */
+  #screen-results {
+    padding: 24px 20px 32px;
+    gap: 20px;
+  }
+
+  .results-hero {
+    text-align: center;
+    padding: 20px 0 8px;
+  }
+  .results-emoji { font-size: 56px; line-height: 1; margin-bottom: 12px; }
+  .results-title { font-size: 26px; font-weight: 900; color: var(--white); }
+  .results-sub { font-size: 14px; color: rgba(255,255,255,.5); margin-top: 6px; font-weight: 500; }
+
+  .results-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .rs-card {
+    background: var(--navy-light);
+    border-radius: var(--radius);
+    padding: 14px 8px;
+    text-align: center;
+  }
+  .rs-val { font-size: 28px; font-weight: 900; font-family: 'DM Mono', monospace; color: var(--gold); }
+  .rs-label { font-size: 10px; color: rgba(255,255,255,.45); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin-top: 4px; }
+
+  .mastery-update {
+    background: var(--navy-light);
+    border-radius: var(--radius);
+    padding: 16px;
+  }
+  .mu-title { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .mu-row { display: flex; align-items: center; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+  .mu-row:last-child { border-bottom: none; }
+  .mu-name { font-size: 14px; font-weight: 600; color: var(--white); }
+  .mu-pill {
+    font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 12px;
+  }
+  .mu-pill.practicing { background: rgba(201,168,76,.18); color: var(--gold-light); }
+  .mu-pill.mastered { background: rgba(45,122,79,.2); color: #5ecb8a; }
+  .mu-pill.none { background: rgba(255,255,255,.08); color: rgba(255,255,255,.4); }
+
+  .btn-row { display: flex; gap: 10px; }
+  .btn-row .btn-primary { flex: 2; }
+  .btn-row .btn-ghost { flex: 1; }
+
+  /* ── SCROLL FIX ── */
+  .scroll-area { overflow-y: auto; flex: 1; -webkit-overflow-scrolling: touch; }
+
+  /* ── RESPONSIVE TOUCH ── */
+  @media (max-height: 650px) {
+    .problem-display { font-size: 48px; }
+    .np-btn { padding: 14px 8px; font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- ══ HEADER ══ -->
+  <header class="app-header">
+    <div class="brand">
+      City Church Academy
+      <span>Math Facts Practice</span>
+    </div>
+    <div id="header-back" style="display:none;">
+      <button class="btn-ghost" style="width:auto;padding:6px 14px;font-size:12px;" onclick="goHome()">← Home</button>
+    </div>
+  </header>
+
+  <!-- ══ HOME SCREEN ══ -->
+  <div id="screen-home" class="screen active scroll-area">
+    <div style="padding:24px 20px 0;">
+      <h1 class="hero-title">Multiplication<br /><em>Facts</em></h1>
+      <p class="hero-sub">Pick a fact family, choose your mode, and go!</p>
+    </div>
+
+    <div style="padding:0 20px;">
+      <p class="section-label">Your Progress</p>
+      <div class="mastery-grid" id="mastery-grid"></div>
+      <div class="legend" style="margin-top:10px;">
+        <div class="legend-item"><span class="legend-dot none"></span>Not started</div>
+        <div class="legend-item"><span class="legend-dot practicing"></span>Practicing</div>
+        <div class="legend-item"><span class="legend-dot mastered"></span>Mastered</div>
+      </div>
+    </div>
+
+    <div style="padding:0 20px;">
+      <p class="section-label">Selected Facts</p>
+      <p id="selection-hint" style="font-size:13px;color:rgba(255,255,255,.4);font-weight:500;">Tap fact families above to select them</p>
+    </div>
+
+    <div style="padding:0 20px;">
+      <p class="section-label">Mode</p>
+      <div class="mode-cards">
+        <div class="mode-card selected" data-mode="timed60" onclick="selectMode(this)">
+          <div class="mode-icon">⚡</div>
+          <div class="mode-name">60-Second Sprint</div>
+          <div class="mode-desc">How many can you get?</div>
+        </div>
+        <div class="mode-card" data-mode="timed120" onclick="selectMode(this)">
+          <div class="mode-icon">🏃</div>
+          <div class="mode-name">2-Minute Run</div>
+          <div class="mode-desc">More time, more facts</div>
+        </div>
+        <div class="mode-card" data-mode="practice20" onclick="selectMode(this)">
+          <div class="mode-icon">🎯</div>
+          <div class="mode-name">20 Questions</div>
+          <div class="mode-desc">No time pressure</div>
+        </div>
+        <div class="mode-card" data-mode="mastery" onclick="selectMode(this)">
+          <div class="mode-icon">🏆</div>
+          <div class="mode-name">Mastery Check</div>
+          <div class="mode-desc">10 facts, earn the ✅</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:0 20px 8px;">
+      <button class="btn-primary" id="start-btn" onclick="startQuiz()" disabled>Select a fact family to begin</button>
+    </div>
+  </div><!-- /home -->
+
+  <!-- ══ QUIZ SCREEN ══ -->
+  <div id="screen-quiz" class="screen">
+    <div class="quiz-top">
+      <div class="quiz-stat">
+        <div class="qs-val" id="q-score">0</div>
+        <div class="qs-label">Score</div>
+      </div>
+      <div class="timer-bar-wrap">
+        <div id="timer-bar"></div>
+      </div>
+      <div class="quiz-stat" id="q-timer-stat">
+        <div class="qs-val" id="q-timer">60</div>
+        <div class="qs-label">Seconds</div>
+      </div>
+      <div class="quiz-stat" id="q-count-stat" style="display:none;">
+        <div class="qs-val" id="q-count">0</div>
+        <div class="qs-label">Left</div>
+      </div>
+      <div class="fact-tag" id="q-fact-tag">×2</div>
+    </div>
+
+    <div class="problem-area">
+      <div class="problem-display">
+        <span id="q-a">?</span>
+        <span class="op"> × </span>
+        <span id="q-b">?</span>
+        <span class="op"> = </span>
+      </div>
+      <div id="answer-display" class="answer-display placeholder">_ _</div>
+      <div class="feedback-zone">
+        <div class="feedback-badge" id="feedback-badge"></div>
+      </div>
+    </div>
+
+    <div class="numpad-wrap">
+      <div class="numpad">
+        <button class="np-btn" onclick="numpadPress('1')">1</button>
+        <button class="np-btn" onclick="numpadPress('2')">2</button>
+        <button class="np-btn" onclick="numpadPress('3')">3</button>
+        <button class="np-btn" onclick="numpadPress('4')">4</button>
+        <button class="np-btn" onclick="numpadPress('5')">5</button>
+        <button class="np-btn" onclick="numpadPress('6')">6</button>
+        <button class="np-btn" onclick="numpadPress('7')">7</button>
+        <button class="np-btn" onclick="numpadPress('8')">8</button>
+        <button class="np-btn" onclick="numpadPress('9')">9</button>
+        <button class="np-btn zero" onclick="numpadPress('0')">0</button>
+        <button class="np-btn clear" onclick="numpadClear()">⌫</button>
+        <button class="np-btn enter" onclick="submitAnswer()">ENTER</button>
+      </div>
+    </div>
+  </div><!-- /quiz -->
+
+  <!-- ══ RESULTS SCREEN ══ -->
+  <div id="screen-results" class="screen scroll-area">
+    <div class="results-hero">
+      <div class="results-emoji" id="r-emoji">🌟</div>
+      <div class="results-title" id="r-title">Great Work!</div>
+      <div class="results-sub" id="r-sub">Here's how you did</div>
+    </div>
+
+    <div class="results-stats">
+      <div class="rs-card"><div class="rs-val" id="r-correct">0</div><div class="rs-label">Correct</div></div>
+      <div class="rs-card"><div class="rs-val" id="r-total">0</div><div class="rs-label">Attempted</div></div>
+      <div class="rs-card"><div class="rs-val" id="r-pct">0%</div><div class="rs-label">Accuracy</div></div>
+    </div>
+
+    <div class="mastery-update" id="mastery-update-box">
+      <div class="mu-title">Fact Family Progress</div>
+      <div id="mastery-update-rows"></div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-primary" onclick="startQuiz()">Play Again</button>
+      <button class="btn-ghost" onclick="goHome()">Home</button>
+    </div>
+  </div><!-- /results -->
+
+</div><!-- /app -->
+
+<script>
+/* ─────────────────────────────────────────
+   STATE
+───────────────────────────────────────── */
+const FACTS = [2,3,4,5,6,7,8,9,10,11,12];
+const MASTERY_THRESHOLD = 8; // out of 10 correct to mark mastered
+
+let state = {
+  selectedFacts: [],
+  mode: 'timed60',
+  // quiz
+  currentA: 0,
+  currentB: 0,
+  currentAnswer: '',
+  score: 0,
+  attempted: 0,
+  correct: 0,
+  timeLeft: 60,
+  totalTime: 60,
+  questionsLeft: 0,
+  timer: null,
+  feedbackTimer: null,
+  quizActive: false,
+  sessionResults: {},   // { factFamily: { correct, attempted } }
+};
+
+/* ─────────────────────────────────────────
+   LOCAL STORAGE — MASTERY
+───────────────────────────────────────── */
+function getMastery() {
+  try {
+    return JSON.parse(localStorage.getItem('ccaMastery') || '{}');
+  } catch { return {}; }
+}
+function saveMastery(m) {
+  localStorage.setItem('ccaMastery', JSON.stringify(m));
+}
+function getMasteryLevel(fact) {
+  const m = getMastery();
+  const d = m[fact];
+  if (!d) return 'none';
+  const pct = d.correct / Math.max(d.attempted, 1);
+  if (d.attempted >= 10 && pct >= (MASTERY_THRESHOLD / 10)) return 'mastered';
+  if (d.attempted > 0) return 'practicing';
+  return 'none';
+}
+function updateMasteryForFact(fact, correct, attempted) {
+  const m = getMastery();
+  if (!m[fact]) m[fact] = { correct: 0, attempted: 0 };
+  m[fact].correct += correct;
+  m[fact].attempted += attempted;
+  saveMastery(m);
+}
+
+/* ─────────────────────────────────────────
+   MASTERY GRID
+───────────────────────────────────────── */
+function renderGrid() {
+  const grid = document.getElementById('mastery-grid');
+  grid.innerHTML = '';
+  FACTS.forEach(f => {
+    const level = state.selectedFacts.includes(f) ? 'selected' : getMasteryLevel(f);
+    const labels = { none: 'New', practicing: 'Going', mastered: '✓ Done', selected: 'Selected' };
+    grid.innerHTML += `
+      <div class="fact-chip" data-fact="${f}" data-mastery="${level}" onclick="toggleFact(${f})">
+        <div class="fc-label">×${f}</div>
+        <div class="fc-status">${labels[level]}</div>
+      </div>`;
+  });
+}
+
+function toggleFact(f) {
+  const idx = state.selectedFacts.indexOf(f);
+  if (idx > -1) {
+    state.selectedFacts.splice(idx, 1);
+  } else {
+    state.selectedFacts.push(f);
+  }
+  updateStartBtn();
+  renderGrid();
+  updateSelectionHint();
+}
+
+function updateSelectionHint() {
+  const hint = document.getElementById('selection-hint');
+  if (state.selectedFacts.length === 0) {
+    hint.textContent = 'Tap fact families above to select them';
+  } else {
+    const sorted = [...state.selectedFacts].sort((a,b)=>a-b);
+    hint.textContent = sorted.map(f => `×${f}`).join(', ');
+  }
+}
+
+function updateStartBtn() {
+  const btn = document.getElementById('start-btn');
+  if (state.selectedFacts.length > 0) {
+    btn.disabled = false;
+    btn.textContent = 'Start Practice →';
+  } else {
+    btn.disabled = true;
+    btn.textContent = 'Select a fact family to begin';
+  }
+}
+
+/* ─────────────────────────────────────────
+   MODE SELECTION
+───────────────────────────────────────── */
+function selectMode(el) {
+  document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  state.mode = el.dataset.mode;
+}
+
+/* ─────────────────────────────────────────
+   QUIZ LOGIC
+───────────────────────────────────────── */
+function generateQuestion() {
+  const fact = state.selectedFacts[Math.floor(Math.random() * state.selectedFacts.length)];
+  const b = Math.floor(Math.random() * 12) + 1;
+  state.currentA = fact;
+  state.currentB = b;
+  // Update fact tag to show current family
+  document.getElementById('q-fact-tag').textContent = `×${fact}`;
+  document.getElementById('q-a').textContent = fact;
+  document.getElementById('q-b').textContent = b;
+  state.currentAnswer = '';
+  updateAnswerDisplay();
+  clearFeedback();
+}
+
+function updateAnswerDisplay() {
+  const el = document.getElementById('answer-display');
+  if (state.currentAnswer === '') {
+    el.textContent = '_ _';
+    el.classList.add('placeholder');
+  } else {
+    el.textContent = state.currentAnswer;
+    el.classList.remove('placeholder');
+  }
+}
+
+function numpadPress(digit) {
+  if (!state.quizActive) return;
+  if (state.currentAnswer.length >= 3) return;
+  state.currentAnswer += digit;
+  updateAnswerDisplay();
+}
+
+function numpadClear() {
+  if (!state.quizActive) return;
+  state.currentAnswer = state.currentAnswer.slice(0, -1);
+  updateAnswerDisplay();
+}
+
+function submitAnswer() {
+  if (!state.quizActive || state.currentAnswer === '') return;
+  const correct = parseInt(state.currentAnswer) === state.currentA * state.currentB;
+  state.attempted++;
+
+  // Track session results per fact family
+  const f = state.currentA;
+  if (!state.sessionResults[f]) state.sessionResults[f] = { correct: 0, attempted: 0 };
+  state.sessionResults[f].attempted++;
+
+  if (correct) {
+    state.correct++;
+    state.score++;
+    state.sessionResults[f].correct++;
+    showFeedback(true);
+    document.getElementById('q-score').textContent = state.score;
+  } else {
+    showFeedback(false, state.currentA * state.currentB);
+  }
+
+  // For count-based modes
+  if (state.mode === 'practice20' || state.mode === 'mastery') {
+    state.questionsLeft--;
+    document.getElementById('q-count').textContent = state.questionsLeft;
+    updateTimerBar(state.questionsLeft, state.totalTime);
+    if (state.questionsLeft <= 0) {
+      endQuiz();
+      return;
+    }
+  }
+
+  setTimeout(() => generateQuestion(), correct ? 400 : 800);
+}
+
+function showFeedback(isCorrect, answer) {
+  const badge = document.getElementById('feedback-badge');
+  badge.textContent = isCorrect ? '✓ Correct!' : `✗  Answer: ${answer}`;
+  badge.className = 'feedback-badge show ' + (isCorrect ? 'correct' : 'wrong');
+  clearTimeout(state.feedbackTimer);
+  state.feedbackTimer = setTimeout(clearFeedback, 900);
+}
+function clearFeedback() {
+  const badge = document.getElementById('feedback-badge');
+  badge.classList.remove('show');
+}
+
+function updateTimerBar(current, total) {
+  const pct = (current / total) * 100;
+  const bar = document.getElementById('timer-bar');
+  bar.style.width = pct + '%';
+  bar.classList.toggle('warning', pct < 25);
+}
+
+function startQuiz() {
+  if (state.selectedFacts.length === 0) return;
+  state.score = 0;
+  state.attempted = 0;
+  state.correct = 0;
+  state.currentAnswer = '';
+  state.quizActive = true;
+  state.sessionResults = {};
+  clearInterval(state.timer);
+
+  const timerStat = document.getElementById('q-timer-stat');
+  const countStat = document.getElementById('q-count-stat');
+
+  if (state.mode === 'timed60') {
+    state.timeLeft = 60; state.totalTime = 60;
+    timerStat.style.display = ''; countStat.style.display = 'none';
+    runTimer(60);
+  } else if (state.mode === 'timed120') {
+    state.timeLeft = 120; state.totalTime = 120;
+    timerStat.style.display = ''; countStat.style.display = 'none';
+    runTimer(120);
+  } else if (state.mode === 'practice20') {
+    state.questionsLeft = 20; state.totalTime = 20;
+    timerStat.style.display = 'none'; countStat.style.display = '';
+    document.getElementById('q-count').textContent = 20;
+    document.getElementById('timer-bar').style.width = '100%';
+    document.getElementById('timer-bar').classList.remove('warning');
+  } else if (state.mode === 'mastery') {
+    state.questionsLeft = 10; state.totalTime = 10;
+    timerStat.style.display = 'none'; countStat.style.display = '';
+    document.getElementById('q-count').textContent = 10;
+    document.getElementById('timer-bar').style.width = '100%';
+    document.getElementById('timer-bar').classList.remove('warning');
+  }
+
+  document.getElementById('q-score').textContent = '0';
+  showScreen('quiz');
+  generateQuestion();
+}
+
+function runTimer(seconds) {
+  state.timeLeft = seconds;
+  document.getElementById('q-timer').textContent = seconds;
+  updateTimerBar(seconds, seconds);
+  state.timer = setInterval(() => {
+    state.timeLeft--;
+    document.getElementById('q-timer').textContent = state.timeLeft;
+    updateTimerBar(state.timeLeft, state.totalTime);
+    if (state.timeLeft <= 0) {
+      clearInterval(state.timer);
+      endQuiz();
+    }
+  }, 1000);
+}
+
+function endQuiz() {
+  state.quizActive = false;
+  clearInterval(state.timer);
+
+  // Persist session results to mastery
+  Object.entries(state.sessionResults).forEach(([fact, data]) => {
+    updateMasteryForFact(parseInt(fact), data.correct, data.attempted);
+  });
+
+  showResults();
+}
+
+/* ─────────────────────────────────────────
+   RESULTS
+───────────────────────────────────────── */
+function showResults() {
+  const pct = state.attempted > 0 ? Math.round((state.correct / state.attempted) * 100) : 0;
+  document.getElementById('r-correct').textContent = state.correct;
+  document.getElementById('r-total').textContent = state.attempted;
+  document.getElementById('r-pct').textContent = pct + '%';
+
+  // Emoji + title
+  let emoji, title, sub;
+  if (pct >= 90) { emoji = '🌟'; title = 'Amazing!'; sub = 'You\'re crushing it!'; }
+  else if (pct >= 75) { emoji = '🎯'; title = 'Great Work!'; sub = 'Keep practicing!'; }
+  else if (pct >= 60) { emoji = '💪'; title = 'Good Effort!'; sub = 'Practice makes perfect!'; }
+  else { emoji = '📚'; title = 'Keep Going!'; sub = 'Every attempt builds your brain!'; }
+
+  document.getElementById('r-emoji').textContent = emoji;
+  document.getElementById('r-title').textContent = title;
+  document.getElementById('r-sub').textContent = sub;
+
+  // Mastery update rows
+  const rows = document.getElementById('mastery-update-rows');
+  rows.innerHTML = '';
+  const m = getMastery();
+  Object.entries(state.sessionResults).forEach(([fact, data]) => {
+    const level = getMasteryLevel(parseInt(fact));
+    const labels = { none: 'Getting Started', practicing: 'Practicing', mastered: 'Mastered! ✓' };
+    rows.innerHTML += `
+      <div class="mu-row">
+        <span class="mu-name">×${fact} facts</span>
+        <span class="mu-pill ${level}">${labels[level]}</span>
+      </div>`;
+  });
+
+  showScreen('results');
+}
+
+/* ─────────────────────────────────────────
+   NAVIGATION
+───────────────────────────────────────── */
+function showScreen(name) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + name).classList.add('active');
+  document.getElementById('header-back').style.display = name === 'home' ? 'none' : '';
+  if (name === 'home') { renderGrid(); updateSelectionHint(); updateStartBtn(); }
+}
+
+function goHome() {
+  clearInterval(state.timer);
+  state.quizActive = false;
+  showScreen('home');
+}
+
+/* ─────────────────────────────────────────
+   KEYBOARD SUPPORT
+───────────────────────────────────────── */
+document.addEventListener('keydown', e => {
+  if (!state.quizActive) return;
+  if (e.key >= '0' && e.key <= '9') numpadPress(e.key);
+  else if (e.key === 'Backspace') numpadClear();
+  else if (e.key === 'Enter') submitAnswer();
+});
+
+/* ─────────────────────────────────────────
+   INIT
+───────────────────────────────────────── */
+renderGrid();
+</script>
+</body>
+</html>
