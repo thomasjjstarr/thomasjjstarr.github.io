@@ -7,21 +7,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#0f1e3c;--navy-mid:#1a2f5a;--gold:#c9a84c;--gold-lite:#e8c96e;--gold-dim:#8a6f2e;--cream:#f8f4ec;--cream-mid:#f0e9d8;--white:#ffffff;--text:#1a1a2e;--text-mid:#3a3a5c;--text-lite:#6b6b8a}
+:root{--navy:#1B4332;--navy-mid:#2D6A4F;--gold:#C45C1A;--gold-lite:#E08A4F;--gold-dim:#8C3D0F;--cream:#f8f4ec;--cream-mid:#f0e9d8;--white:#ffffff;--text:#1a1a2e;--text-mid:#3a3a5c;--text-lite:#6b6b8a}
 body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
-.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(15,30,60,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,76,0.15)}
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(27,67,50,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(196,92,26,0.15)}
 .nav-inner{max-width:1200px;margin:0 auto;padding:0 40px;height:68px;display:flex;align-items:center;justify-content:space-between}
 .nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:#fff;text-decoration:none}
-.nav-logo span{color:#c9a84c;font-style:italic}
+.nav-logo span{color:#C45C1A;font-style:italic}
 .nav-links{display:flex;gap:36px}
 .nav-links a{font-size:12px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s}
-.nav-links a:hover,.nav-links a.active{color:#c9a84c}
+.nav-links a:hover,.nav-links a.active{color:#C45C1A}
 .nav-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
 .nav-toggle span{display:block;width:22px;height:1.5px;background:#fff}
-@media(max-width:768px){.nav-links{display:none}.nav-toggle{display:flex}.site-nav.open .nav-links{display:flex;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(15,30,60,0.98);padding:24px 40px;gap:20px}}
+@media(max-width:768px){.nav-links{display:none}.nav-toggle{display:flex}.site-nav.open .nav-links{display:flex;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(27,67,50,0.98);padding:24px 40px;gap:20px}}
 .page-hero{background:var(--navy);padding:140px 60px 100px;position:relative;overflow:hidden}
 .page-hero::after{content:'';position:absolute;left:0;top:0;width:4px;height:100%;background:linear-gradient(to bottom,transparent,var(--gold),transparent)}
-.page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(135deg,transparent 40%,rgba(201,168,76,0.04) 40%,rgba(201,168,76,0.04) 60%,transparent 60%);background-size:80px 80px}
+.page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(135deg,transparent 40%,rgba(196,92,26,0.04) 40%,rgba(196,92,26,0.04) 60%,transparent 60%);background-size:80px 80px}
 .page-hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
 .page-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:12px}
 .page-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold);display:block}
@@ -56,7 +56,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
 .cred-card-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--navy);margin-bottom:6px}
 .cred-card-sub{font-size:14px;font-weight:300;color:var(--text-lite);line-height:1.5}
 .approach{background:var(--navy);padding:100px 60px;position:relative;overflow:hidden}
-.approach::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 30%,rgba(201,168,76,0.05) 30%)}
+.approach::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 30%,rgba(196,92,26,0.05) 30%)}
 .approach-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
 .approach-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:12px}
 .approach-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold);display:block}
@@ -64,19 +64,19 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
 .approach-heading em{font-style:italic;color:var(--gold)}
 .approach-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:rgba(255,255,255,0.08)}
 .approach-card{background:rgba(255,255,255,0.04);padding:40px 36px;border-left:3px solid transparent;transition:all 0.3s}
-.approach-card:hover{border-left-color:var(--gold);background:rgba(201,168,76,0.06)}
-.approach-num{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:rgba(201,168,76,0.2);line-height:1;margin-bottom:16px}
+.approach-card:hover{border-left-color:var(--gold);background:rgba(196,92,26,0.06)}
+.approach-num{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:rgba(196,92,26,0.2);line-height:1;margin-bottom:16px}
 .approach-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--white);margin-bottom:12px}
 .approach-text{font-size:14px;font-weight:300;color:rgba(255,255,255,0.5);line-height:1.7}
-.site-footer{background:#080f1e;border-top:1px solid rgba(201,168,76,0.15);padding:60px}
+.site-footer{background:#0F2A1F;border-top:1px solid rgba(196,92,26,0.15);padding:60px}
 .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr 1fr;gap:40px;align-items:start;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.06)}
 .footer-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:#fff}
 .footer-title{font-size:12px;color:rgba(255,255,255,0.35);margin-top:4px;letter-spacing:0.1em;text-transform:uppercase}
 .footer-nav{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:center}
 .footer-nav a{font-size:12px;color:rgba(255,255,255,0.45);text-decoration:none;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s}
-.footer-nav a:hover{color:#c9a84c}
+.footer-nav a:hover{color:#C45C1A}
 .footer-right{text-align:right}
-.footer-right a{font-size:14px;color:#c9a84c;text-decoration:none;display:block;margin-bottom:6px}
+.footer-right a{font-size:14px;color:#C45C1A;text-decoration:none;display:block;margin-bottom:6px}
 .footer-right p{font-size:13px;color:rgba(255,255,255,0.35)}
 .footer-bottom{max-width:1200px;margin:24px auto 0;text-align:center;font-size:12px;color:rgba(255,255,255,0.2);letter-spacing:0.08em}
 @media(max-width:900px){.bio-inner{grid-template-columns:1fr}.bio-left{position:static}.cred-grid{grid-template-columns:1fr}.approach-grid{grid-template-columns:1fr}.page-hero,.bio,.credentials,.approach{padding-left:32px;padding-right:32px}.footer-inner{grid-template-columns:1fr;text-align:center}.footer-right{text-align:center}.footer-nav{justify-content:center}.site-footer{padding:48px 24px}}
@@ -135,12 +135,12 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
     <p class="section-eyebrow">Credentials</p>
     <h2 class="section-heading">Education &amp; <em>expertise.</em></h2>
     <div class="cred-grid">
-      <div class="cred-card"><span class="cred-card-icon">🎓</span><p class="cred-card-type">Graduate Degree</p><h3 class="cred-card-title">M.S. Applied Learning Sciences</h3><p class="cred-card-sub">University of Miami<br>Cognitive theory, learning design, educational research</p></div>
-      <div class="cred-card"><span class="cred-card-icon">📐</span><p class="cred-card-type">Current Coursework</p><h3 class="cred-card-title">Instructional Design</h3><p class="cred-card-sub">National University<br>Applied design, project management, DEI in learning</p></div>
-      <div class="cred-card"><span class="cred-card-icon">🔬</span><p class="cred-card-type">Specialization</p><h3 class="cred-card-title">STEM Education</h3><p class="cred-card-sub">K–5 science and engineering curriculum<br>NGSS aligned · Hands-on investigation</p></div>
-      <div class="cred-card"><span class="cred-card-icon">📋</span><p class="cred-card-type">Framework Expertise</p><h3 class="cred-card-title">Understanding by Design</h3><p class="cred-card-sub">Wiggins &amp; McTighe · Backward design · Performance tasks</p></div>
-      <div class="cred-card"><span class="cred-card-icon">🧠</span><p class="cred-card-type">Theoretical Grounding</p><h3 class="cred-card-title">Mayer's CTML</h3><p class="cred-card-sub">Cognitive theory of multimedia learning · Coherence, signaling, segmenting</p></div>
-      <div class="cred-card"><span class="cred-card-icon">♿</span><p class="cred-card-type">Design Commitment</p><h3 class="cred-card-title">Universal Design &amp; DEI</h3><p class="cred-card-sub">UDL · WCAG 2.1 · Design justice · Culturally responsive practice</p></div>
+      <div class="cred-card"><span class="cred-card-icon"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><path d="M2 9L12 4l10 5-10 5-10-5z"/><path d="M6 11.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5"/><path d="M22 9v6"/></svg></span><p class="cred-card-type">Graduate Degree</p><h3 class="cred-card-title">M.S. Applied Learning Sciences</h3><p class="cred-card-sub">University of Miami<br>Cognitive theory, learning design, educational research</p></div>
+      <div class="cred-card"><span class="cred-card-icon"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><path d="M3 21 21 3"/><path d="M15 3h6v6"/><path d="M3 15v6h6"/></svg></span><p class="cred-card-type">Current Coursework</p><h3 class="cred-card-title">Instructional Design</h3><p class="cred-card-sub">National University<br>Applied design, project management, DEI in learning</p></div>
+      <div class="cred-card"><span class="cred-card-icon"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 10V4l-2-1-2 1v3"/><path d="M9 10h6l1 4a4 4 0 0 1-4 4h0a4 4 0 0 1-4-4z"/><path d="M9 7h6"/></svg></span><p class="cred-card-type">Specialization</p><h3 class="cred-card-title">STEM Education</h3><p class="cred-card-sub">K–5 science and engineering curriculum<br>NGSS aligned · Hands-on investigation</p></div>
+      <div class="cred-card"><span class="cred-card-icon"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 11h6"/><path d="M9 15h6"/><path d="M9 19h4"/></svg></span><p class="cred-card-type">Framework Expertise</p><h3 class="cred-card-title">Understanding by Design</h3><p class="cred-card-sub">Wiggins &amp; McTighe · Backward design · Performance tasks</p></div>
+      <div class="cred-card"><span class="cred-card-icon"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><path d="M9 4a2.5 2.5 0 0 0-2.5 2.5v.6A2.5 2.5 0 0 0 5 9.5a2.5 2.5 0 0 0 0 5 2.5 2.5 0 0 0 1.5 2.3v.7A2.5 2.5 0 0 0 9 20"/><path d="M15 4a2.5 2.5 0 0 1 2.5 2.5v.6A2.5 2.5 0 0 1 19 9.5a2.5 2.5 0 0 1 0 5 2.5 2.5 0 0 1-1.5 2.3v.7A2.5 2.5 0 0 1 15 20"/><path d="M9 4v16"/><path d="M15 4v16"/></svg></span><p class="cred-card-type">Theoretical Grounding</p><h3 class="cred-card-title">Mayer's CTML</h3><p class="cred-card-sub">Cognitive theory of multimedia learning · Coherence, signaling, segmenting</p></div>
+      <div class="cred-card"><span class="cred-card-icon"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><circle cx="12" cy="4.5" r="1.5"/><path d="M5 20l4-9 3 3 3-3 4 9"/><path d="M8 11h8"/></svg></span><p class="cred-card-type">Design Commitment</p><h3 class="cred-card-title">Universal Design &amp; DEI</h3><p class="cred-card-sub">UDL · WCAG 2.1 · Design justice · Culturally responsive practice</p></div>
     </div>
   </div>
 </section>

@@ -7,28 +7,28 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#0f1e3c;--navy-mid:#1a2f5a;--gold:#c9a84c;--gold-lite:#e8c96e;--gold-dim:#8a6f2e;--cream:#f8f4ec;--cream-mid:#f0e9d8;--white:#ffffff;--text:#1a1a2e;--text-mid:#3a3a5c;--text-lite:#6b6b8a;--lgray:#e8e8f0}
+:root{--navy:#1B4332;--navy-mid:#2D6A4F;--gold:#C45C1A;--gold-lite:#E08A4F;--gold-dim:#8C3D0F;--cream:#f8f4ec;--cream-mid:#f0e9d8;--white:#ffffff;--text:#1a1a2e;--text-mid:#3a3a5c;--text-lite:#6b6b8a;--lgray:#e8e8f0}
 body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
-.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(15,30,60,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,76,0.15)}
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(27,67,50,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(196,92,26,0.15)}
 .nav-inner{max-width:1200px;margin:0 auto;padding:0 40px;height:68px;display:flex;align-items:center;justify-content:space-between}
 .nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:#fff;text-decoration:none}
-.nav-logo span{color:#c9a84c;font-style:italic}
+.nav-logo span{color:#C45C1A;font-style:italic}
 .nav-links{display:flex;gap:36px}
 .nav-links a{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s}
-.nav-links a:hover,.nav-links a.active{color:#c9a84c}
+.nav-links a:hover,.nav-links a.active{color:#C45C1A}
 .nav-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
 .nav-toggle span{display:block;width:22px;height:1.5px;background:#fff}
-@media(max-width:768px){.nav-links{display:none}.nav-toggle{display:flex}.site-nav.open .nav-links{display:flex;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(15,30,60,0.98);padding:24px 40px;gap:20px}}
+@media(max-width:768px){.nav-links{display:none}.nav-toggle{display:flex}.site-nav.open .nav-links{display:flex;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(27,67,50,0.98);padding:24px 40px;gap:20px}}
 .page-hero{background:var(--navy);padding:140px 60px 100px;position:relative;overflow:hidden}
 .page-hero::after{content:'';position:absolute;left:0;top:0;width:4px;height:100%;background:linear-gradient(to bottom,transparent,var(--gold),transparent)}
-.page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(135deg,transparent 40%,rgba(201,168,76,0.04) 40%,rgba(201,168,76,0.04) 60%,transparent 60%);background-size:80px 80px}
+.page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(135deg,transparent 40%,rgba(196,92,26,0.04) 40%,rgba(196,92,26,0.04) 60%,transparent 60%);background-size:80px 80px}
 .page-hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
 .page-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:12px}
 .page-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold);display:block}
 .page-title{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,6vw,80px);font-weight:300;color:var(--white);line-height:1.05}
 .page-title em{font-style:italic;color:var(--gold)}
 .page-subtitle{font-size:16px;font-weight:300;color:rgba(255,255,255,0.5);margin-top:20px;max-width:560px;line-height:1.7}
-.artifact-nav{background:var(--navy-mid);border-bottom:1px solid rgba(201,168,76,0.15);position:sticky;top:68px;z-index:100}
+.artifact-nav{background:var(--navy-mid);border-bottom:1px solid rgba(196,92,26,0.15);position:sticky;top:68px;z-index:100}
 .artifact-nav-inner{max-width:1200px;margin:0 auto;padding:0 60px;display:flex;gap:0;overflow-x:auto}
 .artifact-tab{padding:18px 28px;font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.45);text-decoration:none;border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap;cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;font-family:'Outfit',sans-serif}
 .artifact-tab:hover{color:rgba(255,255,255,0.8)}
@@ -94,15 +94,15 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
 .pdf-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--navy);margin-bottom:6px}
 .pdf-desc{font-size:13px;font-weight:300;color:var(--text-lite);line-height:1.6;margin-bottom:10px}
 .pdf-link{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-dim)}
-.site-footer{background:#080f1e;border-top:1px solid rgba(201,168,76,0.15);padding:60px}
+.site-footer{background:#0F2A1F;border-top:1px solid rgba(196,92,26,0.15);padding:60px}
 .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr 1fr;gap:40px;align-items:start;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.06)}
 .footer-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:#fff}
 .footer-title{font-size:12px;color:rgba(255,255,255,0.35);margin-top:4px;letter-spacing:0.1em;text-transform:uppercase}
 .footer-nav{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:center}
 .footer-nav a{font-size:12px;color:rgba(255,255,255,0.45);text-decoration:none;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s}
-.footer-nav a:hover{color:#c9a84c}
+.footer-nav a:hover{color:#C45C1A}
 .footer-right{text-align:right}
-.footer-right a{font-size:14px;color:#c9a84c;text-decoration:none;display:block;margin-bottom:6px}
+.footer-right a{font-size:14px;color:#C45C1A;text-decoration:none;display:block;margin-bottom:6px}
 .footer-right p{font-size:13px;color:rgba(255,255,255,0.35)}
 .footer-bottom{max-width:1200px;margin:24px auto 0;text-align:center;font-size:12px;color:rgba(255,255,255,0.2);letter-spacing:0.08em}
 
@@ -233,17 +233,17 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
 
     <div class="three-grid">
       <div class="grid-card">
-        <span class="grid-icon">🎯</span>
+        <span class="grid-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span>
         <h3 class="grid-title">Relevance</h3>
         <p class="grid-text">This artifact sits at the intersection of immersive technology, instructional design, and K–12 STEM — my intended specialization. It demonstrates creative capacity and research literacy: design grounded in peer-reviewed immersive learning research from 2024–2025.</p>
       </div>
       <div class="grid-card">
-        <span class="grid-icon">⭐</span>
+        <span class="grid-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg></span>
         <h3 class="grid-title">Quality</h3>
         <p class="grid-text">A coherent narrative structure — setting, characters, three-act mission progression, adaptive feedback, and conclusion — with clear learning objectives mapped to each of Newton's Three Laws and AI guide NOVA providing real-time adaptive mentoring.</p>
       </div>
       <div class="grid-card">
-        <span class="grid-icon">🔄</span>
+        <span class="grid-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><path d="M4 12a8 8 0 0 1 14-5.3L20 8"/><path d="M20 4v4h-4"/><path d="M20 12a8 8 0 0 1-14 5.3L4 16"/><path d="M4 20v-4h4"/></svg></span>
         <h3 class="grid-title">Variety &amp; Impact</h3>
         <p class="grid-text">The only multimedia and immersive design artifact in this portfolio. Its three-mission structure, character-based mentoring, and adaptive feedback are design patterns transferable across subjects and grade levels — and identified as a potential STEM program development project.</p>
       </div>
@@ -351,17 +351,17 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
 
     <div class="three-grid">
       <div class="grid-card">
-        <span class="grid-icon">🎨</span>
+        <span class="grid-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><path d="M12 3a9 9 0 1 0 0 18c1 0 1.8-.8 1.8-1.8 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-1 .8-1.8 1.8-1.8H16a4 4 0 0 0 4-4c0-4.4-3.6-8-8-8z"/><circle cx="7.5" cy="10.5" r="1.1"/><circle cx="11.5" cy="7.5" r="1.1"/><circle cx="15.5" cy="10.5" r="1.1"/></svg></span>
         <h3 class="grid-title">Design Decisions</h3>
         <p class="grid-text">Each slide has a single focal point, consistent color coding (sky blue for Weather Watch), and timed activity banners so students always know how long each phase lasts. No slide exceeds one concept — direct application of the Coherence Principle.</p>
       </div>
       <div class="grid-card">
-        <span class="grid-icon">🔬</span>
+        <span class="grid-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 10V4l-2-1-2 1v3"/><path d="M9 10h6l1 4a4 4 0 0 1-4 4h0a4 4 0 0 1-4-4z"/><path d="M9 7h6"/></svg></span>
         <h3 class="grid-title">The Build Activity</h3>
         <p class="grid-text">Students build a working anemometer in 25 minutes using paper cups, straws, a pencil, and a pin. The slide sequence scaffolds planning before building, building before testing, and testing before reflecting — the engineering design process made explicit.</p>
       </div>
       <div class="grid-card">
-        <span class="grid-icon">🌍</span>
+        <span class="grid-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 0 18"/><path d="M12 3a15 15 0 0 0 0 18"/></svg></span>
         <h3 class="grid-title">Real-World Connection</h3>
         <p class="grid-text">Every session closes with a question connecting the day's activity to the real world. Weather Watch closes with: "Wind is caused by differences in air temperature — where do you think that energy originally comes from?" Setting up the solar energy session in Week 2.</p>
       </div>
@@ -479,7 +479,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
     <!-- Case study download -->
     <p class="col-label" style="margin-bottom:16px">Portfolio Document</p>
     <a href="StarrID_CaseStudy_MultiplicationFacts.pdf" target="_blank" class="case-study-card">
-      <span class="cs-icon">📋</span>
+      <span class="cs-icon"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 11h6"/><path d="M9 15h6"/><path d="M9 19h4"/></svg></span>
       <div class="cs-body">
         <p class="cs-tag">Case Study · PDF · Starr Instructional Design</p>
         <p class="cs-title">Multiplication Facts App — Full Case Study</p>
@@ -534,7 +534,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
     <h3 class="section-heading" style="font-size:clamp(24px,3vw,38px)">Written work from<br><em>EDU8960.</em></h3>
 
     <a href="#" class="pdf-card">
-      <span class="pdf-icon">📄</span>
+      <span class="pdf-icon"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/><path d="M9.5 13h5"/><path d="M9.5 17h5"/></svg></span>
       <div>
         <p class="pdf-title">Designing With Purpose</p>
         <p class="pdf-desc">Applying backward design and Mayer's five multimedia principles to professional portfolio development — with specific design applications and violations to avoid.</p>
@@ -542,7 +542,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
       </div>
     </a>
     <a href="#" class="pdf-card">
-      <span class="pdf-icon">📄</span>
+      <span class="pdf-icon"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/><path d="M9.5 13h5"/><path d="M9.5 17h5"/></svg></span>
       <div>
         <p class="pdf-title">Designing With Integrity</p>
         <p class="pdf-desc">A seven-criterion rubric for evaluating portfolio design against ethical design, universal design, and DEI principles — with an honest self-assessment applying it to this portfolio.</p>
@@ -550,7 +550,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
       </div>
     </a>
     <a href="#" class="pdf-card">
-      <span class="pdf-icon">📄</span>
+      <span class="pdf-icon"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/><path d="M9.5 13h5"/><path d="M9.5 17h5"/></svg></span>
       <div>
         <p class="pdf-title">Grade 5 States of Matter — Project Management Plan</p>
         <p class="pdf-desc">A complete project management suite: WBS, schedule, communication plan, stakeholder email, risk assessment, closure report, and future trends reflection.</p>

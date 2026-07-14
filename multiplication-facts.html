@@ -437,24 +437,24 @@
       <p class="section-label">Mode</p>
       <div class="mode-cards">
         <div class="mode-card selected" data-mode="timed60" onclick="selectMode(this)">
-          <div class="mode-icon">⚡</div>
+          <div class="mode-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg></div>
           <div class="mode-name">60-Second Sprint</div>
           <div class="mode-desc">How many can you get?</div>
         </div>
         <div class="mode-card" data-mode="timed120" onclick="selectMode(this)">
-          <div class="mode-icon">🏃</div>
+          <div class="mode-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><circle cx="14.5" cy="5" r="1.6"/><path d="M9 21l2-5 3 1 3 5"/><path d="M6 14l3-3 2 1 3-4 3 2"/></svg></div>
           <div class="mode-name">2-Minute Run</div>
           <div class="mode-desc">More time, more facts</div>
         </div>
         <div class="mode-card" data-mode="practice20" onclick="selectMode(this)">
-          <div class="mode-icon">🎯</div>
+          <div class="mode-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></div>
           <div class="mode-name">20 Questions</div>
           <div class="mode-desc">No time pressure</div>
         </div>
         <div class="mode-card" data-mode="mastery" onclick="selectMode(this)">
-          <div class="mode-icon">🏆</div>
+          <div class="mode-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 5H4v2a4 4 0 0 0 4 4"/><path d="M16 5h4v2a4 4 0 0 1-4 4"/><path d="M12 13v4"/><path d="M9 21h6"/><path d="M9.5 17h5l.5 4h-6z"/></svg></div>
           <div class="mode-name">Mastery Check</div>
-          <div class="mode-desc">10 facts, earn the ✅</div>
+          <div class="mode-desc">10 facts, earn the <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--green);vertical-align:-2px;display:inline-block"><path d="M5 13l4 4L19 7"/></svg></div>
         </div>
       </div>
     </div>
@@ -519,7 +519,7 @@
   <!-- ══ RESULTS SCREEN ══ -->
   <div id="screen-results" class="screen scroll-area">
     <div class="results-hero">
-      <div class="results-emoji" id="r-emoji">🌟</div>
+      <div class="results-emoji" id="r-emoji"><svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg></div>
       <div class="results-title" id="r-title">Great Work!</div>
       <div class="results-sub" id="r-sub">Here's how you did</div>
     </div>
@@ -828,12 +828,12 @@ function showResults() {
 
   // Emoji + title
   let emoji, title, sub;
-  if (pct >= 90) { emoji = '🌟'; title = 'Amazing!'; sub = 'You\'re crushing it!'; }
-  else if (pct >= 75) { emoji = '🎯'; title = 'Great Work!'; sub = 'Keep practicing!'; }
-  else if (pct >= 60) { emoji = '💪'; title = 'Good Effort!'; sub = 'Practice makes perfect!'; }
-  else { emoji = '📚'; title = 'Keep Going!'; sub = 'Every attempt builds your brain!'; }
+  if (pct >= 90) { emoji = '<svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>'; title = 'Amazing!'; sub = 'You\'re crushing it!'; }
+  else if (pct >= 75) { emoji = '<svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--green);"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>'; title = 'Great Work!'; sub = 'Keep practicing!'; }
+  else if (pct >= 60) { emoji = '<svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--navy);"><path d="M7 11v9H4v-9z"/><path d="M7 11l3-7a2 2 0 0 1 2 2v3h5a2 2 0 0 1 2 2.2l-1 6A2 2 0 0 1 16 19H7"/></svg>'; title = 'Good Effort!'; sub = 'Practice makes perfect!'; }
+  else { emoji = '<svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--navy);"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H12v17H6.5A2.5 2.5 0 0 0 4 22z"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H12v17h5.5a2.5 2.5 0 0 1 2.5 2.5"/></svg>'; title = 'Keep Going!'; sub = 'Every attempt builds your brain!'; }
 
-  document.getElementById('r-emoji').textContent = emoji;
+  document.getElementById('r-emoji').innerHTML = emoji;
   document.getElementById('r-title').textContent = title;
   document.getElementById('r-sub').textContent = sub;
 
