@@ -7,21 +7,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#0f1e3c;--navy-mid:#1a2f5a;--gold:#c9a84c;--gold-lite:#e8c96e;--gold-dim:#8a6f2e;--cream:#f8f4ec;--cream-mid:#f0e9d8;--white:#ffffff;--text:#1a1a2e;--text-mid:#3a3a5c;--text-lite:#6b6b8a}
+:root{--navy:#1B4332;--navy-mid:#2D6A4F;--gold:#C45C1A;--gold-lite:#E08A4F;--gold-dim:#8C3D0F;--cream:#f8f4ec;--cream-mid:#f0e9d8;--white:#ffffff;--text:#1a1a2e;--text-mid:#3a3a5c;--text-lite:#6b6b8a}
 body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
-.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(15,30,60,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,76,0.15)}
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(27,67,50,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(196,92,26,0.15)}
 .nav-inner{max-width:1200px;margin:0 auto;padding:0 40px;height:68px;display:flex;align-items:center;justify-content:space-between}
 .nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:#fff;text-decoration:none}
-.nav-logo span{color:#c9a84c;font-style:italic}
+.nav-logo span{color:#C45C1A;font-style:italic}
 .nav-links{display:flex;gap:36px}
 .nav-links a{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s}
-.nav-links a:hover,.nav-links a.active{color:#c9a84c}
+.nav-links a:hover,.nav-links a.active{color:#C45C1A}
 .nav-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
 .nav-toggle span{display:block;width:22px;height:1.5px;background:#fff}
-@media(max-width:768px){.nav-links{display:none}.nav-toggle{display:flex}.site-nav.open .nav-links{display:flex;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(15,30,60,0.98);padding:24px 40px;gap:20px}}
+@media(max-width:768px){.nav-links{display:none}.nav-toggle{display:flex}.site-nav.open .nav-links{display:flex;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(27,67,50,0.98);padding:24px 40px;gap:20px}}
 .page-hero{background:var(--navy);padding:140px 60px 100px;position:relative;overflow:hidden}
 .page-hero::after{content:'';position:absolute;left:0;top:0;width:4px;height:100%;background:linear-gradient(to bottom,transparent,var(--gold),transparent)}
-.page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(135deg,transparent 40%,rgba(201,168,76,0.04) 40%,rgba(201,168,76,0.04) 60%,transparent 60%);background-size:80px 80px}
+.page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(135deg,transparent 40%,rgba(196,92,26,0.04) 40%,rgba(196,92,26,0.04) 60%,transparent 60%);background-size:80px 80px}
 .page-hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
 .page-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:12px}
 .page-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold);display:block}
@@ -40,18 +40,18 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
 .phil-principles{margin:48px 0;display:flex;flex-direction:column;gap:2px;background:var(--cream-mid)}
 .phil-principle{background:var(--white);padding:32px 36px;display:grid;grid-template-columns:48px 1fr;gap:24px;align-items:start;transition:background 0.3s}
 .phil-principle:hover{background:#fdfbf7}
-.phil-principle-num{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;color:rgba(201,168,76,0.25);line-height:1}
+.phil-principle-num{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;color:rgba(196,92,26,0.25);line-height:1}
 .phil-principle-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--navy);margin-bottom:8px}
 .phil-principle-text{font-size:14px;font-weight:300;color:var(--text-lite);line-height:1.7}
-.site-footer{background:#080f1e;border-top:1px solid rgba(201,168,76,0.15);padding:60px}
+.site-footer{background:#0F2A1F;border-top:1px solid rgba(196,92,26,0.15);padding:60px}
 .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr 1fr;gap:40px;align-items:start;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.06)}
 .footer-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:#fff}
 .footer-title{font-size:12px;color:rgba(255,255,255,0.35);margin-top:4px;letter-spacing:0.1em;text-transform:uppercase}
 .footer-nav{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:center}
 .footer-nav a{font-size:12px;color:rgba(255,255,255,0.45);text-decoration:none;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s}
-.footer-nav a:hover{color:#c9a84c}
+.footer-nav a:hover{color:#C45C1A}
 .footer-right{text-align:right}
-.footer-right a{font-size:14px;color:#c9a84c;text-decoration:none;display:block;margin-bottom:6px}
+.footer-right a{font-size:14px;color:#C45C1A;text-decoration:none;display:block;margin-bottom:6px}
 .footer-right p{font-size:13px;color:rgba(255,255,255,0.35)}
 .footer-bottom{max-width:1200px;margin:24px auto 0;text-align:center;font-size:12px;color:rgba(255,255,255,0.2);letter-spacing:0.08em}
 @media(max-width:900px){.page-hero,.phil-body{padding-left:32px;padding-right:32px}.phil-body{padding-top:80px;padding-bottom:80px}.footer-inner{grid-template-columns:1fr;text-align:center}.footer-right{text-align:center}.footer-nav{justify-content:center}.site-footer{padding:48px 24px}}
