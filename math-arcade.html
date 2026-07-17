@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="theme-color" content="#0a0a1a"/>
+<title>Math Arcade — City Church Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0a0a1a;
+  --navy2:#0f1530;
+  --navy3:#1a2448;
+  --gold:#f0c040;
+  --gold2:#ffd966;
+  --cyan:#00e5ff;
+  --pink:#ff4fa3;
+  --green:#39ff14;
+  --purple:#b44fff;
+  --white:#ffffff;
+  --dim:rgba(255,255,255,0.5);
+}
+html,body{min-height:100%;background:var(--navy);color:var(--white);font-family:'Outfit',sans-serif;overflow-x:hidden}
+
+/* ── SCANLINES OVERLAY ── */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,0.12) 0px,rgba(0,0,0,0.12) 1px,transparent 1px,transparent 3px);
+  pointer-events:none;z-index:9999;
+}
+
+/* ── STARS BG ── */
+.stars{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.star{position:absolute;border-radius:50%;animation:twinkle var(--d,2s) var(--delay,0s) infinite alternate}
+@keyframes twinkle{from{opacity:0.2}to{opacity:1}}
+
+/* ── HEADER ── */
+.arcade-header{
+  position:relative;z-index:10;
+  text-align:center;
+  padding:48px 20px 32px;
+  border-bottom:2px solid var(--gold);
+  background:linear-gradient(180deg,rgba(10,10,26,0) 0%,rgba(10,10,26,0.8) 100%);
+}
+.cca-tag{
+  font-size:9px;font-family:'Press Start 2P',monospace;
+  color:var(--gold);letter-spacing:.12em;
+  margin-bottom:20px;opacity:.7;
+}
+.arcade-title{
+  font-family:'Press Start 2P',monospace;
+  font-size:clamp(22px,5vw,44px);
+  color:var(--gold);
+  text-shadow:0 0 20px rgba(240,192,64,.6),0 0 40px rgba(240,192,64,.3),4px 4px 0 #7a5c00;
+  line-height:1.4;
+  letter-spacing:.05em;
+  margin-bottom:10px;
+}
+.arcade-sub{
+  font-size:clamp(10px,2vw,13px);
+  font-family:'Press Start 2P',monospace;
+  color:var(--cyan);
+  text-shadow:0 0 10px var(--cyan);
+  letter-spacing:.1em;
+  animation:blink 1.4s step-end infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+.insert-coin{
+  font-family:'Press Start 2P',monospace;
+  font-size:9px;color:var(--pink);
+  letter-spacing:.1em;margin-top:14px;
+  text-shadow:0 0 8px var(--pink);
+  animation:blink 1.8s step-end infinite;
+}
+
+/* ── GAME GRID ── */
+.game-grid{
+  position:relative;z-index:10;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+  max-width:840px;
+  margin:40px auto;
+  padding:0 20px;
+}
+@media(max-width:560px){.game-grid{grid-template-columns:1fr}}
+
+.game-card{
+  position:relative;
+  background:var(--navy2);
+  border:2px solid var(--card-color,var(--gold));
+  border-radius:4px;
+  padding:32px 24px 28px;
+  text-decoration:none;
+  display:flex;flex-direction:column;align-items:center;
+  gap:14px;
+  cursor:pointer;
+  overflow:hidden;
+  transition:transform .12s,box-shadow .12s;
+  box-shadow:0 0 16px -4px var(--card-color,var(--gold));
+}
+.game-card::before{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.04) 0%,transparent 60%);
+  pointer-events:none;
+}
+.game-card:hover{
+  transform:translateY(-4px) scale(1.02);
+  box-shadow:0 0 32px -2px var(--card-color,var(--gold)),0 8px 24px rgba(0,0,0,.4);
+}
+.game-card:active{transform:scale(.97)}
+
+.card-corner{
+  position:absolute;width:12px;height:12px;
+  border-color:var(--card-color,var(--gold));border-style:solid;
+}
+.card-corner.tl{top:6px;left:6px;border-width:2px 0 0 2px}
+.card-corner.tr{top:6px;right:6px;border-width:2px 2px 0 0}
+.card-corner.bl{bottom:6px;left:6px;border-width:0 0 2px 2px}
+.card-corner.br{bottom:6px;right:6px;border-width:0 2px 2px 0}
+
+.card-symbol{
+  font-size:52px;line-height:1;
+  filter:drop-shadow(0 0 12px var(--card-color,var(--gold)));
+}
+.card-op{
+  font-family:'Press Start 2P',monospace;
+  font-size:clamp(14px,3vw,22px);
+  color:var(--card-color,var(--gold));
+  text-shadow:0 0 12px var(--card-color,var(--gold));
+  letter-spacing:.05em;
+  text-align:center;
+}
+.card-range{
+  font-size:10px;
+  font-family:'Press Start 2P',monospace;
+  color:var(--dim);
+  letter-spacing:.08em;
+  text-align:center;
+}
+.card-play{
+  margin-top:6px;
+  background:var(--card-color,var(--gold));
+  color:var(--navy);
+  font-family:'Press Start 2P',monospace;
+  font-size:9px;
+  padding:8px 20px;
+  border:none;
+  border-radius:2px;
+  cursor:pointer;
+  letter-spacing:.1em;
+  transition:filter .1s;
+}
+.game-card:hover .card-play{filter:brightness(1.2)}
+
+/* ── SCOREBOARD STRIP ── */
+.score-strip{
+  position:relative;z-index:10;
+  max-width:840px;margin:0 auto 48px;padding:0 20px;
+}
+.score-strip-inner{
+  background:var(--navy2);
+  border:1px solid rgba(240,192,64,.2);
+  border-radius:4px;
+  padding:20px 28px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:20px;flex-wrap:wrap;
+}
+.score-strip-label{
+  font-family:'Press Start 2P',monospace;
+  font-size:8px;color:var(--gold);
+  letter-spacing:.12em;opacity:.7;
+}
+.mastery-summary{display:flex;gap:20px;flex-wrap:wrap}
+.ms-item{text-align:center}
+.ms-val{font-family:'Press Start 2P',monospace;font-size:14px;color:var(--gold)}
+.ms-label{font-size:9px;font-family:'Press Start 2P',monospace;color:var(--dim);margin-top:4px;letter-spacing:.06em}
+
+/* ── FOOTER ── */
+.arcade-footer{
+  position:relative;z-index:10;
+  text-align:center;padding:24px;
+  border-top:1px solid rgba(240,192,64,.15);
+}
+.arcade-footer p{font-family:'Press Start 2P',monospace;font-size:8px;color:var(--dim);letter-spacing:.1em}
+</style>
+</head>
+<body>
+
+<!-- Stars -->
+<div class="stars" id="stars"></div>
+
+<!-- Header -->
+<header class="arcade-header">
+  <p class="cca-tag">CITY CHURCH ACADEMY</p>
+  <h1 class="arcade-title">MATH<br>ARCADE</h1>
+  <p class="arcade-sub">SELECT YOUR GAME</p>
+  <p class="insert-coin">▶ PRESS ANY KEY TO START ◀</p>
+</header>
+
+<!-- Game Grid -->
+<div class="game-grid">
+
+  <a href="arcade-addition.html" class="game-card" style="--card-color:#39ff14">
+    <div class="card-corner tl"></div><div class="card-corner tr"></div>
+    <div class="card-corner bl"></div><div class="card-corner br"></div>
+    <div class="card-symbol">➕</div>
+    <div class="card-op">ADDITION</div>
+    <div class="card-range">FACTS 1 – 20</div>
+    <div class="card-play">PLAY →</div>
+  </a>
+
+  <a href="arcade-subtraction.html" class="game-card" style="--card-color:#ff4fa3">
+    <div class="card-corner tl"></div><div class="card-corner tr"></div>
+    <div class="card-corner bl"></div><div class="card-corner br"></div>
+    <div class="card-symbol">➖</div>
+    <div class="card-op">SUBTRACTION</div>
+    <div class="card-range">FACTS 1 – 20</div>
+    <div class="card-play">PLAY →</div>
+  </a>
+
+  <a href="multiplication-facts.html" class="game-card" style="--card-color:#f0c040">
+    <div class="card-corner tl"></div><div class="card-corner tr"></div>
+    <div class="card-corner bl"></div><div class="card-corner br"></div>
+    <div class="card-symbol">✖️</div>
+    <div class="card-op">MULTIPLICATION</div>
+    <div class="card-range">FACTS 1 – 12</div>
+    <div class="card-play">PLAY →</div>
+  </a>
+
+  <a href="arcade-division.html" class="game-card" style="--card-color:#00e5ff">
+    <div class="card-corner tl"></div><div class="card-corner tr"></div>
+    <div class="card-corner bl"></div><div class="card-corner br"></div>
+    <div class="card-symbol">➗</div>
+    <div class="card-op">DIVISION</div>
+    <div class="card-range">FACTS 1 – 12</div>
+    <div class="card-play">PLAY →</div>
+  </a>
+
+</div>
+
+<!-- Mastery summary -->
+<div class="score-strip">
+  <div class="score-strip-inner">
+    <p class="score-strip-label">YOUR MASTERY</p>
+    <div class="mastery-summary" id="mastery-summary">
+      <div class="ms-item"><div class="ms-val" id="ms-add">—</div><div class="ms-label">ADDITION</div></div>
+      <div class="ms-item"><div class="ms-val" id="ms-sub">—</div><div class="ms-label">SUBTRACTION</div></div>
+      <div class="ms-item"><div class="ms-val" id="ms-mult">—</div><div class="ms-label">MULTIPLY</div></div>
+      <div class="ms-item"><div class="ms-val" id="ms-div">—</div><div class="ms-label">DIVISION</div></div>
+    </div>
+  </div>
+</div>
+
+<footer class="arcade-footer">
+  <p>© 2026 CITY CHURCH ACADEMY · MATH ARCADE · ALL RIGHTS RESERVED</p>
+</footer>
+
+<script>
+// Stars
+const starsEl = document.getElementById('stars');
+for(let i=0;i<120;i++){
+  const s=document.createElement('div');
+  s.className='star';
+  const size=Math.random()*2.5+0.5;
+  s.style.cssText=`width:${size}px;height:${size}px;background:#fff;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${(Math.random()*3+1.5).toFixed(1)}s;--delay:${(Math.random()*4).toFixed(1)}s`;
+  starsEl.appendChild(s);
+}
+
+// Mastery counts
+function countMastered(key, families){
+  try{
+    const m=JSON.parse(localStorage.getItem(key)||'{}');
+    let count=0;
+    families.forEach(f=>{
+      const d=m[f];
+      if(d&&d.attempted>=10&&(d.correct/d.attempted)>=0.8)count++;
+    });
+    return `${count}/${families.length}`;
+  }catch{return '0/'+families.length}
+}
+
+const mult=[2,3,4,5,6,7,8,9,10,11,12];
+const add=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+const sub=add;
+const div=mult;
+
+document.getElementById('ms-mult').textContent=countMastered('ccaMastery',mult);
+document.getElementById('ms-add').textContent=countMastered('ccaAddMastery',add);
+document.getElementById('ms-sub').textContent=countMastered('ccaSubMastery',sub);
+document.getElementById('ms-div').textContent=countMastered('ccaDivMastery',div);
+</script>
+</body>
+</html>
