@@ -7,9 +7,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#1B4332;--navy-mid:#2D6A4F;--gold:#C45C1A;--gold-lite:#E08A4F;--gold-dim:#8C3D0F;--cream:#f8f4ec;--cream-mid:#f0e9d8;--white:#ffffff;--text:#1a1a2e;--text-mid:#3a3a5c;--text-lite:#6b6b8a;--lgray:#e8e8f0}
+:root{--navy:#1E3A2C;--navy-mid:#2D6A4F;--gold:#C45C1A;--gold-lite:#E07B3A;--gold-dim:#9A4713;--cream:#f8f4ec;--cream-mid:#f0e9d8;--white:#ffffff;--text:#1a1a2e;--text-mid:#3a3a5c;--text-lite:#6b6b8a;--lgray:#e8e8f0}
 body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
-.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(27,67,50,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(196,92,26,0.15)}
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(30,58,44,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(196,92,26,0.18)}
 .nav-inner{max-width:1200px;margin:0 auto;padding:0 40px;height:68px;display:flex;align-items:center;justify-content:space-between}
 .nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:#fff;text-decoration:none}
 .nav-logo span{color:#C45C1A;font-style:italic}
@@ -18,17 +18,17 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
 .nav-links a:hover,.nav-links a.active{color:#C45C1A}
 .nav-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
 .nav-toggle span{display:block;width:22px;height:1.5px;background:#fff}
-@media(max-width:768px){.nav-links{display:none}.nav-toggle{display:flex}.site-nav.open .nav-links{display:flex;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(27,67,50,0.98);padding:24px 40px;gap:20px}}
+@media(max-width:768px){.nav-links{display:none}.nav-toggle{display:flex}.site-nav.open .nav-links{display:flex;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(30,58,44,0.98);padding:24px 40px;gap:20px}}
 .page-hero{background:var(--navy);padding:140px 60px 100px;position:relative;overflow:hidden}
 .page-hero::after{content:'';position:absolute;left:0;top:0;width:4px;height:100%;background:linear-gradient(to bottom,transparent,var(--gold),transparent)}
-.page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(135deg,transparent 40%,rgba(196,92,26,0.04) 40%,rgba(196,92,26,0.04) 60%,transparent 60%);background-size:80px 80px}
+.page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(135deg,transparent 40%,rgba(196,92,26,0.05) 40%,rgba(196,92,26,0.05) 60%,transparent 60%);background-size:80px 80px}
 .page-hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
 .page-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:12px}
 .page-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold);display:block}
 .page-title{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,6vw,80px);font-weight:300;color:var(--white);line-height:1.05}
 .page-title em{font-style:italic;color:var(--gold)}
 .page-subtitle{font-size:16px;font-weight:300;color:rgba(255,255,255,0.5);margin-top:20px;max-width:560px;line-height:1.7}
-.artifact-nav{background:var(--navy-mid);border-bottom:1px solid rgba(196,92,26,0.15);position:sticky;top:68px;z-index:100}
+.artifact-nav{background:var(--navy-mid);border-bottom:1px solid rgba(196,92,26,0.18);position:sticky;top:68px;z-index:100}
 .artifact-nav-inner{max-width:1200px;margin:0 auto;padding:0 60px;display:flex;gap:0;overflow-x:auto}
 .artifact-tab{padding:18px 28px;font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.45);text-decoration:none;border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap;cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;font-family:'Outfit',sans-serif}
 .artifact-tab:hover{color:rgba(255,255,255,0.8)}
@@ -94,7 +94,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
 .pdf-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--navy);margin-bottom:6px}
 .pdf-desc{font-size:13px;font-weight:300;color:var(--text-lite);line-height:1.6;margin-bottom:10px}
 .pdf-link{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-dim)}
-.site-footer{background:#0F2A1F;border-top:1px solid rgba(196,92,26,0.15);padding:60px}
+.site-footer{background:#0F1F16;border-top:1px solid rgba(196,92,26,0.18);padding:60px}
 .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr 1fr;gap:40px;align-items:start;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.06)}
 .footer-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:#fff}
 .footer-title{font-size:12px;color:rgba(255,255,255,0.35);margin-top:4px;letter-spacing:0.1em;text-transform:uppercase}
@@ -186,10 +186,11 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
 
 <nav class="artifact-nav">
   <div class="artifact-nav-inner">
-    <button class="artifact-tab active" onclick="showArtifact('mission-motion',this)">Artifact 4 — Mission: Motion</button>
+    <button class="artifact-tab active" onclick="showArtifact('mult-facts',this)">Math Arcade</button>
+    <button class="artifact-tab" onclick="showArtifact('mission-motion',this)">Artifact 4 — Mission: Motion</button>
     <button class="artifact-tab" onclick="showArtifact('stem-club',this)">STEM Club — Full Year</button>
     <button class="artifact-tab" onclick="showArtifact('weather-watch',this)">Spring Slides — Weather Watch</button>
-    <button class="artifact-tab" onclick="showArtifact('mult-facts',this)">Multiplication Facts App</button>
+    <button class="artifact-tab" onclick="showArtifact('rise-training',this)">Rise 360 — Teacher Training</button>
     <button class="artifact-tab" onclick="showArtifact('academic',this)">Academic Work</button>
   </div>
 </nav>
@@ -197,7 +198,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
 <!-- ══════════════════════════════════════
      TAB 1 — MISSION: MOTION
 ══════════════════════════════════════ -->
-<section class="artifact-section active" id="mission-motion" style="background:var(--white);padding:80px 60px">
+<section class="artifact-section" id="mission-motion" style="background:var(--white);padding:80px 60px">
   <div class="section-inner">
 
     <div class="artifact-header">
@@ -233,17 +234,17 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
 
     <div class="three-grid">
       <div class="grid-card">
-        <span class="grid-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span>
+        <span class="grid-icon">🎯</span>
         <h3 class="grid-title">Relevance</h3>
         <p class="grid-text">This artifact sits at the intersection of immersive technology, instructional design, and K–12 STEM — my intended specialization. It demonstrates creative capacity and research literacy: design grounded in peer-reviewed immersive learning research from 2024–2025.</p>
       </div>
       <div class="grid-card">
-        <span class="grid-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg></span>
+        <span class="grid-icon">⭐</span>
         <h3 class="grid-title">Quality</h3>
         <p class="grid-text">A coherent narrative structure — setting, characters, three-act mission progression, adaptive feedback, and conclusion — with clear learning objectives mapped to each of Newton's Three Laws and AI guide NOVA providing real-time adaptive mentoring.</p>
       </div>
       <div class="grid-card">
-        <span class="grid-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><path d="M4 12a8 8 0 0 1 14-5.3L20 8"/><path d="M20 4v4h-4"/><path d="M20 12a8 8 0 0 1-14 5.3L4 16"/><path d="M4 20v-4h4"/></svg></span>
+        <span class="grid-icon">🔄</span>
         <h3 class="grid-title">Variety &amp; Impact</h3>
         <p class="grid-text">The only multimedia and immersive design artifact in this portfolio. Its three-mission structure, character-based mentoring, and adaptive feedback are design patterns transferable across subjects and grade levels — and identified as a potential STEM program development project.</p>
       </div>
@@ -351,17 +352,17 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
 
     <div class="three-grid">
       <div class="grid-card">
-        <span class="grid-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><path d="M12 3a9 9 0 1 0 0 18c1 0 1.8-.8 1.8-1.8 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-1 .8-1.8 1.8-1.8H16a4 4 0 0 0 4-4c0-4.4-3.6-8-8-8z"/><circle cx="7.5" cy="10.5" r="1.1"/><circle cx="11.5" cy="7.5" r="1.1"/><circle cx="15.5" cy="10.5" r="1.1"/></svg></span>
+        <span class="grid-icon">🎨</span>
         <h3 class="grid-title">Design Decisions</h3>
         <p class="grid-text">Each slide has a single focal point, consistent color coding (sky blue for Weather Watch), and timed activity banners so students always know how long each phase lasts. No slide exceeds one concept — direct application of the Coherence Principle.</p>
       </div>
       <div class="grid-card">
-        <span class="grid-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 10V4l-2-1-2 1v3"/><path d="M9 10h6l1 4a4 4 0 0 1-4 4h0a4 4 0 0 1-4-4z"/><path d="M9 7h6"/></svg></span>
+        <span class="grid-icon">🔬</span>
         <h3 class="grid-title">The Build Activity</h3>
         <p class="grid-text">Students build a working anemometer in 25 minutes using paper cups, straws, a pencil, and a pin. The slide sequence scaffolds planning before building, building before testing, and testing before reflecting — the engineering design process made explicit.</p>
       </div>
       <div class="grid-card">
-        <span class="grid-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 0 18"/><path d="M12 3a15 15 0 0 0 0 18"/></svg></span>
+        <span class="grid-icon">🌍</span>
         <h3 class="grid-title">Real-World Connection</h3>
         <p class="grid-text">Every session closes with a question connecting the day's activity to the real world. Weather Watch closes with: "Wind is caused by differences in air temperature — where do you think that energy originally comes from?" Setting up the solar energy session in Week 2.</p>
       </div>
@@ -373,45 +374,45 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
 <!-- ══════════════════════════════════════
      TAB 4 — MULTIPLICATION FACTS APP
 ══════════════════════════════════════ -->
-<section class="artifact-section" id="mult-facts" style="background:var(--cream);padding:80px 60px">
+<section class="artifact-section active" id="mult-facts" style="background:var(--cream);padding:80px 60px">
   <div class="section-inner">
 
-    <p class="artifact-num">Live Web Application · City Church Academy</p>
-    <span class="artifact-badge">EdTech · Web App · Grades 4–5</span>
-    <h2 class="artifact-title" style="margin-top:16px">Multiplication Facts<br><em>Practice App</em></h2>
-    <p class="artifact-subtitle">A fully deployed, mobile-friendly web application for building multiplication fact fluency in 4th and 5th grade students — with per-device mastery tracking, four practice modes, and zero personal data collected.</p>
+    <p class="artifact-num">Live Gamified Learning Platform · City Church Academy</p>
+    <span class="artifact-badge">EdTech · Game Design · Grades 1–5</span>
+    <h2 class="artifact-title" style="margin-top:16px">The Math<br><em>Arcade</em></h2>
+    <p class="artifact-subtitle">What began as a single multiplication practice app evolved into a five-game arcade platform with a shared XP economy, rank progression, achievement badges, combo scoring, and a full canvas-based action game — all built on free hosting with zero student data collected.</p>
 
     <!-- Launch card -->
     <div class="app-launch-card">
       <div class="app-launch-text">
-        <p class="alc-tag">Live Application</p>
-        <p class="alc-title">Open the app on any device — phone, tablet, or Chromebook</p>
-        <p class="alc-desc">No login. No download. Students tap the link and start practicing immediately. Progress saves to their device and persists across sessions.</p>
+        <p class="alc-tag">Live Platform</p>
+        <p class="alc-title">Enter the Math Arcade — five games, one progression system</p>
+        <p class="alc-desc">No login. No download. Students pick a game, earn XP toward eight ranks, unlock badges, chase high scores, and build fact fluency across all four operations. Progress saves to their device.</p>
       </div>
-      <a href="multiplication-facts.html" target="_blank" class="app-launch-btn">Launch App →</a>
+      <a href="math-arcade.html" target="_blank" class="app-launch-btn">Enter Arcade →</a>
     </div>
 
     <!-- Feature cards -->
     <div class="feature-row">
       <div class="feature-card">
-        <p class="feature-num">4</p>
-        <p class="feature-title">Practice Modes</p>
-        <p class="feature-text">60-second sprint, 2-minute run, 20-question practice, and a 10-question mastery check — one for every classroom context.</p>
+        <p class="feature-num">5</p>
+        <p class="feature-title">Games</p>
+        <p class="feature-text">Addition Blaster, Subtraction Strike, Multiplication Mayhem, Division Destroyer, and Laser Blaster — a canvas-based action game where correct answers fire your ship's laser at falling asteroids.</p>
       </div>
       <div class="feature-card">
-        <p class="feature-num">×12</p>
-        <p class="feature-title">Fact Families</p>
-        <p class="feature-text">All 11 fact families (×2 through ×12) available. Students select which ones to practice each session.</p>
+        <p class="feature-num">8</p>
+        <p class="feature-title">Ranks</p>
+        <p class="feature-text">A shared XP economy across all games. Every correct answer earns XP toward eight ranks — Rookie to Legend — with combo multipliers rewarding streaks.</p>
       </div>
       <div class="feature-card">
-        <p class="feature-num">3</p>
-        <p class="feature-title">Mastery Levels</p>
-        <p class="feature-text">Not Started → Practicing → Mastered. Earned at 8/10 correct and tracked on-device across sessions.</p>
+        <p class="feature-num">6</p>
+        <p class="feature-title">Badges</p>
+        <p class="feature-text">Achievements like Perfect Round, Speed Demon, and 10 Streak — unlocked through play and displayed on the arcade hub's badge shelf.</p>
       </div>
       <div class="feature-card">
         <p class="feature-num">0</p>
         <p class="feature-title">Data Collected</p>
-        <p class="feature-text">Progress lives on the student's own device only. No accounts, no servers, no personal information — COPPA-compliant by design.</p>
+        <p class="feature-text">All progress, XP, badges, and high scores live on the student's own device only. No accounts, no servers — COPPA-compliant by design.</p>
       </div>
     </div>
 
@@ -445,7 +446,21 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
         <div class="decision-num">04</div>
         <div class="decision-body">
           <h4>Four Modes for Different Contexts</h4>
-          <p>A 60-second warm-up serves a different purpose than a structured homework session or a formal mastery assessment. Building all four modes into one tool means teachers don't need separate resources for each context — the app adapts to the moment.</p>
+          <p>A 60-second warm-up serves a different purpose than a structured homework session or a formal mastery assessment. Building all four modes into every game means teachers don't need separate resources for each context — the platform adapts to the moment.</p>
+        </div>
+      </div>
+      <div class="decision-row">
+        <div class="decision-num">05</div>
+        <div class="decision-body">
+          <h4>Gamification as Retention Engineering</h4>
+          <p>Streak combos, escalating point multipliers, rank progression, and achievement badges were added deliberately — not as decoration, but as replay drivers. Fact fluency requires distributed practice over weeks, and the XP economy gives students a reason to return. Sound design, particle effects, and screen shake provide the immediate feedback loops that make repetition feel like play.</p>
+        </div>
+      </div>
+      <div class="decision-row">
+        <div class="decision-num">06</div>
+        <div class="decision-body">
+          <h4>An Action Game That Embeds the Skill</h4>
+          <p>Laser Blaster inverts the typical drill structure: instead of answering questions to earn points, students solve problems as the core game mechanic — the answer IS the weapon. Falling asteroids create authentic time pressure, boss battles require sustained accuracy, and wave progression scales difficulty automatically. The math is not a gate before the fun; it is the gameplay itself.</p>
         </div>
       </div>
     </div>
@@ -479,7 +494,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
     <!-- Case study download -->
     <p class="col-label" style="margin-bottom:16px">Portfolio Document</p>
     <a href="StarrID_CaseStudy_MultiplicationFacts.pdf" target="_blank" class="case-study-card">
-      <span class="cs-icon"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 11h6"/><path d="M9 15h6"/><path d="M9 19h4"/></svg></span>
+      <span class="cs-icon">📋</span>
       <div class="cs-body">
         <p class="cs-tag">Case Study · PDF · Starr Instructional Design</p>
         <p class="cs-title">Multiplication Facts App — Full Case Study</p>
@@ -489,7 +504,43 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
     </a>
 
     <div class="pull-quote" style="margin-top:32px">
-      <p>"This project demonstrated that instructional design thinking and rapid development can work together. A real learning need, a grounded design rationale, and a deployed solution — built in a single evening."</p>
+      <p>"This project demonstrates iterative instructional design in action: a single practice app, validated with real users, then rebuilt into a gamified platform grounded in motivation research. Each design decision — from combo multipliers to boss battles — serves the same goal the original app did: automatic recall of math facts."</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     TAB — RISE 360 TEACHER TRAINING
+══════════════════════════════════════ -->
+<section class="artifact-section" id="rise-training" style="background:var(--white);padding:80px 60px">
+  <div class="section-inner">
+
+    <p class="artifact-num">Rise 360 eLearning Module · Professional Development</p>
+    <span class="artifact-badge">Instructional Design · Teacher Training · Interactive Course</span>
+    <h2 class="artifact-title" style="margin-top:16px">Engaging Arithmetic —<br><em>A Rise 360 Training Module</em></h2>
+    <p class="artifact-subtitle">Ready to transform 5th grade math lessons into dynamic, interactive experiences? This course empowers upper elementary teachers using the Abeka Arithmetic 5 curriculum to elevate student engagement and understanding — exploring practical techniques for integrating visuals, interactive elements, and comprehension checks into daily math instruction.</p>
+
+    <div class="app-launch-card">
+      <div class="app-launch-text">
+        <p class="alc-tag">Live Interactive Module</p>
+        <p class="alc-title">Launch the full Rise 360 course in a new tab</p>
+        <p class="alc-desc">Built in Articulate Rise 360 and hosted independently. Opens in a new tab since Rise's interactive elements are best experienced in their own window.</p>
+      </div>
+      <a href="Rise360-Math/content/" target="_blank" class="app-launch-btn">Launch Module →</a>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <p class="col-label">The Audience</p>
+        <h3 class="col-heading">Upper elementary math teachers.</h3>
+        <p class="col-text">Designed for teachers delivering the Abeka Arithmetic 5 curriculum who want to move beyond lecture-and-worksheet instruction toward lessons that actively engage students and surface understanding in real time.</p>
+      </div>
+      <div>
+        <p class="col-label">The Structure</p>
+        <h3 class="col-heading">Five sequenced lessons.</h3>
+        <p class="col-text">Mapping the Arithmetic 5 curriculum, designing effective comprehension checks, selecting and creating visual aids, integrating interactivity, and a step-by-step walkthrough of enhancing existing Arithmetic 5 materials — moving from theory to direct classroom application.</p>
+      </div>
     </div>
 
   </div>
@@ -534,7 +585,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
     <h3 class="section-heading" style="font-size:clamp(24px,3vw,38px)">Written work from<br><em>EDU8960.</em></h3>
 
     <a href="#" class="pdf-card">
-      <span class="pdf-icon"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/><path d="M9.5 13h5"/><path d="M9.5 17h5"/></svg></span>
+      <span class="pdf-icon">📄</span>
       <div>
         <p class="pdf-title">Designing With Purpose</p>
         <p class="pdf-desc">Applying backward design and Mayer's five multimedia principles to professional portfolio development — with specific design applications and violations to avoid.</p>
@@ -542,7 +593,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
       </div>
     </a>
     <a href="#" class="pdf-card">
-      <span class="pdf-icon"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/><path d="M9.5 13h5"/><path d="M9.5 17h5"/></svg></span>
+      <span class="pdf-icon">📄</span>
       <div>
         <p class="pdf-title">Designing With Integrity</p>
         <p class="pdf-desc">A seven-criterion rubric for evaluating portfolio design against ethical design, universal design, and DEI principles — with an honest self-assessment applying it to this portfolio.</p>
@@ -550,7 +601,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
       </div>
     </a>
     <a href="#" class="pdf-card">
-      <span class="pdf-icon"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/><path d="M9.5 13h5"/><path d="M9.5 17h5"/></svg></span>
+      <span class="pdf-icon">📄</span>
       <div>
         <p class="pdf-title">Grade 5 States of Matter — Project Management Plan</p>
         <p class="pdf-desc">A complete project management suite: WBS, schedule, communication plan, stakeholder email, risk assessment, closure report, and future trends reflection.</p>
