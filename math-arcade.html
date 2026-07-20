@@ -114,6 +114,15 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
     <div class="card-mastery" id="cm-div"></div>
     <div class="card-play">PLAY →</div>
   </a>
+  <a href="arcade-blaster.html" class="game-card" style="--card-color:#b44fff;grid-column:1/-1">
+    <div class="card-corner tl"></div><div class="card-corner tr"></div>
+    <div class="card-corner bl"></div><div class="card-corner br"></div>
+    <div class="card-symbol">🚀</div>
+    <div class="card-op">LASER BLASTER</div>
+    <div class="card-range">ARCADE GAME · ALL OPERATIONS</div>
+    <div class="card-mastery" style="color:#b44fff" id="cm-blaster"></div>
+    <div class="card-play">PLAY →</div>
+  </a>
 </div>
 
 <footer class="arcade-footer">
@@ -187,6 +196,10 @@ setCM('cm-mult','ccaMastery',mult);
 setCM('cm-add','ccaAddMastery',twenty);
 setCM('cm-sub','ccaSubMastery',twenty);
 setCM('cm-div','ccaDivMastery',mult);
+try{
+  const bh=JSON.parse(localStorage.getItem('ccaHS_blaster')||'{}');
+  if(bh.score!=null)document.getElementById('cm-blaster').textContent='★ HIGH SCORE: '+bh.score;
+}catch(e){}
 </script>
 </body>
 </html>

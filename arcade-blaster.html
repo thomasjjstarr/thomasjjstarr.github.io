@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"/>
+<meta name="theme-color" content="#0a0a1a"/>
+<title>Laser Blaster — Math Arcade</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0a0a1a;--navy2:#0f1530;--navy3:#1a2448;--accent:#b44fff;--gold:#f0c040;--white:#fff;--dim:rgba(255,255,255,0.45);--red:#ff4444;--green:#39ff14;--cyan:#00e5ff;}
+html,body{height:100%;background:var(--navy);color:var(--white);font-family:'Outfit',sans-serif;overflow:hidden;touch-action:manipulation}
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,0.1) 0px,rgba(0,0,0,0.1) 1px,transparent 1px,transparent 3px);pointer-events:none;z-index:9999}
+.top-bar{background:var(--navy2);border-bottom:2px solid var(--accent);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.back-btn{font-family:'Press Start 2P',monospace;font-size:8px;color:var(--accent);text-decoration:none;letter-spacing:.08em;text-shadow:0 0 8px var(--accent)}
+.op-badge{font-family:'Press Start 2P',monospace;font-size:9px;color:var(--accent);text-shadow:0 0 10px var(--accent);letter-spacing:.1em}
+#app{display:flex;flex-direction:column;height:100dvh;max-width:520px;margin:0 auto}
+.screen{display:none;flex-direction:column;flex:1;overflow:hidden}
+.screen.active{display:flex}
+#screen-home{padding:20px;gap:16px;overflow-y:auto}
+.game-title{font-family:'Press Start 2P',monospace;font-size:clamp(16px,4.5vw,26px);color:var(--accent);text-shadow:0 0 20px var(--accent),0 0 40px rgba(180,79,255,.3);text-align:center;line-height:1.6;padding:12px 0}
+.intro-text{font-family:'Press Start 2P',monospace;font-size:8px;color:var(--dim);text-align:center;line-height:2}
+.mastery-label{font-family:'Press Start 2P',monospace;font-size:8px;color:var(--gold);letter-spacing:.1em;margin-bottom:10px;text-align:center}
+.op-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.op-card{background:var(--navy2);border:2px solid rgba(255,255,255,.1);border-radius:3px;padding:16px 10px;text-align:center;cursor:pointer;transition:border-color .12s;-webkit-tap-highlight-color:transparent}
+.op-card.selected{border-color:var(--accent);box-shadow:0 0 10px rgba(180,79,255,.35)}
+.op-card .oc-sym{font-size:26px;margin-bottom:6px}
+.op-card .oc-name{font-family:'Press Start 2P',monospace;font-size:8px;color:var(--white)}
+.hs-row{display:flex;gap:6px}
+.hs-chip{flex:1;background:var(--navy2);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:8px 4px;text-align:center}
+.hs-val{font-family:'Press Start 2P',monospace;font-size:12px;color:var(--accent)}
+.hs-label{font-family:'Press Start 2P',monospace;font-size:6px;color:var(--dim);margin-top:4px}
+.btn-start{width:100%;padding:16px;background:var(--accent);color:#fff;border:none;border-radius:3px;font-family:'Press Start 2P',monospace;font-size:12px;cursor:pointer;letter-spacing:.1em;box-shadow:0 0 20px rgba(180,79,255,.4)}
+.btn-start:active{transform:scale(.97)}
+/* GAME */
+#screen-game{position:relative}
+#game-canvas{flex:1;display:block;width:100%;background:transparent;touch-action:none}
+.game-hud{background:var(--navy2);padding:8px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--accent);flex-shrink:0}
+.gh-item{font-family:'Press Start 2P',monospace;font-size:9px;color:var(--white)}
+.gh-item .lab{font-size:6px;color:var(--dim);display:block;margin-bottom:3px}
+.gh-lives{color:var(--red)}
+.gh-wave{color:var(--cyan)}
+.numpad-wrap{padding:6px 10px 12px;flex-shrink:0;background:rgba(10,10,26,.9)}
+.answer-strip{display:flex;align-items:center;justify-content:center;gap:10px;padding:4px 0 8px}
+.answer-display{font-family:'Press Start 2P',monospace;font-size:20px;color:var(--accent);text-shadow:0 0 10px var(--accent);min-width:80px;text-align:center;min-height:26px}
+.answer-display.ph{color:rgba(255,255,255,.2)}
+.numpad{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}
+.np{background:var(--navy3);border:1px solid rgba(180,79,255,.25);border-radius:3px;padding:12px 4px;font-family:'Press Start 2P',monospace;font-size:13px;color:var(--white);cursor:pointer;text-align:center;transition:transform .08s;-webkit-tap-highlight-color:transparent}
+.np:active{transform:scale(.9);background:var(--accent)}
+.np.clr{background:rgba(255,68,68,.12);border-color:rgba(255,68,68,.3);color:var(--red)}
+.np.ent{background:var(--accent);color:#fff;font-size:9px;border-color:var(--accent);grid-column:span 2}
+/* GAME OVER */
+#screen-over{padding:20px;gap:14px;overflow-y:auto;align-items:center;justify-content:center}
+.over-title{font-family:'Press Start 2P',monospace;font-size:clamp(18px,5vw,26px);color:var(--red);text-shadow:0 0 16px var(--red);text-align:center;line-height:1.5}
+.over-title.win{color:var(--green);text-shadow:0 0 16px var(--green)}
+.result-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%}
+.rs{background:var(--navy2);border:1px solid rgba(180,79,255,.2);border-radius:3px;padding:14px 8px;text-align:center}
+.rs-val{font-family:'Press Start 2P',monospace;font-size:18px;color:var(--accent)}
+.rs-label{font-family:'Press Start 2P',monospace;font-size:6px;color:var(--dim);margin-top:6px}
+.new-hs{font-family:'Press Start 2P',monospace;font-size:9px;color:var(--gold);text-shadow:0 0 10px var(--gold);animation:pulse .4s infinite alternate}
+@keyframes pulse{from{transform:scale(1)}to{transform:scale(1.08)}}
+.xp-earned{background:var(--navy2);border:1px solid rgba(240,192,64,.3);border-radius:3px;padding:12px 16px;width:100%;text-align:center}
+.xp-earned-val{font-family:'Press Start 2P',monospace;font-size:14px;color:var(--gold);text-shadow:0 0 10px var(--gold)}
+.xp-earned-label{font-family:'Press Start 2P',monospace;font-size:7px;color:var(--dim);margin-top:6px}
+.btn-row{display:flex;gap:8px;width:100%}
+.btn-again{flex:2;padding:14px;background:var(--accent);color:#fff;border:none;border-radius:3px;font-family:'Press Start 2P',monospace;font-size:10px;cursor:pointer}
+.btn-home{flex:1;padding:14px;background:transparent;color:var(--dim);border:1px solid rgba(255,255,255,.2);border-radius:3px;font-family:'Press Start 2P',monospace;font-size:9px;cursor:pointer}
+.shake{animation:shakeAnim .3s}
+@keyframes shakeAnim{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="top-bar">
+    <a href="math-arcade.html" class="back-btn">← ARCADE</a>
+    <span class="op-badge">🚀 LASER BLASTER</span>
+    <span></span>
+  </div>
+
+  <!-- HOME -->
+  <div id="screen-home" class="screen active">
+    <div class="game-title">LASER<br>BLASTER</div>
+    <p class="intro-text">ASTEROIDS ARE FALLING!<br>SOLVE THE PROBLEM.<br>TYPE THE ANSWER.<br>FIRE THE LASER!<br><br>DON'T LET THEM REACH<br>YOUR SHIP. 3 LIVES.</p>
+    <div class="hs-row">
+      <div class="hs-chip"><div class="hs-val" id="hs-score">—</div><div class="hs-label">HIGH SCORE</div></div>
+      <div class="hs-chip"><div class="hs-val" id="hs-wave">—</div><div class="hs-label">BEST WAVE</div></div>
+    </div>
+    <div>
+      <p class="mastery-label">CHOOSE YOUR WEAPON</p>
+      <div class="op-grid">
+        <div class="op-card selected" data-op="mult" onclick="selOp(this)"><div class="oc-sym">✖️</div><div class="oc-name">MULTIPLY</div></div>
+        <div class="op-card" data-op="add" onclick="selOp(this)"><div class="oc-sym">➕</div><div class="oc-name">ADD</div></div>
+        <div class="op-card" data-op="sub" onclick="selOp(this)"><div class="oc-sym">➖</div><div class="oc-name">SUBTRACT</div></div>
+        <div class="op-card" data-op="div" onclick="selOp(this)"><div class="oc-sym">➗</div><div class="oc-name">DIVIDE</div></div>
+      </div>
+    </div>
+    <button class="btn-start" onclick="startGame()">LAUNCH →</button>
+  </div>
+
+  <!-- GAME -->
+  <div id="screen-game" class="screen">
+    <div class="game-hud">
+      <div class="gh-item"><span class="lab">SCORE</span><span id="g-score">0</span></div>
+      <div class="gh-item gh-wave"><span class="lab">WAVE</span><span id="g-wave">1</span></div>
+      <div class="gh-item"><span class="lab">STREAK</span><span id="g-streak">0</span></div>
+      <div class="gh-item gh-lives"><span class="lab">LIVES</span><span id="g-lives">♥♥♥</span></div>
+    </div>
+    <canvas id="game-canvas"></canvas>
+    <div class="numpad-wrap">
+      <div class="answer-strip">
+        <div class="answer-display ph" id="ans-display">TYPE ANSWER</div>
+      </div>
+      <div class="numpad">
+        <div class="np" onclick="np('1')">1</div><div class="np" onclick="np('2')">2</div><div class="np" onclick="np('3')">3</div>
+        <div class="np" onclick="np('4')">4</div><div class="np" onclick="np('5')">5</div><div class="np" onclick="np('6')">6</div>
+        <div class="np" onclick="np('7')">7</div><div class="np" onclick="np('8')">8</div><div class="np" onclick="np('9')">9</div>
+        <div class="np" onclick="np('0')">0</div><div class="np clr" onclick="npClear()">⌫</div><div class="np ent" onclick="fire()">FIRE!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GAME OVER -->
+  <div id="screen-over" class="screen">
+    <div class="over-title" id="over-title">GAME OVER</div>
+    <div class="new-hs" id="new-hs" style="display:none">★ NEW HIGH SCORE! ★</div>
+    <div class="result-stats">
+      <div class="rs"><div class="rs-val" id="o-score">0</div><div class="rs-label">SCORE</div></div>
+      <div class="rs"><div class="rs-val" id="o-wave">1</div><div class="rs-label">WAVE</div></div>
+      <div class="rs"><div class="rs-val" id="o-hits">0</div><div class="rs-label">ASTEROIDS</div></div>
+    </div>
+    <div class="xp-earned"><div class="xp-earned-val" id="o-xp">+0 XP</div><div class="xp-earned-label" id="o-rank"></div></div>
+    <div class="btn-row">
+      <button class="btn-again" onclick="startGame()">PLAY AGAIN</button>
+      <button class="btn-home" onclick="goHome()">HOME</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ══ SHARED SYSTEMS ══ */
+const HS_KEY='ccaHS_blaster';
+const LEVELS=[
+  {name:'ROOKIE',xp:0},{name:'CADET',xp:100},{name:'PILOT',xp:300},
+  {name:'ACE',xp:600},{name:'CAPTAIN',xp:1000},{name:'MASTER',xp:1600},
+  {name:'CHAMPION',xp:2400},{name:'LEGEND',xp:3500}
+];
+function getXP(){try{return JSON.parse(localStorage.getItem('ccaXP')||'{"xp":0}')}catch{return{xp:0}}}
+function saveXP(x){localStorage.setItem('ccaXP',JSON.stringify(x))}
+function levelFor(xp){let lv=LEVELS[0];for(const L of LEVELS){if(xp>=L.xp)lv=L;}return lv;}
+function getHS(){try{return JSON.parse(localStorage.getItem(HS_KEY)||'{}')}catch{return{}}}
+function saveHS(h){localStorage.setItem(HS_KEY,JSON.stringify(h))}
+
+let AC=null;
+function beep(freq,dur,type='square',vol=0.07){
+  try{
+    if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();
+    const o=AC.createOscillator(),g=AC.createGain();
+    o.type=type;o.frequency.value=freq;
+    g.gain.value=vol;g.gain.exponentialRampToValueAtTime(0.001,AC.currentTime+dur);
+    o.connect(g);g.connect(AC.destination);
+    o.start();o.stop(AC.currentTime+dur);
+  }catch(e){}
+}
+function sndLaser(){beep(1200,0.08,'sawtooth',0.05);setTimeout(()=>beep(800,0.06,'sawtooth',0.04),50);}
+function sndBoom(){beep(120,0.25,'sawtooth',0.09);beep(80,0.35,'square',0.06);}
+function sndHit(){beep(200,0.3,'sawtooth',0.1);setTimeout(()=>beep(130,0.3,'square',0.08),100);}
+function sndWave(){[523,659,784].forEach((f,i)=>setTimeout(()=>beep(f,0.15,'triangle',0.07),i*100));}
+function sndKey(){beep(700,0.03,'square',0.03);}
+function sndMiss(){beep(180,0.15,'sawtooth',0.05);}
+
+/* ══ PROBLEM GENERATION ══ */
+let opMode='mult';
+function selOp(el){document.querySelectorAll('.op-card').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');opMode=el.dataset.op;}
+function makeProblem(wave){
+  const hardCap=Math.min(12,6+wave); // difficulty ramps with wave
+  if(opMode==='mult'){
+    const a=Math.floor(Math.random()*hardCap)+1,b=Math.floor(Math.random()*12)+1;
+    return{txt:a+'×'+b,ans:a*b};
+  }
+  if(opMode==='add'){
+    const a=Math.floor(Math.random()*Math.min(20,8+wave*2))+1;
+    const b=Math.floor(Math.random()*Math.max(1,20-a))+1;
+    return{txt:a+'+'+b,ans:a+b};
+  }
+  if(opMode==='sub'){
+    const a=Math.floor(Math.random()*Math.min(20,10+wave*2))+1;
+    const b=Math.floor(Math.random()*a)+1;
+    return{txt:a+'−'+b,ans:a-b};
+  }
+  // div
+  const d=Math.floor(Math.random()*Math.min(11,4+wave))+2;
+  const q=Math.floor(Math.random()*12)+1;
+  return{txt:(d*q)+'÷'+d,ans:q};
+}
+
+/* ══ GAME STATE ══ */
+const canvas=document.getElementById('game-canvas');
+const ctx=canvas.getContext('2d');
+let W=0,H=0,dpr=1;
+function resize(){
+  dpr=window.devicePixelRatio||1;
+  const r=canvas.getBoundingClientRect();
+  W=r.width;H=r.height;
+  canvas.width=W*dpr;canvas.height=H*dpr;
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+}
+window.addEventListener('resize',resize);
+
+let running=false,raf=null,lastT=0;
+let asteroids=[],lasers=[],parts=[],stars=[];
+let score=0,wave=1,streak=0,lives=3,kills=0,waveKills=0;
+let answer='';
+let spawnT=0,spawnInt=3.2;
+let bossActive=false;
+let shipX=0.5; // fraction of width
+
+function initStars(){
+  stars=[];
+  for(let i=0;i<50;i++)stars.push({x:Math.random(),y:Math.random(),s:Math.random()*1.5+0.5,v:Math.random()*0.01+0.005});
+}
+
+function spawnAsteroid(isBoss=false){
+  const p=makeProblem(wave);
+  const r=isBoss?46:(26+Math.random()*8);
+  asteroids.push({
+    x:0.12+Math.random()*0.76, y:-0.08,
+    r, p, boss:isBoss, hp:isBoss?3:1,
+    v:(0.018+wave*0.004)*(isBoss?0.55:1)*(0.8+Math.random()*0.4),
+    wob:Math.random()*6.28, rot:Math.random()*6.28, rotV:(Math.random()-0.5)*1.5,
+    verts:Array.from({length:9},()=>0.75+Math.random()*0.4)
+  });
+}
+
+function explode(x,y,color,n=14){
+  for(let i=0;i<n;i++){
+    const a=Math.random()*6.28,sp=40+Math.random()*130;
+    parts.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,life:0.7,max:0.7,color,s:2+Math.random()*3});
+  }
+}
+
+function updateHUD(){
+  document.getElementById('g-score').textContent=score;
+  document.getElementById('g-wave').textContent=wave;
+  document.getElementById('g-streak').textContent=streak;
+  document.getElementById('g-lives').textContent='♥'.repeat(Math.max(0,lives));
+}
+
+function np(d){if(!running||answer.length>=3)return;answer+=d;sndKey();renderAns();}
+function npClear(){if(!running)return;answer=answer.slice(0,-1);renderAns();}
+function renderAns(){
+  const el=document.getElementById('ans-display');
+  if(answer===''){el.textContent='TYPE ANSWER';el.className='answer-display ph';}
+  else{el.textContent=answer;el.className='answer-display';}
+}
+
+function fire(){
+  if(!running||answer==='')return;
+  const val=parseInt(answer);
+  // find closest-to-bottom asteroid whose answer matches
+  let target=null;
+  for(const a of asteroids){
+    if(a.p.ans===val&&(!target||a.y>target.y))target=a;
+  }
+  if(target){
+    sndLaser();
+    lasers.push({x1:shipX*W,y1:H-30,tx:target,t:0});
+    streak++;
+    const mult=streak>=9?4:streak>=6?3:streak>=3?2:1;
+    const pts=(target.boss?30:10)*mult;
+    score+=pts;
+  }else{
+    streak=0;sndMiss();
+    const el=document.getElementById('ans-display');
+    el.style.color='var(--red)';
+    setTimeout(()=>{el.style.color='';},250);
+  }
+  answer='';renderAns();updateHUD();
+}
+
+function laserHit(a){
+  a.hp--;
+  if(a.hp<=0){
+    explode(a.x*W,a.y*H,a.boss?'#f0c040':'#b44fff',a.boss?30:14);
+    sndBoom();
+    asteroids=asteroids.filter(x=>x!==a);
+    kills++;waveKills++;
+    if(a.boss)bossActive=false;
+    // wave up every 8 kills
+    if(waveKills>=8){
+      wave++;waveKills=0;sndWave();
+      spawnInt=Math.max(1.3,spawnInt-0.25);
+      // every 3rd wave spawn a boss
+      if(wave%3===0){bossActive=true;spawnAsteroid(true);}
+    }
+  }else{
+    // boss takes another problem
+    a.p=makeProblem(wave);
+    explode(a.x*W,a.y*H,'#f0c040',8);
+    sndBoom();
+  }
+  updateHUD();
+}
+
+function loseLife(a){
+  explode(a.x*W,a.y*H,'#ff4444',20);
+  sndHit();
+  asteroids=asteroids.filter(x=>x!==a);
+  if(a.boss)bossActive=false;
+  lives--;streak=0;
+  document.getElementById('app').classList.add('shake');
+  setTimeout(()=>document.getElementById('app').classList.remove('shake'),320);
+  updateHUD();
+  if(lives<=0)endGame();
+}
+
+function update(dt){
+  // stars
+  for(const s of stars){s.y+=s.v*dt;if(s.y>1)s.y-=1;}
+  // ship idle sway
+  shipX=0.5+Math.sin(performance.now()/1200)*0.02;
+  // spawn
+  spawnT+=dt;
+  const maxOnScreen=Math.min(4,2+Math.floor(wave/2));
+  if(spawnT>spawnInt&&asteroids.length<maxOnScreen+(bossActive?1:0)){
+    spawnT=0;spawnAsteroid();
+  }
+  // asteroids
+  for(const a of[...asteroids]){
+    a.y+=a.v*dt;
+    a.wob+=dt*2;a.rot+=a.rotV*dt;
+    a.x+=Math.sin(a.wob)*0.0004;
+    if(a.y*H>H-46)loseLife(a);
+  }
+  // lasers
+  for(const l of[...lasers]){
+    l.t+=dt*6;
+    if(l.t>=1){
+      lasers=lasers.filter(x=>x!==l);
+      if(asteroids.includes(l.tx))laserHit(l.tx);
+    }
+  }
+  // particles
+  for(const p of[...parts]){
+    p.life-=dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=60*dt;
+    if(p.life<=0)parts=parts.filter(x=>x!==p);
+  }
+}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  // stars
+  ctx.fillStyle='rgba(255,255,255,0.6)';
+  for(const s of stars){ctx.fillRect(s.x*W,s.y*H,s.s,s.s);}
+  // asteroids
+  for(const a of asteroids){
+    const x=a.x*W,y=a.y*H;
+    ctx.save();ctx.translate(x,y);ctx.rotate(a.rot);
+    ctx.beginPath();
+    for(let i=0;i<a.verts.length;i++){
+      const ang=(i/a.verts.length)*6.28;
+      const rr=a.r*a.verts[i];
+      if(i===0)ctx.moveTo(Math.cos(ang)*rr,Math.sin(ang)*rr);
+      else ctx.lineTo(Math.cos(ang)*rr,Math.sin(ang)*rr);
+    }
+    ctx.closePath();
+    ctx.fillStyle=a.boss?'rgba(240,192,64,0.15)':'rgba(180,79,255,0.12)';
+    ctx.fill();
+    ctx.lineWidth=2;
+    ctx.strokeStyle=a.boss?'#f0c040':'#b44fff';
+    ctx.shadowColor=a.boss?'#f0c040':'#b44fff';
+    ctx.shadowBlur=10;
+    ctx.stroke();
+    ctx.restore();
+    // problem text
+    ctx.font=(a.boss?'13px':'11px')+" 'Press Start 2P',monospace";
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.shadowBlur=0;
+    ctx.fillStyle='#fff';
+    ctx.fillText(a.p.txt,x,y);
+    if(a.boss){
+      ctx.font="8px 'Press Start 2P',monospace";
+      ctx.fillStyle='#f0c040';
+      ctx.fillText('BOSS '+('●'.repeat(a.hp)),x,y-a.r-12);
+    }
+  }
+  // lasers
+  for(const l of lasers){
+    if(!asteroids.includes(l.tx))continue;
+    const tx=l.tx.x*W,ty=l.tx.y*H;
+    const cx=l.x1+(tx-l.x1)*l.t,cy=l.y1+(ty-l.y1)*l.t;
+    ctx.strokeStyle='#00e5ff';
+    ctx.lineWidth=3;
+    ctx.shadowColor='#00e5ff';ctx.shadowBlur=12;
+    ctx.beginPath();ctx.moveTo(l.x1,l.y1);ctx.lineTo(cx,cy);ctx.stroke();
+    ctx.shadowBlur=0;
+  }
+  // particles
+  for(const p of parts){
+    ctx.globalAlpha=p.life/p.max;
+    ctx.fillStyle=p.color;
+    ctx.fillRect(p.x-p.s/2,p.y-p.s/2,p.s,p.s);
+  }
+  ctx.globalAlpha=1;
+  // ship
+  const sx=shipX*W,sy=H-24;
+  ctx.save();ctx.translate(sx,sy);
+  ctx.beginPath();
+  ctx.moveTo(0,-16);ctx.lineTo(12,10);ctx.lineTo(5,6);ctx.lineTo(0,12);ctx.lineTo(-5,6);ctx.lineTo(-12,10);
+  ctx.closePath();
+  ctx.fillStyle='rgba(0,229,255,0.15)';ctx.fill();
+  ctx.lineWidth=2;ctx.strokeStyle='#00e5ff';
+  ctx.shadowColor='#00e5ff';ctx.shadowBlur=10;
+  ctx.stroke();
+  // thruster
+  ctx.shadowBlur=0;
+  ctx.fillStyle='rgba(255,150,50,'+(0.5+Math.random()*0.5)+')';
+  ctx.beginPath();ctx.moveTo(-4,12);ctx.lineTo(0,20+Math.random()*6);ctx.lineTo(4,12);ctx.closePath();ctx.fill();
+  ctx.restore();
+  // danger line
+  ctx.strokeStyle='rgba(255,68,68,0.25)';
+  ctx.setLineDash([6,6]);
+  ctx.beginPath();ctx.moveTo(0,H-46);ctx.lineTo(W,H-46);ctx.stroke();
+  ctx.setLineDash([]);
+}
+
+function loop(t){
+  if(!running)return;
+  const dt=Math.min(0.05,(t-lastT)/1000);lastT=t;
+  update(dt);draw();
+  raf=requestAnimationFrame(loop);
+}
+
+function startGame(){
+  score=0;wave=1;streak=0;lives=3;kills=0;waveKills=0;
+  asteroids=[];lasers=[];parts=[];answer='';
+  spawnT=2;spawnInt=3.2;bossActive=false;
+  showScreen('game');
+  resize();initStars();
+  renderAns();updateHUD();
+  spawnAsteroid();
+  running=true;lastT=performance.now();
+  raf=requestAnimationFrame(loop);
+}
+
+function endGame(){
+  running=false;cancelAnimationFrame(raf);
+  // XP: 1 per kill + wave bonus
+  const xpGain=kills*2+wave*5;
+  const x=getXP();x.xp+=xpGain;saveXP(x);
+  const h=getHS();let newHS=false;
+  if(h.score==null||score>h.score){h.score=score;newHS=true;}
+  if(h.wave==null||wave>h.wave)h.wave=wave;
+  saveHS(h);
+  document.getElementById('o-score').textContent=score;
+  document.getElementById('o-wave').textContent=wave;
+  document.getElementById('o-hits').textContent=kills;
+  document.getElementById('o-xp').textContent='+'+xpGain+' XP';
+  document.getElementById('o-rank').textContent='RANK: '+levelFor(x.xp).name;
+  document.getElementById('new-hs').style.display=newHS?'':'none';
+  document.getElementById('over-title').textContent='GAME OVER';
+  showScreen('over');
+}
+
+function renderHomeHS(){
+  const h=getHS();
+  document.getElementById('hs-score').textContent=h.score!=null?h.score:'—';
+  document.getElementById('hs-wave').textContent=h.wave!=null?h.wave:'—';
+}
+
+function showScreen(n){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('screen-'+n).classList.add('active');
+  if(n==='home')renderHomeHS();
+}
+function goHome(){running=false;cancelAnimationFrame(raf);showScreen('home');}
+
+document.addEventListener('keydown',e=>{
+  if(!running)return;
+  if(e.key>='0'&&e.key<='9')np(e.key);
+  else if(e.key==='Backspace')npClear();
+  else if(e.key==='Enter')fire();
+});
+
+renderHomeHS();
+</script>
+</body>
+</html>
