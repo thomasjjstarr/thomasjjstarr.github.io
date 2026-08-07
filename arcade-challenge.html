@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="theme-color" content="#0a0a1a"/>
+<title>Challenge — Math Arcade</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0a0a1a;--navy2:#0f1530;--navy3:#1a2448;--gold:#f0c040;--white:#ffffff;--dim:rgba(255,255,255,0.5);--accent:#ff5555;}
+html,body{min-height:100%;background:var(--navy);color:var(--white);font-family:'Outfit',sans-serif;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,0.12) 0px,rgba(0,0,0,0.12) 1px,transparent 1px,transparent 3px);pointer-events:none;z-index:9999}
+.stars{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.star{position:absolute;border-radius:50%;animation:twinkle var(--d,2s) var(--delay,0s) infinite alternate}
+@keyframes twinkle{from{opacity:0.2}to{opacity:1}}
+
+.top-bar{position:relative;z-index:10;background:var(--navy2);border-bottom:2px solid var(--accent);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;}
+.back-btn{font-family:'Press Start 2P',monospace;font-size:9px;color:var(--accent);text-decoration:none;letter-spacing:.08em;text-shadow:0 0 8px var(--accent);}
+
+.mode-header{position:relative;z-index:10;text-align:center;padding:36px 20px 24px;}
+.mode-icon-big{font-size:44px;filter:drop-shadow(0 0 16px var(--accent));margin-bottom:12px;}
+.mode-title-big{font-family:'Press Start 2P',monospace;font-size:clamp(20px,5vw,32px);color:var(--accent);text-shadow:0 0 20px var(--accent),0 0 40px rgba(255,85,85,.3);letter-spacing:.06em;margin-bottom:10px;}
+.mode-sub-big{font-family:'Press Start 2P',monospace;font-size:9px;color:var(--dim);letter-spacing:.06em;line-height:1.9;max-width:480px;margin:0 auto;}
+
+.game-grid{position:relative;z-index:10;display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:840px;margin:28px auto;padding:0 20px;}
+@media(max-width:560px){.game-grid{grid-template-columns:1fr}}
+.game-card{position:relative;background:var(--navy2);border:2px solid var(--card-color,var(--gold));border-radius:4px;padding:36px 24px 32px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:14px;cursor:pointer;overflow:hidden;transition:transform .12s,box-shadow .12s;box-shadow:0 0 16px -4px var(--card-color,var(--gold));grid-column:1/-1;}
+.game-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.04) 0%,transparent 60%);pointer-events:none;}
+.game-card:hover{transform:translateY(-4px) scale(1.01);box-shadow:0 0 32px -2px var(--card-color,var(--gold)),0 8px 24px rgba(0,0,0,.4);}
+.game-card:active{transform:scale(.98)}
+.card-corner{position:absolute;width:14px;height:14px;border-color:var(--card-color,var(--gold));border-style:solid;}
+.card-corner.tl{top:8px;left:8px;border-width:2px 0 0 2px}
+.card-corner.tr{top:8px;right:8px;border-width:2px 2px 0 0}
+.card-corner.bl{bottom:8px;left:8px;border-width:0 0 2px 2px}
+.card-corner.br{bottom:8px;right:8px;border-width:0 2px 2px 0}
+.card-symbol{font-size:60px;line-height:1;filter:drop-shadow(0 0 14px var(--card-color,var(--gold)));}
+.card-op{font-family:'Press Start 2P',monospace;font-size:clamp(15px,3.4vw,24px);color:var(--card-color,var(--gold));text-shadow:0 0 12px var(--card-color,var(--gold));letter-spacing:.05em;text-align:center;}
+.card-range{font-size:11px;font-family:'Press Start 2P',monospace;color:var(--dim);letter-spacing:.08em;text-align:center;}
+.card-mastery{font-size:9px;font-family:'Press Start 2P',monospace;letter-spacing:.06em}
+.card-play{margin-top:6px;background:var(--card-color,var(--gold));color:var(--navy);font-family:'Press Start 2P',monospace;font-size:10px;padding:10px 26px;border:none;border-radius:2px;cursor:pointer;letter-spacing:.1em;transition:filter .1s;}
+.game-card:hover .card-play{filter:brightness(1.2)}
+
+.arcade-footer{position:relative;z-index:10;text-align:center;padding:24px;border-top:1px solid rgba(255,85,85,.15);}
+.arcade-footer p{font-family:'Press Start 2P',monospace;font-size:8px;color:var(--dim);letter-spacing:.1em}
+</style>
+</head>
+<body>
+<div class="stars" id="stars"></div>
+
+<div class="top-bar">
+  <a href="math-arcade.html" class="back-btn">← ARCADE</a>
+  <span></span>
+</div>
+
+<div class="mode-header">
+  <div class="mode-icon-big">🔥</div>
+  <h1 class="mode-title-big">CHALLENGE</h1>
+  <p class="mode-sub-big">PUT YOUR SKILLS TO THE TEST<br>SPEED, STRATEGY, SURVIVAL</p>
+</div>
+
+<div class="game-grid">
+  <a href="arcade-blaster.html" class="game-card" style="--card-color:#b44fff">
+    <div class="card-corner tl"></div><div class="card-corner tr"></div>
+    <div class="card-corner bl"></div><div class="card-corner br"></div>
+    <div class="card-symbol">🚀</div>
+    <div class="card-op">LASER BLASTER</div>
+    <div class="card-range">ARCADE GAME · ALL OPERATIONS</div>
+    <div class="card-mastery" style="color:#b44fff" id="cm-blaster"></div>
+    <div class="card-play">PLAY →</div>
+  </a>
+  <a href="arcade-rpg.html" class="game-card" style="--card-color:#ff5555">
+    <div class="card-corner tl"></div><div class="card-corner tr"></div>
+    <div class="card-corner bl"></div><div class="card-corner br"></div>
+    <div class="card-symbol">⚔️</div>
+    <div class="card-op">MATH QUEST: CASTLE</div>
+    <div class="card-range">RPG · EXPLORE · 9 MONSTERS · BOSS</div>
+    <div class="card-mastery" style="color:#ff5555" id="cm-rpg"></div>
+    <div class="card-play">PLAY →</div>
+  </a>
+</div>
+
+<footer class="arcade-footer">
+  <p>© 2026 CITY CHURCH ACADEMY · MATH ARCADE</p>
+</footer>
+
+<script>
+const starsEl=document.getElementById('stars');
+for(let i=0;i<80;i++){
+  const s=document.createElement('div');s.className='star';
+  const size=Math.random()*2.5+0.5;
+  s.style.cssText=`width:${size}px;height:${size}px;background:#fff;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${(Math.random()*3+1.5).toFixed(1)}s;--delay:${(Math.random()*4).toFixed(1)}s`;
+  starsEl.appendChild(s);
+}
+
+try{
+  const bh=JSON.parse(localStorage.getItem('ccaHS_blaster')||'{}');
+  if(bh.score!=null)document.getElementById('cm-blaster').textContent='★ HIGH SCORE: '+bh.score;
+}catch(e){}
+try{
+  const rs=JSON.parse(localStorage.getItem('ccaCastle')||'{}');
+  const cmEl=document.getElementById('cm-rpg');
+  if(rs.complete)cmEl.textContent='★ CASTLE CONQUERED!';
+  else if(rs.defeated&&rs.defeated.length>0)cmEl.textContent='★ '+rs.defeated.length+'/9 MONSTERS DEFEATED';
+}catch(e){}
+</script>
+</body>
+</html>
