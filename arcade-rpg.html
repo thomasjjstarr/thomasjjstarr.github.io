@@ -47,6 +47,26 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .btn-start{width:100%;padding:14px;background:var(--accent);color:var(--navy);border:none;border-radius:3px;font-family:'Press Start 2P',monospace;font-size:11px;cursor:pointer;letter-spacing:.08em;box-shadow:0 0 20px rgba(255,85,85,.4)}
 .btn-start:active{transform:scale(.97)}
 .btn-reset{width:100%;padding:9px;background:transparent;color:var(--dim);border:1px solid rgba(255,255,255,.15);border-radius:3px;font-family:'Press Start 2P',monospace;font-size:7px;cursor:pointer}
+.btn-view-char{width:100%;padding:12px;background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:3px;font-family:'Press Start 2P',monospace;font-size:9px;cursor:pointer;letter-spacing:.06em}
+.btn-view-char:active{transform:scale(.97);background:rgba(240,192,64,.1)}
+.eh-char-btn{background:var(--navy3);border:1px solid var(--accent);border-radius:3px;padding:5px 9px;font-size:15px;cursor:pointer;flex-shrink:0;color:var(--accent);-webkit-tap-highlight-color:transparent}
+.eh-char-btn:active{transform:scale(.9)}
+
+/* ══ CHARACTER SCREEN ══ */
+.char-big-wrap{display:flex;flex-direction:column;align-items:center;padding:26px 20px 14px;gap:8px}
+#char-big-sprite{width:160px;height:160px;image-rendering:pixelated;filter:drop-shadow(0 0 20px rgba(255,85,85,.35))}
+.char-big-rank{font-family:'Press Start 2P',monospace;font-size:9px;color:var(--gold);text-shadow:0 0 8px var(--gold);letter-spacing:.06em}
+.char-stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 20px;margin-bottom:8px}
+.equip-list{display:flex;flex-direction:column;gap:10px;padding:0 20px 24px}
+.equip-card{background:var(--navy2);border:2px solid rgba(255,255,255,.12);border-radius:4px;padding:14px;display:flex;align-items:center;gap:14px}
+.equip-card.filled{border-color:var(--rarity,var(--gold));box-shadow:0 0 14px -6px var(--rarity,var(--gold))}
+.equip-card-icon{font-size:28px;width:40px;text-align:center;flex-shrink:0}
+.equip-card-body{flex:1;min-width:0}
+.equip-card-slot{font-family:'Press Start 2P',monospace;font-size:7px;color:var(--dim);letter-spacing:.08em;margin-bottom:5px}
+.equip-card-name{font-family:'Press Start 2P',monospace;font-size:10px;color:var(--white);margin-bottom:5px;line-height:1.4}
+.equip-card-name.empty{color:rgba(255,255,255,.25)}
+.equip-card-rarity{font-family:'Press Start 2P',monospace;font-size:7px;margin-bottom:5px}
+.equip-card-stat{font-family:'Press Start 2P',monospace;font-size:8px;color:var(--green)}
 
 /* ══ EXPLORE ══ */
 #screen-explore{padding:0}
@@ -133,16 +153,40 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .dodge-overlay{position:absolute;inset:0;background:rgba(5,5,16,.95);display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:20px;z-index:40}
 .dodge-overlay.show{display:flex}
 .dodge-title{font-family:'Press Start 2P',monospace;font-size:12px;color:#ff5555;text-shadow:0 0 14px #ff5555;text-align:center;animation:pulse .3s infinite alternate;line-height:1.6}
-.dodge-track{position:relative;width:280px;max-width:80vw;height:22px;background:var(--navy3);border:2px solid rgba(255,255,255,.2);border-radius:11px;overflow:hidden}
-.dodge-zone-good{position:absolute;top:0;bottom:0;left:28%;right:28%;background:rgba(240,192,64,.3)}
-.dodge-zone-perfect{position:absolute;top:0;bottom:0;left:42%;right:42%;background:rgba(57,255,20,.4);border-left:2px solid #39ff14;border-right:2px solid #39ff14}
-.dodge-indicator{position:absolute;top:-4px;bottom:-4px;left:0;width:4px;background:#fff;box-shadow:0 0 8px #fff}
+/* ══ DODGE OVERLAY — projectile scene ══ */
+.dodge-stage{position:relative;width:100%;max-width:300px;height:96px;display:flex;align-items:center;justify-content:space-between;padding:0 6px}
+.dodge-monster{width:64px;height:64px;image-rendering:pixelated;filter:drop-shadow(0 0 10px rgba(255,85,85,.5))}
+.dodge-hero{width:64px;height:64px;image-rendering:pixelated;transition:transform .15s,filter .15s}
+.dodge-hero.glow{filter:drop-shadow(0 0 12px #ffe066) drop-shadow(0 0 22px #ffe066)}
+.dodge-hero.dodged{transform:translate(-16px,-8px) rotate(-10deg)}
+.dodge-hero.hit{animation:heroHitFlash .3s}
+@keyframes heroHitFlash{0%,100%{filter:none}50%{filter:brightness(3) drop-shadow(0 0 12px #ff4444)}}
+.dodge-projectile{position:absolute;top:50%;left:12%;width:14px;height:14px;border-radius:50%;transform:translate(0,-50%);box-shadow:0 0 10px currentColor;transition:none}
 .dodge-btn{padding:16px 44px;background:#ff5555;color:#0a0a1a;border:none;border-radius:4px;font-family:'Press Start 2P',monospace;font-size:13px;cursor:pointer;box-shadow:0 0 20px rgba(255,85,85,.5);letter-spacing:.06em}
 .dodge-btn:active{transform:scale(.94)}
 .dodge-result{font-family:'Press Start 2P',monospace;font-size:11px;min-height:16px;text-align:center}
 .dodge-result.perfect{color:#39ff14;text-shadow:0 0 10px #39ff14}
 .dodge-result.good{color:#f0c040;text-shadow:0 0 10px #f0c040}
 .dodge-result.miss{color:#ff4444;text-shadow:0 0 10px #ff4444}
+
+/* ══ IDLE ANIMATIONS (battle screen) ══ */
+@keyframes idleSquish{0%,100%{transform:scaleX(1) scaleY(1)}50%{transform:scaleX(0.92) scaleY(1.08)}}
+@keyframes idleFlap{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-4px) rotate(4deg)}}
+@keyframes idleJitter{0%,100%{transform:translateX(0)}25%{transform:translateX(-2px)}75%{transform:translateX(2px)}}
+@keyframes idleBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes idleRattle{0%,100%{transform:rotate(0deg)}25%{transform:rotate(-2deg)}75%{transform:rotate(2deg)}}
+@keyframes idleSkitter{0%,100%{transform:translate(0,0)}30%{transform:translate(-1px,-2px)}60%{transform:translate(1px,0)}}
+@keyframes idleBreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.monster-sprite.idle-slime{animation:idleSquish 1.8s ease-in-out infinite}
+.monster-sprite.idle-bat{animation:idleFlap 0.5s ease-in-out infinite}
+.monster-sprite.idle-rat{animation:idleJitter 0.35s ease-in-out infinite}
+.monster-sprite.idle-goblin,.monster-sprite.idle-orc,.monster-sprite.idle-knight{animation:idleBob 2s ease-in-out infinite}
+.monster-sprite.idle-skeleton{animation:idleRattle 0.6s ease-in-out infinite}
+.monster-sprite.idle-spider{animation:idleSkitter 0.8s ease-in-out infinite}
+.monster-sprite.idle-dragon{animation:idleBreathe 2.5s ease-in-out infinite}
+/* hurt/attack must win over idle while active — placed after idle rules */
+.monster-sprite.hurt{animation:monsterHurt .3s !important}
+.monster-sprite.attack{animation:monsterAttack .3s !important}
 .numpad{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}
 .np{background:var(--navy3);border:1px solid rgba(255,85,85,.25);border-radius:3px;padding:11px 4px;font-family:'Press Start 2P',monospace;font-size:12px;color:var(--white);cursor:pointer;text-align:center;transition:transform .08s;-webkit-tap-highlight-color:transparent}
 .np:active{transform:scale(.9);background:var(--accent)}
@@ -211,7 +255,28 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
     </div>
 
     <button class="btn-start" id="start-btn" onclick="beginOrContinue()">ENTER THE CASTLE →</button>
+    <button class="btn-view-char" onclick="openCharacterScreen('home')">VIEW CHARACTER →</button>
     <button class="btn-reset" onclick="resetGame()">RESET QUEST PROGRESS</button>
+  </div>
+
+  <!-- CHARACTER -->
+  <div id="screen-character" class="screen scrollable">
+    <div class="top-bar">
+      <a href="#" class="back-btn" onclick="closeCharacterScreen();return false;">← BACK</a>
+      <span class="op-badge">YOUR HERO</span>
+      <span></span>
+    </div>
+    <div class="char-big-wrap">
+      <canvas id="char-big-sprite" width="160" height="160"></canvas>
+      <div class="char-big-rank" id="char-big-rank">ROOKIE</div>
+    </div>
+    <div class="char-stats-row">
+      <div class="stat-chip"><div class="stat-chip-val" id="char-atk">5</div><div class="stat-chip-label">ATTACK</div></div>
+      <div class="stat-chip"><div class="stat-chip-val" id="char-def">2</div><div class="stat-chip-label">DEFENSE</div></div>
+      <div class="stat-chip"><div class="stat-chip-val" id="char-hp">50</div><div class="stat-chip-label">MAX HP</div></div>
+    </div>
+    <p class="mastery-label" style="margin:4px 0 10px">EQUIPPED GEAR</p>
+    <div class="equip-list" id="equip-list"></div>
   </div>
 
   <!-- EXPLORE -->
@@ -222,6 +287,7 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
         <div class="eh-hp-bar"><div class="eh-hp-fill" id="ex-hp-fill" style="width:100%"></div></div>
       </div>
       <div class="eh-xp" id="ex-xp">0 XP</div>
+      <button class="eh-char-btn" onclick="openCharacterScreen('explore')">👤</button>
     </div>
     <div class="canvas-wrap">
       <canvas id="castle-canvas"></canvas>
@@ -294,10 +360,10 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 
     <div class="dodge-overlay" id="dodge-overlay">
       <div class="dodge-title" id="dodge-title">INCOMING ATTACK!</div>
-      <div class="dodge-track" id="dodge-track">
-        <div class="dodge-zone-good" id="dodge-zone-good"></div>
-        <div class="dodge-zone-perfect" id="dodge-zone-perfect"></div>
-        <div class="dodge-indicator" id="dodge-indicator"></div>
+      <div class="dodge-stage" id="dodge-stage">
+        <img class="dodge-monster" id="dodge-monster-img" alt="monster" src=""/>
+        <div class="dodge-projectile" id="dodge-projectile"></div>
+        <canvas class="dodge-hero" id="dodge-hero-canvas" width="64" height="64"></canvas>
       </div>
       <div class="dodge-result" id="dodge-result"></div>
       <button class="dodge-btn" id="dodge-btn" onclick="tapDodge()">DODGE!</button>
@@ -553,6 +619,19 @@ function drawHero(ctx, size, gear){
   ctx.restore();
 }
 
+function getIdleAnim(type, t){
+  const s=t/1000;
+  switch(type){
+    case 'slime': return {dx:0,dy:0,sx:1-0.06*Math.sin(s*3.3),sy:1+0.08*Math.sin(s*3.3),rot:0};
+    case 'bat': return {dx:0,dy:-3*Math.sin(s*8),sx:1,sy:1,rot:(Math.PI/180)*4*Math.sin(s*8)};
+    case 'rat': return {dx:1.5*Math.sin(s*12),dy:0,sx:1,sy:1,rot:0};
+    case 'skeleton': return {dx:0,dy:0,sx:1,sy:1,rot:(Math.PI/180)*2.5*Math.sin(s*9)};
+    case 'spider': return {dx:1*Math.sin(s*11),dy:-2*Math.abs(Math.sin(s*5)),sx:1,sy:1,rot:0};
+    case 'dragon': return {dx:0,dy:0,sx:1+0.04*Math.sin(s*1.6),sy:1+0.04*Math.sin(s*1.6),rot:0};
+    default: return {dx:0,dy:-2*Math.sin(s*2.2),sx:1,sy:1,rot:0}; // goblin/orc/knight generic idle bob
+  }
+}
+
 /* ══ CASTLE RENDERING ══ */
 const canvas=document.getElementById('castle-canvas');
 const ctx=canvas.getContext('2d');
@@ -649,7 +728,13 @@ function renderCastle(){
           const img=SPRITE_IMG[m.img];
           if(img && img.complete && img.naturalWidth>0){
             const size=m.boss?TILE*1.35:TILE*0.92;
-            ctx.drawImage(img,sx+TILE/2-size/2,sy+TILE/2-size/2,size,size);
+            const anim=getIdleAnim(m.img, nowMs());
+            ctx.save();
+            ctx.translate(sx+TILE/2+anim.dx, sy+TILE/2+anim.dy);
+            ctx.rotate(anim.rot);
+            ctx.scale(anim.sx, anim.sy);
+            ctx.drawImage(img,-size/2,-size/2,size,size);
+            ctx.restore();
           }else{
             ctx.font=(m.boss?'26px':'20px')+' monospace';
             ctx.textAlign='center';ctx.textBaseline='middle';
@@ -811,6 +896,7 @@ function startBattle(r,c,tierKey){
   document.getElementById('monster-sprite').src=SPRITE_DATA[curMonster.img]||'';
   document.getElementById('monster-sprite').style.width=curMonster.boss?'160px':'112px';
   document.getElementById('monster-sprite').style.height=curMonster.boss?'160px':'112px';
+  document.getElementById('monster-sprite').className='monster-sprite idle-'+curMonster.img;
   document.getElementById('monster-name').textContent=curMonster.name;
   updateBattleHP();
   showScreen('battle');
@@ -984,31 +1070,56 @@ function resolveTurn(correct,fracLeft){
   }
 }
 
-/* ══ DODGE / PARRY MINI-EVENT ══ */
-let dodgeRAF=null, dodgeStartT=0, dodgeDuration=1500, dodgeResolved=false, dodgeReason='normal';
+/* ══ DODGE / PARRY MINI-EVENT — visible projectile, generous fair timing ══ */
+let dodgeRAF=null, dodgeStartT=0, dodgeDuration=1400, dodgeResolved=false, dodgeReason='normal';
 function nowMs(){ return (typeof performance!=='undefined'&&performance.now) ? performance.now() : Date.now(); }
+
+const DODGE_FLAVOR={
+  slime:'The Slime lobs a glob!', rat:'The Rat lunges at you!', goblin:'The Goblin throws a dagger!',
+  bat:'The Bat dive-bombs you!', skeleton:'The Skeleton hurls a bone!', spider:'The Spider shoots web!',
+  orc:'The Orc swings its axe!', knight:'The Dark Knight charges!', dragon:'The Dragon breathes fire!'
+};
+const PROJECTILE_STYLE={
+  slime:'#39ff14', rat:'#c9a878', goblin:'#8fd35c', bat:'#7a6a9a',
+  skeleton:'#e8e4d0', spider:'#b545e0', orc:'#5fa848', knight:'#c8d4e0', dragon:'#ff6b35'
+};
 
 function triggerDodge(reason){
   battleActive=false;
   dodgeResolved=false;
   dodgeReason=reason;
   const overlay=document.getElementById('dodge-overlay');
-  document.getElementById('dodge-title').textContent = reason==='special' ? '⚠ SPECIAL ATTACK!\nDODGE!' : 'INCOMING ATTACK!\nDODGE!';
+  const flavor=DODGE_FLAVOR[curMonster.img]||(curMonster.name+' attacks!');
+  document.getElementById('dodge-title').textContent = reason==='special' ? '⚠ SPECIAL ATTACK! ⚠' : flavor;
   document.getElementById('dodge-result').textContent='';
   document.getElementById('dodge-result').className='dodge-result';
-  document.getElementById('dodge-indicator').style.left='0%';
+  document.getElementById('dodge-monster-img').src=SPRITE_DATA[curMonster.img]||'';
+  const heroCanvas=document.getElementById('dodge-hero-canvas');
+  drawHero(heroCanvas.getContext('2d'),64,save.gear);
+  heroCanvas.className='dodge-hero';
+  const proj=document.getElementById('dodge-projectile');
+  const color=PROJECTILE_STYLE[curMonster.img]||'#ff5555';
+  proj.style.background=color;
+  proj.style.color=color;
+  proj.style.left='12%';
+  proj.style.opacity='1';
   overlay.classList.add('show');
   dodgeStartT=nowMs();
   animateDodge();
 }
 function animateDodge(){
-  const indicator=document.getElementById('dodge-indicator');
   const t=(nowMs()-dodgeStartT)/dodgeDuration;
+  const proj=document.getElementById('dodge-projectile');
+  const heroEl=document.getElementById('dodge-hero-canvas');
   if(t>=1){
-    if(!dodgeResolved) resolveDodge(1); // ran out of time = treated as miss (far right)
+    if(!dodgeResolved) resolveDodge(1); // ran out of time = full hit
     return;
   }
-  indicator.style.left=(t*100)+'%';
+  const pct=12+t*68; // travels from 12% to 80% across the stage
+  proj.style.left=pct+'%';
+  // glow cue gives fair warning window before the "perfect" beat
+  if(t>=0.55&&t<=0.95) heroEl.classList.add('glow');
+  else heroEl.classList.remove('glow');
   dodgeRAF=requestAnimationFrame(animateDodge);
 }
 function tapDodge(){
@@ -1019,16 +1130,22 @@ function tapDodge(){
 function resolveDodge(pos){
   dodgeResolved=true;
   if(dodgeRAF)cancelAnimationFrame(dodgeRAF);
+  const heroEl=document.getElementById('dodge-hero-canvas');
+  const proj=document.getElementById('dodge-projectile');
   const stats=totalStats(save);
   const baseDmg=Math.max(1,curMonster.atk-stats.def);
   const specialMult=dodgeReason==='special'?1.6:1;
   let dmg,label,cls,snd;
-  if(pos>=0.42&&pos<=0.58){
+  if(pos>=0.72&&pos<=0.92){
     dmg=0;label='PERFECT DODGE!';cls='perfect';snd=()=>beep(1200,0.15,'square',0.08);
-  }else if(pos>=0.28&&pos<=0.72){
+    heroEl.classList.add('dodged');
+    proj.style.opacity='0';
+  }else if((pos>=0.50&&pos<0.72)||(pos>0.92&&pos<=1.0)){
     dmg=Math.max(1,Math.round(baseDmg*specialMult*0.4));label='PARTIAL BLOCK';cls='good';snd=()=>beep(500,0.12,'square',0.06);
+    heroEl.classList.add('dodged');
   }else{
     dmg=Math.round(baseDmg*specialMult);label='HIT!';cls='miss';snd=sndMonsterHit;
+    heroEl.classList.add('hit');
   }
   document.getElementById('dodge-result').textContent=label+(dmg>0?(' -'+dmg+' HP'):'');
   document.getElementById('dodge-result').className='dodge-result '+cls;
@@ -1041,6 +1158,7 @@ function resolveDodge(pos){
   updateBattleHP();
   setTimeout(()=>{
     document.getElementById('dodge-overlay').classList.remove('show');
+    heroEl.className='dodge-hero';
     if(playerHp<=0){loseBattle();return;}
     battleActive=true;
     startTurn();
@@ -1200,12 +1318,6 @@ function beginOrContinue(){
 
 function enterExplore(){
   showScreen('explore');
-  exploring=true;
-  requestAnimationFrame(()=>{
-    resizeCanvas();
-    renderCastle();
-    updateExploreHUD();
-  });
 }
 
 function updateExploreHUD(){
@@ -1221,6 +1333,74 @@ function resetGame(){
   renderHome();
 }
 
+/* ══ CHARACTER SCREEN ══ */
+let charScreenReturnTo='home';
+function openCharacterScreen(returnTo){
+  charScreenReturnTo=returnTo||'home';
+  renderCharacterScreen();
+  showScreen('character');
+}
+function closeCharacterScreen(){
+  showScreen(charScreenReturnTo);
+}
+function renderCharacterScreen(){
+  save=getSave();
+  const stats=totalStats(save);
+  const x=getXP();
+  const info=levelFor(x.xp);
+  document.getElementById('char-big-rank').textContent=info.name;
+  document.getElementById('char-atk').textContent=stats.atk;
+  document.getElementById('char-def').textContent=stats.def;
+  document.getElementById('char-hp').textContent=stats.maxHp;
+  const bigCanvas=document.getElementById('char-big-sprite');
+  drawHero(bigCanvas.getContext('2d'),160,save.gear);
+
+  const slots=[
+    {key:'weapon',label:'WEAPON',icon:'⚔️'},
+    {key:'armor',label:'ARMOR',icon:'🛡️'},
+    {key:'charm',label:'CHARM',icon:'💍'}
+  ];
+  const list=document.getElementById('equip-list');
+  list.innerHTML='';
+  slots.forEach(s=>{
+    const item=save.gear[s.key];
+    if(item){
+      let statTxt='';
+      if(s.key==='weapon')statTxt='+'+item.atk+' ATTACK';
+      if(s.key==='armor')statTxt='+'+item.def+' DEFENSE, +'+item.hp+' MAX HP';
+      if(s.key==='charm')statTxt='+'+item.hp+' MAX HP';
+      list.innerHTML+='<div class="equip-card filled" style="--rarity:'+item.hex+'">'
+        +'<div class="equip-card-icon">'+s.icon+'</div>'
+        +'<div class="equip-card-body">'
+        +'<div class="equip-card-slot">'+s.label+'</div>'
+        +'<div class="equip-card-name">'+item.name+'</div>'
+        +'<div class="equip-card-rarity" style="color:'+item.hex+'">'+item.rarityName+'</div>'
+        +'<div class="equip-card-stat">'+statTxt+'</div>'
+        +'</div></div>';
+    }else{
+      list.innerHTML+='<div class="equip-card">'
+        +'<div class="equip-card-icon" style="opacity:.25">'+s.icon+'</div>'
+        +'<div class="equip-card-body">'
+        +'<div class="equip-card-slot">'+s.label+'</div>'
+        +'<div class="equip-card-name empty">Not yet found</div>'
+        +'</div></div>';
+    }
+  });
+}
+
+/* ══ CONTINUOUS CASTLE ANIMATION LOOP (idle monster motion while exploring) ══ */
+let castleAnimRunning=false;
+function startCastleAnimLoop(){
+  if(castleAnimRunning)return;
+  castleAnimRunning=true;
+  function loop(){
+    if(!exploring){castleAnimRunning=false;return;}
+    renderCastle();
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+}
+
 function showScreen(n){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('screen-'+n).classList.add('active');
@@ -1228,7 +1408,12 @@ function showScreen(n){
   if(n==='explore'){
     exploring=true;
     save=getSave();
-    requestAnimationFrame(()=>{resizeCanvas();renderCastle();updateExploreHUD();});
+    requestAnimationFrame(()=>{
+      resizeCanvas();
+      renderCastle();
+      updateExploreHUD();
+      startCastleAnimLoop();
+    });
   }
 }
 function goHome(){clearInterval(battleTimer);exploring=false;battleActive=false;showScreen('home');}
