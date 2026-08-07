@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#0a0a1a;--navy2:#0f1530;--navy3:#1a2448;--gold:#f0c040;--gold2:#ffd966;--cyan:#00e5ff;--pink:#ff4fa3;--green:#39ff14;--white:#ffffff;--dim:rgba(255,255,255,0.5);}
+:root{--navy:#0a0a1a;--navy2:#0f1530;--navy3:#1a2448;--gold:#f0c040;--gold2:#ffd966;--cyan:#00e5ff;--pink:#ff4fa3;--green:#39ff14;--white:#ffffff;--dim:rgba(255,255,255,0.5);--practice:#4fd0ff;--challenge:#ff5555;}
 html,body{min-height:100%;background:var(--navy);color:var(--white);font-family:'Outfit',sans-serif;overflow-x:hidden}
 body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,0.12) 0px,rgba(0,0,0,0.12) 1px,transparent 1px,transparent 3px);pointer-events:none;z-index:9999}
 .stars{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
@@ -20,7 +20,6 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .arcade-sub{font-size:clamp(10px,2vw,13px);font-family:'Press Start 2P',monospace;color:var(--cyan);text-shadow:0 0 10px var(--cyan);letter-spacing:.1em;animation:blink 1.4s step-end infinite;}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 
-/* Player card */
 .player-card{position:relative;z-index:10;max-width:840px;margin:24px auto 0;padding:0 20px;}
 .player-card-inner{background:var(--navy2);border:2px solid var(--gold);border-radius:4px;padding:18px 24px;box-shadow:0 0 20px -6px var(--gold);}
 .pc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px}
@@ -35,23 +34,27 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .badge-icon{font-size:16px}
 .badge-name{font-family:'Press Start 2P',monospace;font-size:6px;color:var(--white);line-height:1.5}
 
-.game-grid{position:relative;z-index:10;display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:840px;margin:28px auto;padding:0 20px;}
-@media(max-width:560px){.game-grid{grid-template-columns:1fr}}
-.game-card{position:relative;background:var(--navy2);border:2px solid var(--card-color,var(--gold));border-radius:4px;padding:32px 24px 28px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:14px;cursor:pointer;overflow:hidden;transition:transform .12s,box-shadow .12s;box-shadow:0 0 16px -4px var(--card-color,var(--gold));}
-.game-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.04) 0%,transparent 60%);pointer-events:none;}
-.game-card:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 0 32px -2px var(--card-color,var(--gold)),0 8px 24px rgba(0,0,0,.4);}
-.game-card:active{transform:scale(.97)}
-.card-corner{position:absolute;width:12px;height:12px;border-color:var(--card-color,var(--gold));border-style:solid;}
-.card-corner.tl{top:6px;left:6px;border-width:2px 0 0 2px}
-.card-corner.tr{top:6px;right:6px;border-width:2px 2px 0 0}
-.card-corner.bl{bottom:6px;left:6px;border-width:0 0 2px 2px}
-.card-corner.br{bottom:6px;right:6px;border-width:0 2px 2px 0}
-.card-symbol{font-size:52px;line-height:1;filter:drop-shadow(0 0 12px var(--card-color,var(--gold)));}
-.card-op{font-family:'Press Start 2P',monospace;font-size:clamp(14px,3vw,22px);color:var(--card-color,var(--gold));text-shadow:0 0 12px var(--card-color,var(--gold));letter-spacing:.05em;text-align:center;}
-.card-range{font-size:10px;font-family:'Press Start 2P',monospace;color:var(--dim);letter-spacing:.08em;text-align:center;}
-.card-mastery{font-size:9px;font-family:'Press Start 2P',monospace;color:var(--green);letter-spacing:.06em}
-.card-play{margin-top:6px;background:var(--card-color,var(--gold));color:var(--navy);font-family:'Press Start 2P',monospace;font-size:9px;padding:8px 20px;border:none;border-radius:2px;cursor:pointer;letter-spacing:.1em;transition:filter .1s;}
-.game-card:hover .card-play{filter:brightness(1.2)}
+.mode-wrap{position:relative;z-index:10;max-width:840px;margin:36px auto;padding:0 20px;display:flex;flex-direction:column;gap:20px;}
+.mode-tile{position:relative;background:var(--navy2);border:3px solid var(--tile-color,var(--gold));border-radius:6px;padding:32px 28px;text-decoration:none;display:flex;align-items:center;gap:24px;overflow:hidden;transition:transform .14s,box-shadow .14s;box-shadow:0 0 24px -6px var(--tile-color,var(--gold));}
+.mode-tile::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.05) 0%,transparent 55%);pointer-events:none;}
+.mode-tile:hover{transform:translateY(-3px) scale(1.01);box-shadow:0 0 40px -2px var(--tile-color,var(--gold)),0 10px 28px rgba(0,0,0,.4);}
+.mode-tile:active{transform:scale(.98)}
+.mode-corner{position:absolute;width:16px;height:16px;border-color:var(--tile-color,var(--gold));border-style:solid;}
+.mode-corner.tl{top:8px;left:8px;border-width:3px 0 0 3px}
+.mode-corner.tr{top:8px;right:8px;border-width:3px 3px 0 0}
+.mode-corner.bl{bottom:8px;left:8px;border-width:0 0 3px 3px}
+.mode-corner.br{bottom:8px;right:8px;border-width:0 3px 3px 0}
+.mode-icon{font-size:56px;flex-shrink:0;filter:drop-shadow(0 0 14px var(--tile-color,var(--gold)));}
+.mode-body{flex:1;min-width:0}
+.mode-title{font-family:'Press Start 2P',monospace;font-size:clamp(16px,3.4vw,24px);color:var(--tile-color,var(--gold));text-shadow:0 0 14px var(--tile-color,var(--gold));letter-spacing:.05em;margin-bottom:8px;}
+.mode-desc{font-size:13px;color:rgba(255,255,255,.6);line-height:1.6;font-weight:500;margin-bottom:10px;}
+.mode-meta{font-family:'Press Start 2P',monospace;font-size:8px;color:var(--dim);letter-spacing:.06em;}
+.mode-enter{flex-shrink:0;background:var(--tile-color,var(--gold));color:var(--navy);font-family:'Press Start 2P',monospace;font-size:10px;padding:12px 18px;border-radius:3px;letter-spacing:.08em;white-space:nowrap;}
+@media(max-width:560px){
+  .mode-tile{flex-direction:column;text-align:center;padding:26px 20px;gap:14px}
+  .mode-enter{width:100%;text-align:center}
+}
+
 .arcade-footer{position:relative;z-index:10;text-align:center;padding:24px;border-top:1px solid rgba(240,192,64,.15);}
 .arcade-footer p{font-family:'Press Start 2P',monospace;font-size:8px;color:var(--dim);letter-spacing:.1em}
 </style>
@@ -61,10 +64,9 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 <header class="arcade-header">
   <p class="cca-tag">CITY CHURCH ACADEMY</p>
   <h1 class="arcade-title">MATH<br>ARCADE</h1>
-  <p class="arcade-sub">SELECT YOUR GAME</p>
+  <p class="arcade-sub">CHOOSE YOUR MODE</p>
 </header>
 
-<!-- Player rank card -->
 <div class="player-card">
   <div class="player-card-inner">
     <div class="pc-top">
@@ -77,60 +79,29 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
   </div>
 </div>
 
-<div class="game-grid">
-  <a href="arcade-addition.html" class="game-card" style="--card-color:#39ff14">
-    <div class="card-corner tl"></div><div class="card-corner tr"></div>
-    <div class="card-corner bl"></div><div class="card-corner br"></div>
-    <div class="card-symbol">➕</div>
-    <div class="card-op">ADDITION</div>
-    <div class="card-range">FACTS 1 – 20</div>
-    <div class="card-mastery" id="cm-add"></div>
-    <div class="card-play">PLAY →</div>
+<div class="mode-wrap">
+  <a href="arcade-practice.html" class="mode-tile" style="--tile-color:#4fd0ff">
+    <div class="mode-corner tl"></div><div class="mode-corner tr"></div>
+    <div class="mode-corner bl"></div><div class="mode-corner br"></div>
+    <div class="mode-icon">⚡</div>
+    <div class="mode-body">
+      <div class="mode-title">PRACTICE</div>
+      <p class="mode-desc">Build your fact fluency, one operation at a time. Timed drills, mastery tracking, and steady progress on addition, subtraction, multiplication, and division.</p>
+      <p class="mode-meta" id="practice-meta">4 GAMES · TRACK YOUR MASTERY</p>
+    </div>
+    <div class="mode-enter">ENTER →</div>
   </a>
-  <a href="arcade-subtraction.html" class="game-card" style="--card-color:#ff4fa3">
-    <div class="card-corner tl"></div><div class="card-corner tr"></div>
-    <div class="card-corner bl"></div><div class="card-corner br"></div>
-    <div class="card-symbol">➖</div>
-    <div class="card-op">SUBTRACTION</div>
-    <div class="card-range">FACTS 1 – 20</div>
-    <div class="card-mastery" id="cm-sub"></div>
-    <div class="card-play">PLAY →</div>
-  </a>
-  <a href="multiplication-facts.html" class="game-card" style="--card-color:#f0c040">
-    <div class="card-corner tl"></div><div class="card-corner tr"></div>
-    <div class="card-corner bl"></div><div class="card-corner br"></div>
-    <div class="card-symbol">✖️</div>
-    <div class="card-op">MULTIPLICATION</div>
-    <div class="card-range">FACTS 1 – 12</div>
-    <div class="card-mastery" id="cm-mult"></div>
-    <div class="card-play">PLAY →</div>
-  </a>
-  <a href="arcade-division.html" class="game-card" style="--card-color:#00e5ff">
-    <div class="card-corner tl"></div><div class="card-corner tr"></div>
-    <div class="card-corner bl"></div><div class="card-corner br"></div>
-    <div class="card-symbol">➗</div>
-    <div class="card-op">DIVISION</div>
-    <div class="card-range">FACTS 1 – 12</div>
-    <div class="card-mastery" id="cm-div"></div>
-    <div class="card-play">PLAY →</div>
-  </a>
-  <a href="arcade-blaster.html" class="game-card" style="--card-color:#b44fff;grid-column:1/-1">
-    <div class="card-corner tl"></div><div class="card-corner tr"></div>
-    <div class="card-corner bl"></div><div class="card-corner br"></div>
-    <div class="card-symbol">🚀</div>
-    <div class="card-op">LASER BLASTER</div>
-    <div class="card-range">ARCADE GAME · ALL OPERATIONS</div>
-    <div class="card-mastery" style="color:#b44fff" id="cm-blaster"></div>
-    <div class="card-play">PLAY →</div>
-  </a>
-  <a href="arcade-rpg.html" class="game-card" style="--card-color:#ff5555;grid-column:1/-1">
-    <div class="card-corner tl"></div><div class="card-corner tr"></div>
-    <div class="card-corner bl"></div><div class="card-corner br"></div>
-    <div class="card-symbol">⚔️</div>
-    <div class="card-op">MATH QUEST: CASTLE</div>
-    <div class="card-range">RPG · EXPLORE · 9 MONSTERS · BOSS</div>
-    <div class="card-mastery" style="color:#ff5555" id="cm-rpg"></div>
-    <div class="card-play">PLAY →</div>
+
+  <a href="arcade-challenge.html" class="mode-tile" style="--tile-color:#ff5555">
+    <div class="mode-corner tl"></div><div class="mode-corner tr"></div>
+    <div class="mode-corner bl"></div><div class="mode-corner br"></div>
+    <div class="mode-icon">🔥</div>
+    <div class="mode-body">
+      <div class="mode-title">CHALLENGE</div>
+      <p class="mode-desc">Put your skills to the test. Blast asteroids at light speed or explore a full castle dungeon — speed, strategy, and survival, all built on your math facts.</p>
+      <p class="mode-meta" id="challenge-meta">2 GAMES · HIGH SCORES & BOSS BATTLES</p>
+    </div>
+    <div class="mode-enter">ENTER →</div>
   </a>
 </div>
 
@@ -139,7 +110,6 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 </footer>
 
 <script>
-// Stars
 const starsEl=document.getElementById('stars');
 for(let i=0;i<120;i++){
   const s=document.createElement('div');s.className='star';
@@ -148,7 +118,6 @@ for(let i=0;i<120;i++){
   starsEl.appendChild(s);
 }
 
-// XP / Levels (same thresholds as games)
 const LEVELS=[
   {name:'ROOKIE',xp:0},{name:'CADET',xp:100},{name:'PILOT',xp:300},
   {name:'ACE',xp:600},{name:'CAPTAIN',xp:1000},{name:'MASTER',xp:1600},
@@ -178,7 +147,6 @@ if(next){
   document.getElementById('pc-next').textContent='MAX RANK ACHIEVED!';
 }
 
-// Badge shelf
 const earned=getBadges();
 const shelf=document.getElementById('badge-shelf');
 Object.entries(BADGES).forEach(([id,b])=>{
@@ -186,7 +154,7 @@ Object.entries(BADGES).forEach(([id,b])=>{
   shelf.innerHTML+=`<div class="badge-slot${has?'':' locked'}"><span class="badge-icon">${b.icon}</span><span class="badge-name">${has?b.name:'???'}</span></div>`;
 });
 
-// Mastery counts per card
+// quick mastery summary on tiles
 function countMastered(key,families){
   try{
     const m=JSON.parse(localStorage.getItem(key)||'{}');
@@ -197,23 +165,19 @@ function countMastered(key,families){
 }
 const mult=[2,3,4,5,6,7,8,9,10,11,12];
 const twenty=Array.from({length:20},(_,i)=>i+1);
-function setCM(id,key,fam){
-  const c=countMastered(key,fam);
-  document.getElementById(id).textContent=c>0?('★ '+c+'/'+fam.length+' MASTERED'):'';
+const totalMastered=countMastered('ccaAddMastery',twenty)+countMastered('ccaSubMastery',twenty)+countMastered('ccaMastery',mult)+countMastered('ccaDivMastery',mult);
+if(totalMastered>0){
+  document.getElementById('practice-meta').textContent='4 GAMES · '+totalMastered+' FACT FAMILIES MASTERED';
 }
-setCM('cm-mult','ccaMastery',mult);
-setCM('cm-add','ccaAddMastery',twenty);
-setCM('cm-sub','ccaSubMastery',twenty);
-setCM('cm-div','ccaDivMastery',mult);
+
 try{
   const bh=JSON.parse(localStorage.getItem('ccaHS_blaster')||'{}');
-  if(bh.score!=null)document.getElementById('cm-blaster').textContent='★ HIGH SCORE: '+bh.score;
-}catch(e){}
-try{
   const rs=JSON.parse(localStorage.getItem('ccaCastle')||'{}');
-  const cmEl=document.getElementById('cm-rpg');
-  if(rs.complete)cmEl.textContent='★ CASTLE CONQUERED!';
-  else if(rs.defeated&&rs.defeated.length>0)cmEl.textContent='★ '+rs.defeated.length+'/9 MONSTERS DEFEATED';
+  let bits=[];
+  if(bh.score!=null)bits.push('BLASTER BEST: '+bh.score);
+  if(rs.complete)bits.push('CASTLE CONQUERED!');
+  else if(rs.defeated&&rs.defeated.length>0)bits.push(rs.defeated.length+'/9 MONSTERS DOWN');
+  if(bits.length)document.getElementById('challenge-meta').textContent=bits.join(' · ');
 }catch(e){}
 </script>
 </body>
