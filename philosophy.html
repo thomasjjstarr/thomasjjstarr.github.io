@@ -89,19 +89,27 @@ html body .artifact-tab.active{color:#ffffff}
 html body :is(.hero,.page-hero,.contact-wrap,.philosophy-strip)::before{opacity:.3}
 html body .phil-principle-num{color:#F4B488}
 html body .phil-lead{background:#fff;box-shadow:0 18px 48px rgba(0,40,24,.12)}
+
+/* ── Accessibility: skip link, visible keyboard focus, reduced motion ── */
+.skip-link{position:absolute;left:12px;top:-80px;z-index:3000;background:#ffffff;color:#005030;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;padding:12px 18px;border-top:3px solid #F05B01;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.skip-link:focus{top:12px}
+:focus-visible{outline:2px solid #ffffff;outline-offset:2px;box-shadow:0 0 0 5px #F05B01}
+#main:focus{outline:none;box-shadow:none}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to main content</a>
 <nav class="site-nav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">Thomas <span>Starr</span></a>
     <div class="nav-links">
       <a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="philosophy.html" class="active">Philosophy</a><a href="resume.html">Résumé</a><a href="contact.html">Contact</a>
     </div>
-    <button class="nav-toggle" onclick="this.parentElement.parentElement.classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+    <button class="nav-toggle" onclick="this.setAttribute('aria-expanded',this.parentElement.parentElement.classList.toggle('open'))" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </nav>
-<section class="page-hero">
+<section class="page-hero" id="main" tabindex="-1">
   <div class="page-hero-inner">
     <p class="page-eyebrow">Philosophy</p>
     <h1 class="page-title">What I believe about<br><em>learning design.</em></h1>

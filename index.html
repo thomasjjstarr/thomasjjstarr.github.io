@@ -174,9 +174,17 @@ html body .featured-grid > div:last-child{background:#fff;padding:44px 44px 40px
 html body p.philosophy-quote{background:#fff;color:var(--navy);padding:40px 44px;border-top:4px solid var(--gold);box-shadow:0 24px 60px rgba(0,0,0,.28)}
 html body p.philosophy-quote span{color:var(--gold)}
 @media(max-width:768px){html body .featured-grid > div:last-child,html body p.philosophy-quote{padding:28px 24px}}
+
+/* ── Accessibility: skip link, visible keyboard focus, reduced motion ── */
+.skip-link{position:absolute;left:12px;top:-80px;z-index:3000;background:#ffffff;color:#005030;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;padding:12px 18px;border-top:3px solid #F05B01;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.skip-link:focus{top:12px}
+:focus-visible{outline:2px solid #ffffff;outline-offset:2px;box-shadow:0 0 0 5px #F05B01}
+#main:focus{outline:none;box-shadow:none}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to main content</a>
 
 <nav class="site-nav">
   <div class="nav-inner">
@@ -189,13 +197,13 @@ html body p.philosophy-quote span{color:var(--gold)}
       <a href="resume.html">Résumé</a>
       <a href="contact.html">Contact</a>
     </div>
-    <button class="nav-toggle" onclick="this.parentElement.parentElement.classList.toggle('open')" aria-label="Menu">
+    <button class="nav-toggle" onclick="this.setAttribute('aria-expanded',this.parentElement.parentElement.classList.toggle('open'))" aria-label="Menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
-<section class="hero">
+<section class="hero" id="main" tabindex="-1">
   <div class="hero-inner">
     <div>
       <p class="hero-eyebrow">Instructional Designer</p>

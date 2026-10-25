@@ -157,9 +157,17 @@ html body .profile-strip{background:#fff;padding:36px 40px;border-bottom:none;bo
 html body .resume-grid > div{background:#fff;padding:36px 36px 12px;border-top:4px solid var(--gold);box-shadow:0 18px 48px rgba(0,40,24,.10)}
 html body .resume-grid{gap:32px}
 @media(max-width:768px){html body .profile-strip,html body .resume-grid > div{padding:28px 22px 12px}}
+
+/* ── Accessibility: skip link, visible keyboard focus, reduced motion ── */
+.skip-link{position:absolute;left:12px;top:-80px;z-index:3000;background:#ffffff;color:#005030;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;padding:12px 18px;border-top:3px solid #F05B01;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.skip-link:focus{top:12px}
+:focus-visible{outline:2px solid #ffffff;outline-offset:2px;box-shadow:0 0 0 5px #F05B01}
+#main:focus{outline:none;box-shadow:none}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to main content</a>
 
 <nav class="site-nav">
   <div class="nav-inner">
@@ -172,13 +180,13 @@ html body .resume-grid{gap:32px}
       <a href="resume.html" class="active">Résumé</a>
       <a href="contact.html">Contact</a>
     </div>
-    <button class="nav-toggle" onclick="this.parentElement.parentElement.classList.toggle('open')" aria-label="Menu">
+    <button class="nav-toggle" onclick="this.setAttribute('aria-expanded',this.parentElement.parentElement.classList.toggle('open'))" aria-label="Menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
-<section class="page-hero">
+<section class="page-hero" id="main" tabindex="-1">
   <div class="page-hero-inner">
     <div>
       <p class="page-eyebrow">Résumé</p>
@@ -209,9 +217,8 @@ html body .resume-grid{gap:32px}
       <div>
         <p class="col-label">Contact</p>
         <div class="contact-list">
-          <div class="contact-item"><span class="contact-dot"></span>386-848-3014</div>
           <div class="contact-item"><span class="contact-dot"></span><a href="mailto:thomasjjstarr@gmail.com">thomasjjstarr@gmail.com</a></div>
-          <div class="contact-item"><span class="contact-dot"></span>2577 Derby Dr., Deltona FL</div>
+          <div class="contact-item"><span class="contact-dot"></span>Deltona, FL</div>
         </div>
 
         <p class="col-label">Education</p>
@@ -234,24 +241,29 @@ html body .resume-grid{gap:32px}
 
         <p class="col-label">Professional Development</p>
         <div class="cert-list">
+          <div class="cert-item">Google Certified Educator</div>
           <div class="cert-item">Canva Education</div>
           <div class="cert-item">AWS Skill Builder (In Progress)</div>
         </div>
 
         <p class="col-label">Core Skills</p>
         <div class="skills-section">
+          <span class="skill-tag">ADDIE</span>
+          <span class="skill-tag">SAM</span>
+          <span class="skill-tag">Backward Design (UbD)</span>
+          <span class="skill-tag">Mayer’s Multimedia Principles</span>
+          <span class="skill-tag">UDL</span>
+          <span class="skill-tag">ARCS Model</span>
+          <span class="skill-tag">Curriculum Design</span>
+          <span class="skill-tag">Formative Assessment</span>
+          <span class="skill-tag">Accessible / DEI Design</span>
+          <span class="skill-tag">Articulate 360 (Storyline &amp; Rise)</span>
+          <span class="skill-tag">WCAG 2.1</span>
+          <span class="skill-tag">AI-Adaptive EdTech</span>
           <span class="skill-tag">Differentiated Instruction</span>
           <span class="skill-tag">Reading Intervention (SIPPS)</span>
-          <span class="skill-tag">Curriculum Design</span>
-          <span class="skill-tag">STEM Coordination</span>
-          <span class="skill-tag">Formative Assessment</span>
-          <span class="skill-tag">Data-Driven Instruction</span>
-          <span class="skill-tag">AI-Adaptive EdTech</span>
-          <span class="skill-tag">Google Classroom</span>
-          <span class="skill-tag">Tier 2 Intervention</span>
-          <span class="skill-tag">Phonics &amp; Fluency</span>
-          <span class="skill-tag">ESOL Instruction</span>
-          <span class="skill-tag">Instructional Design</span>
+          <span class="skill-tag">STEM Integration</span>
+          <span class="skill-tag">ESOL</span>
         </div>
       </div>
 
@@ -324,6 +336,7 @@ html body .resume-grid{gap:32px}
       <div class="skill-group">
         <h3 class="skill-group-title">Design &amp; Technology</h3>
         <div class="skill-tags">
+          <span class="skill-tag-lg">Articulate 360 (Storyline &amp; Rise)</span>
           <span class="skill-tag-lg">PowerPoint</span>
           <span class="skill-tag-lg">HTML / CSS</span>
           <span class="skill-tag-lg">Canva</span>
