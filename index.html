@@ -4,32 +4,51 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thomas Starr — Instructional Designer</title>
+<meta name="description" content="Instructional designer creating learning experiences for simulation-based training, grounded in the learning sciences and 10+ years of classroom teaching.">
+<meta name="theme-color" content="#005030">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="canonical" href="https://thomasjjstarr.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Thomas Starr">
+<meta property="og:title" content="Thomas Starr — Instructional Designer">
+<meta property="og:description" content="Instructional designer creating learning experiences for simulation-based training, grounded in the learning sciences and 10+ years of classroom teaching.">
+<meta property="og:url" content="https://thomasjjstarr.com/">
+<meta property="og:image" content="https://thomasjjstarr.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Thomas Starr, Instructional Designer">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Thomas Starr — Instructional Designer">
+<meta name="twitter:description" content="Instructional designer creating learning experiences for simulation-based training, grounded in the learning sciences and 10+ years of classroom teaching.">
+<meta name="twitter:image" content="https://thomasjjstarr.com/og-image.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --navy:#1B4332;--navy-mid:#2D6A4F;
-  --gold:#C45C1A;--gold-lite:#E08A4F;--gold-dim:#8C3D0F;
+  --navy:#005030;--navy-mid:#0D6B44;
+  --gold:#F05B01;--gold-lite:#F58A42;--gold-dim:#B03F00;
   --cream:#f8f4ec;--cream-mid:#f0e9d8;
   --white:#ffffff;--text:#1a1a2e;--text-mid:#3a3a5c;--text-lite:#6b6b8a;
 }
 body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
 
 /* ── NAV ── */
-.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(27,67,50,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(196,92,26,0.15)}
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(0,80,48,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(240,91,1,0.15)}
 .nav-inner{max-width:1200px;margin:0 auto;padding:0 40px;height:68px;display:flex;align-items:center;justify-content:space-between}
 .nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:#fff;text-decoration:none}
-.nav-logo span{color:#C45C1A;font-style:italic}
+.nav-logo span{color:#F05B01;font-style:italic}
 .nav-links{display:flex;gap:36px}
 .nav-links a{font-size:12px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s}
-.nav-links a:hover,.nav-links a.active{color:#C45C1A}
+.nav-links a:hover,.nav-links a.active{color:#F05B01}
 .nav-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
 .nav-toggle span{display:block;width:22px;height:1.5px;background:#fff;transition:all 0.3s}
-@media(max-width:768px){.nav-links{display:none}.nav-toggle{display:flex}.site-nav.open .nav-links{display:flex;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(27,67,50,0.98);padding:24px 40px;gap:20px}}
+@media(max-width:768px){.nav-links{display:none}.nav-toggle{display:flex}.site-nav.open .nav-links{display:flex;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(0,80,48,0.98);padding:24px 40px;gap:20px}}
 
 /* ── HERO ── */
 .hero{min-height:100vh;background:var(--navy);position:relative;display:flex;flex-direction:column;justify-content:center;overflow:hidden;padding-top:68px}
-.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(135deg,transparent 40%,rgba(196,92,26,0.04) 40%,rgba(196,92,26,0.04) 60%,transparent 60%),linear-gradient(45deg,transparent 40%,rgba(196,92,26,0.03) 40%,rgba(196,92,26,0.03) 60%,transparent 60%);background-size:80px 80px}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(135deg,transparent 40%,rgba(240,91,1,0.04) 40%,rgba(240,91,1,0.04) 60%,transparent 60%),linear-gradient(45deg,transparent 40%,rgba(240,91,1,0.03) 40%,rgba(240,91,1,0.03) 60%,transparent 60%);background-size:80px 80px}
 .hero::after{content:'';position:absolute;left:0;top:0;width:4px;height:100%;background:linear-gradient(to bottom,transparent,var(--gold),transparent)}
 .hero-inner{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:80px 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
 .hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;gap:12px}
@@ -43,11 +62,11 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
 .btn-primary:hover{background:var(--gold-lite);transform:translateY(-2px)}
 .btn-outline{display:inline-block;padding:14px 36px;background:transparent;border:1px solid rgba(255,255,255,0.3);color:rgba(255,255,255,0.8);font-size:13px;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:all 0.3s}
 .btn-outline:hover{border-color:var(--gold);color:var(--gold)}
-.hero-card{background:rgba(255,255,255,0.04);border:1px solid rgba(196,92,26,0.2);padding:48px;backdrop-filter:blur(8px)}
+.hero-card{background:rgba(255,255,255,0.04);border:1px solid rgba(240,91,1,0.2);padding:48px;backdrop-filter:blur(8px)}
 .hero-card-label{font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:32px}
 .cred-item{display:flex;gap:20px;margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07)}
 .cred-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
-.cred-icon{width:40px;height:40px;background:rgba(196,92,26,0.1);border:1px solid rgba(196,92,26,0.3);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.cred-icon{width:40px;height:40px;background:rgba(240,91,1,0.1);border:1px solid rgba(240,91,1,0.3);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
 .cred-label{font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
 .cred-text{font-size:14px;font-weight:300;color:rgba(255,255,255,0.8);line-height:1.5}
 
@@ -64,7 +83,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
 .service-card::before{content:'';position:absolute;bottom:0;left:0;width:0;height:3px;background:var(--gold);transition:width 0.4s}
 .service-card:hover::before{width:100%}
 .service-card:hover{background:#fdfbf7}
-.service-num{font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:300;color:rgba(196,92,26,0.1);line-height:1;margin-bottom:20px;display:block}
+.service-num{font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:300;color:rgba(240,91,1,0.1);line-height:1;margin-bottom:20px;display:block}
 .service-icon{font-size:28px;margin-bottom:16px;display:block}
 .service-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--navy);margin-bottom:12px}
 .service-desc{font-size:14px;font-weight:300;color:var(--text-lite);line-height:1.7}
@@ -89,7 +108,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
 
 /* ── PHILOSOPHY STRIP ── */
 .philosophy-strip{background:var(--navy);padding:100px 60px;position:relative;overflow:hidden}
-.philosophy-strip::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 30%,rgba(196,92,26,0.05) 30%)}
+.philosophy-strip::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 30%,rgba(240,91,1,0.05) 30%)}
 .philosophy-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:2}
 .philosophy-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,3vw,40px);font-weight:300;font-style:italic;color:var(--white);line-height:1.4}
 .philosophy-quote span{color:var(--gold)}
@@ -97,22 +116,22 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
 
 /* ── STATS ── */
 .stats{background:var(--cream-mid);padding:80px 60px}
-.stats-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(196,92,26,0.15)}
+.stats-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(240,91,1,0.15)}
 .stat-card{background:var(--cream);padding:48px 32px;text-align:center}
 .stat-num{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;color:var(--navy);line-height:1;margin-bottom:8px}
 .stat-num span{color:var(--gold-dim)}
 .stat-label{font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-lite)}
 
 /* ── FOOTER ── */
-.site-footer{background:#0F2A1F;border-top:1px solid rgba(196,92,26,0.15);padding:60px}
+.site-footer{background:#00331F;border-top:1px solid rgba(240,91,1,0.15);padding:60px}
 .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr 1fr;gap:40px;align-items:start;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.06)}
 .footer-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:#fff}
 .footer-title{font-size:12px;color:rgba(255,255,255,0.35);margin-top:4px;letter-spacing:0.1em;text-transform:uppercase}
 .footer-nav{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:center}
 .footer-nav a{font-size:12px;color:rgba(255,255,255,0.45);text-decoration:none;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s}
-.footer-nav a:hover{color:#C45C1A}
+.footer-nav a:hover{color:#F05B01}
 .footer-right{text-align:right}
-.footer-right a{font-size:14px;color:#C45C1A;text-decoration:none;display:block;margin-bottom:6px}
+.footer-right a{font-size:14px;color:#F05B01;text-decoration:none;display:block;margin-bottom:6px}
 .footer-right p{font-size:13px;color:rgba(255,255,255,0.35)}
 .footer-bottom{max-width:1200px;margin:24px auto 0;text-align:center;font-size:12px;color:rgba(255,255,255,0.2);letter-spacing:0.08em}
 
@@ -132,6 +151,29 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
 @media(max-width:600px){
   .stats-inner{grid-template-columns:1fr}
 }
+
+/* ── Brand palette matched to the U logo (orange #F05B01, green #005030).
+   The two logo colors are only 2.8:1 against each other, so text uses
+   nearby shades that pass WCAG AA; fills, buttons, and borders keep the exact logo colors. ── */
+:root{--gold-text-lg:#FF7A26;--gold-text:#FFAA70;--on-gold:#00261A}
+html body :is(.nav-logo span,.hero-name span,.page-title em,.decision-num,.philosophy-quote span,.approach-heading em){color:var(--gold-text-lg)}
+html body :is(.nav-links a.active,.hero-eyebrow,.page-eyebrow,.hero-card-label,.cred-label,.approach-eyebrow,.alc-tag,th,.contact-item-label,.form-label){color:var(--gold-text)}
+html body .site-footer a{color:var(--gold-text-lg)}
+html body :is(.btn-primary,.featured-tag,.artifact-badge,.app-launch-btn,.btn-dl,.btn-gold){color:var(--on-gold)}
+html body .artifact-tab.active{color:#ffffff}
+html body .hero-card{background:#ffffff;border:none;border-top:4px solid var(--gold);box-shadow:0 24px 60px rgba(0,0,0,.28);backdrop-filter:none}
+html body div.hero-card p.hero-card-label,html body div.hero-card p.cred-label{color:var(--gold-dim)}
+html body .cred-text{color:var(--text);font-weight:400}
+html body .cred-item{border-bottom-color:#ece5d8}
+html body .cred-icon{background:rgba(240,91,1,0.08);border-color:rgba(240,91,1,0.35)}
+
+/* ── Refinements: calmer headers, intentional decorative numbers, white cards ── */
+html body :is(.hero,.page-hero,.contact-wrap,.philosophy-strip)::before{opacity:.3}
+html body .service-num{color:#F7C4A0}
+html body .featured-grid > div:last-child{background:#fff;padding:44px 44px 40px;border-top:4px solid var(--gold);box-shadow:0 18px 48px rgba(0,40,24,.12)}
+html body p.philosophy-quote{background:#fff;color:var(--navy);padding:40px 44px;border-top:4px solid var(--gold);box-shadow:0 24px 60px rgba(0,0,0,.28)}
+html body p.philosophy-quote span{color:var(--gold)}
+@media(max-width:768px){html body .featured-grid > div:last-child,html body p.philosophy-quote{padding:28px 24px}}
 </style>
 </head>
 <body>
@@ -158,7 +200,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
     <div>
       <p class="hero-eyebrow">Instructional Designer</p>
       <h1 class="hero-name">Thomas<br><span>Starr</span></h1>
-      <p class="hero-title">M.S. Applied Learning Sciences &nbsp;·&nbsp; National University</p>
+      <p class="hero-title">M.S. Applied Learning Sciences &nbsp;·&nbsp; Ed.D. in Progress</p>
       <p class="hero-desc">I design learning experiences that treat learners as the experts in their own context — building systems that are purposeful, evidence-based, and genuinely useful.</p>
       <div class="hero-cta-group">
         <a href="projects.html" class="btn-primary">View My Work</a>
@@ -177,8 +219,8 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);o
       <div class="cred-item">
         <div class="cred-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><path d="M3 21 21 3"/><path d="M15 3h6v6"/><path d="M3 15v6h6"/></svg></div>
         <div>
-          <p class="cred-label">Current Study</p>
-          <p class="cred-text">Instructional Design<br>National University</p>
+          <p class="cred-label">Doctoral Study</p>
+          <p class="cred-text">Ed.D. Instructional Design<br>National University</p>
         </div>
       </div>
       <div class="cred-item">
