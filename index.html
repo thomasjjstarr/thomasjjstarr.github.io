@@ -181,6 +181,12 @@ html body p.philosophy-quote span{color:var(--gold)}
 :focus-visible{outline:2px solid #ffffff;outline-offset:2px;box-shadow:0 0 0 5px #F05B01}
 #main:focus{outline:none;box-shadow:none}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
+html body .featured-shot{display:block;padding:0;background:#005030}
+html body .featured-shot img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+html body .featured-shot:hover img{transform:scale(1.02)}
+.featured-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn-outline-navy{display:inline-block;padding:13px 34px;border:1px solid var(--navy);color:var(--navy);font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:background .2s,color .2s}
+.btn-outline-navy:hover{background:var(--navy);color:#fff}
 </style>
 </head>
 <body>
@@ -298,29 +304,29 @@ html body p.philosophy-quote span{color:var(--gold)}
 <section class="featured">
   <div class="section-inner">
     <p class="section-eyebrow">Featured Project</p>
-    <h2 class="section-heading">Selected work from<br><em>a full year of practice.</em></h2>
+    <h2 class="section-heading">Selected work,<br><em>live and playable.</em></h2>
     <div class="featured-grid">
-      <div class="featured-visual">
-        <div class="featured-visual-inner">
-          <span class="featured-visual-icon"><svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 10V4l-2-1-2 1v3"/><path d="M9 10h6l1 4a4 4 0 0 1-4 4h0a4 4 0 0 1-4-4z"/><path d="M9 7h6"/></svg></span>
-          <p class="featured-visual-label">City Church Academy<br>Elementary STEM Club</p>
-        </div>
-      </div>
+      <a class="featured-visual featured-shot" href="math-arcade.html" target="_blank" rel="noopener">
+        <img src="math-arcade-feature.jpg" alt="Two screens from Math Quest: a torch-lit castle map, and a courtyard battle where a lightning strike hits a crow above the problem 11 + 2." width="1200" height="900" loading="lazy">
+      </a>
       <div>
-        <span class="featured-tag">Curriculum Design · STEM · K–5</span>
-        <h3 class="featured-title">Elementary STEM Club — Forces &amp; Structures and Earth &amp; Energy</h3>
-        <p class="featured-desc">A full-year, two-semester after-school STEM program for Grades 3–5. Sixteen sessions of hands-on science and engineering, designed from scratch using Understanding by Design.</p>
+        <span class="featured-tag">EdTech · Game Design · Grades 1–5</span>
+        <h3 class="featured-title">The Math Arcade — Six Games, One Progression System</h3>
+        <p class="featured-desc">What began as a single multiplication practice app grew into a six-game arcade with a shared XP economy, rank progression, and badges, plus Math Quest, an explorable adventure where students battle monsters with math. Built on free hosting with zero student data collected.</p>
         <div class="featured-meta">
           <div>
-            <p class="meta-label">Framework</p>
-            <p class="meta-value">UbD / Backward Design</p>
+            <p class="meta-label">Frameworks</p>
+            <p class="meta-value">ADDIE · Cognitive Load Theory</p>
           </div>
           <div>
-            <p class="meta-label">Standards</p>
-            <p class="meta-value">NGSS Aligned · Grades 3–5</p>
+            <p class="meta-label">Privacy</p>
+            <p class="meta-value">No Login · Zero Student Data</p>
           </div>
         </div>
-        <a href="projects.html#stem-club" class="btn-navy">View Project →</a>
+        <div class="featured-actions">
+          <a href="math-arcade.html" target="_blank" rel="noopener" class="btn-navy">Play the Arcade →</a>
+          <a href="projects.html#mult-facts" class="btn-outline-navy">View Project →</a>
+        </div>
       </div>
     </div>
   </div>
