@@ -667,8 +667,16 @@ function showArtifact(id, btn) {
   document.querySelectorAll('.artifact-tab').forEach(t => t.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
-  window.scrollTo({ top: document.querySelector('.artifact-nav').offsetTop - 68, behavior: 'smooth' });
+  if (history.replaceState) history.replaceState(null, '', '#' + id);
+  const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({ top: document.querySelector('.artifact-nav').offsetTop - 68, behavior: calm ? 'auto' : 'smooth' });
 }
+// Open the tab named in the link, e.g. projects.html#stem-club
+(function () {
+  const id = location.hash.slice(1);
+  const btn = id && document.querySelector('.artifact-tab[onclick*="\'' + id + '\'"]');
+  if (btn && document.getElementById(id)) showArtifact(id, btn);
+})();
 </script>
 </body>
 </html>
